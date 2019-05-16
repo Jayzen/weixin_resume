@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  guest_id: 1
+  content: MyText
+
+two:
+  guest_id: 1
+  content: MyText

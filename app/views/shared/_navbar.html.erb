@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm navbar-light mb-4">
+  <div class="container">
+    <%= link_to "微信名片后台", root_path, class: "navbar-brand" %>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle navbar-avatar" data-toggle="dropdown">
+                <%= current_user.name %>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <%= link_to "个人设置", edit_user_registration_path, class: "dropdown-item" %>
+                <% if current_user.has_roles?(:root_admin) %>
+                  <%= link_to "用户管理", admins_path, class: "dropdown-item" %>
+                <% end %>
+                <div class="dropdown-divider"></div>
+                <%= link_to "退出", destroy_user_session_path, method: "delete", class: "dropdown-item" %>
+              </div>
+            </li>
+          <% end -%>
+        </ul>
+      </div>
+  </div>
+</nav>
+
+
