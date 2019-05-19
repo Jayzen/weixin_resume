@@ -30,4 +30,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 zh:
-  hello: "你好 世界"
+  name: "名字"
+  avatar: "头像"
+  motto: "格言"
+  introduction: "个人介绍"
+  phone: "手机号码"
+  wechat: "微信号码"
+  qq: "qq号码"
+  email: "邮箱地址"
+  company: "公司名称"
+  address: "公司地址"
+  job: "工作内容"
+

@@ -1,6 +1,28 @@
-<div class="text-center">
-  <h5><%= @basic.name %></h5>
-</div>
-<div class="text-center">
-  <%= link_to "编辑", edit_basic_path(@basic), class: "badge badge-light" %>
-</div>
+<%= link_to "编辑", edit_basic_path, class: "btn btn-primary btn-sm" %>
+<ul>
+  <% @attributes.each do |attribute| %>
+    <% if attribute == "avatar"%>
+      <li class="mb-1">
+        <% if @basic.is_avatar %>
+          <div class="btn btn-primary btn-sm">已显示</div>
+        <% else %>
+          <div class="btn btn-danger btn-sm">已隐藏</div>
+        <% end -%>
+        <% if @basic.avatar.url %>
+          <%= image_tag @basic.avatar.url, height: "150" %>
+        <% end -%>
+      </li>
+    <% else %>
+      <li class="mb-1">
+        <% is_attribute = "is_" + attribute %>
+        <% if @basic.send(is_attribute) %>
+          <div class="btn btn-primary btn-sm">已显示</div>
+        <% else %>
+          <div class="btn btn-danger btn-sm">已隐藏</div>
+        <% end -%>
+        <%= t attribute %>:
+        <%= @basic.send(attribute) %>
+      </li>
+     <% end -%>
+  <% end -%>
+</ul>

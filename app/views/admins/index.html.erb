@@ -20,7 +20,8 @@
     <div class="d-flex justify-content-between">
       <div>
         <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
-        <%= user.name %>
+        <%= user.name %>|
+        <%= user.appkey %>
         <% if user == current_user %>
           <span class="badge badge-primary">当前用户</span>
         <% end %>

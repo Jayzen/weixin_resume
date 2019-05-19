@@ -13,10 +13,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :lockable, :trackable,
          :recoverable, :rememberable, :validatable, :confirmable, :timeoutable
 
-  has_many :basics
+  has_one :basic
+  has_one :location
   has_many :comments
 
-  after_create :set_role, :generate_token
+  after_create :set_role, :generate_token, :create_default_basic, :create_default_location
 
   def set_role
     self.roles = 'editor'
@@ -30,5 +31,13 @@ class User < ApplicationRecord
     token
     self.appkey = token
     self.save
+  end
+
+  def create_default_basic
+    self.create_basic(name: "name", motto: "motto", introduction: "introduction", phone: "phone", avatar: "phone", wechat: "wechat", qq: "qq", email: "email", company: "company", job: "job", address: "address")
+  end
+
+  def create_default_location
+    self.create_location(name: "浙江大学", address: "杭州市西湖区浙大路38号", latitude: 30.263964, longitude: 120.123218)
   end
 end

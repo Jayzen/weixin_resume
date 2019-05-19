@@ -1,1 +1,29 @@
-<%= render 'form', basic: @basic %>
+<% @attributes.each do |attribute| %>
+  <%= form_for(@basic, url: basic_path) do |f| %>
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <div class="form-group">
+          <%= t attribute %>
+        </div>
+        <div class="form-group">
+          <% case attribute %>
+          <% when 'avatar' %>
+            <%= f.file_field attribute, class: "form-control" %>
+          <% when 'introduction' %>
+            <%= f.text_area attribute, class: "form-control" %>
+          <% else %>
+            <%= f.text_field attribute, class: "form-control" %>
+          <% end -%>
+        </div>
+        <% is_attribute = "is_" + attribute %>
+        <div class="form-group">
+          <%= f.collection_select is_attribute, [[Basic::Status::On, '发布'], [Basic::Status::Off, '不发布']], :first, :last %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.submit "更新", class: "btn btn-primary btn-sm" %>
+      </div>
+    </div>
+  <% end -%> 
+<% end %>
+

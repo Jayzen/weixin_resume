@@ -7,11 +7,19 @@ module API
       desc 'find basic'
       get '/basic' do
         @user = User.find_by(appkey: request.headers["Appkey"])
-        @basic = @user.basics.first
+        @basic = @user.basic
         @basic.visit = @basic.visit+1
         @basic.save
         basic = present @basic, with: API::Entities::Basic
         build_response code: 0, data: basic
+      end
+
+      desc 'find location'
+      get '/location' do
+        @user = User.find_by(appkey: request.headers["Appkey"])
+        @location = @user.location
+        location = present @location, with: API::Entities::Location
+        build_response code: 0, data: location
       end
 
       desc 'get openid'
@@ -76,9 +84,18 @@ module API
       desc 'get all comments'
       get '/comments' do
         @user = User.find_by(appkey: request.headers["Appkey"])
-        @comments = @user.comments.includes(:guest)
+        @comments = @user.comments.includes(:guest).where(reveal: true)
         comments = present @comments, with: API::Entities::Comment
         build_response code: 0, data: comments
+      end
+
+      desc 'create client'
+      params do 
+        requires :name, type: String, allow_blank: false
+        requires :contact, type: String, allow_blank: false
+      end
+      post 'client' do
+        Client.create(name: params[:name], contact: params[:contact])
       end
     end
   end

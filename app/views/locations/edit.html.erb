@@ -1,0 +1,8 @@
+<%= link_to "获取坐标", "https://lbs.qq.com/tool/getpoint/", target: "_blank" %>
+<%= form_for(@location, url: location_path) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :address %>
+  <%= f.text_field :latitude %>
+  <%= f.text_field :longitude %>
+  <%= f.submit "更新" %>
+<% end -%>

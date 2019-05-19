@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_113236) do
+ActiveRecord::Schema.define(version: 2019_05_19_072807) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -35,15 +35,27 @@ ActiveRecord::Schema.define(version: 2019_05_16_113236) do
 
   create_table "basics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
+    t.boolean "is_name", default: true
     t.string "avatar"
+    t.boolean "is_avatar", default: true
     t.string "motto"
-    t.text "introduce"
+    t.boolean "is_motto", default: true
+    t.text "introduction"
+    t.boolean "is_introduction", default: true
     t.string "phone"
+    t.boolean "is_phone", default: true
     t.string "wechat"
+    t.boolean "is_wechat", default: true
+    t.string "qq"
+    t.boolean "is_qq", default: true
     t.string "email"
+    t.boolean "is_email", default: true
     t.string "company"
+    t.boolean "is_company", default: true
     t.string "job"
-    t.string "position"
+    t.boolean "is_job", default: true
+    t.string "address"
+    t.boolean "is_address", default: true
     t.integer "visit", default: 0
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -51,11 +63,18 @@ ActiveRecord::Schema.define(version: 2019_05_16_113236) do
     t.index ["user_id"], name: "index_basics_on_user_id"
   end
 
+  create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "contact"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "guest_id"
     t.integer "user_id"
     t.text "content"
-    t.boolean "show", default: false
+    t.boolean "reveal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["guest_id"], name: "index_comments_on_guest_id"
@@ -67,6 +86,17 @@ ActiveRecord::Schema.define(version: 2019_05_16_113236) do
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "latitude"
+    t.string "longitude"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

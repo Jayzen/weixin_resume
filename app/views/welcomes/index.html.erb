@@ -4,7 +4,7 @@
     </div>
   </div>
   <div class="d-flex justify-content-center">
-    欢迎来到柳比歇夫时间管理
+    欢迎来到微信名片后台
   </div>
   <div class="d-flex justify-content-center mt-5">
     <div class="col-md-6">
@@ -19,7 +19,9 @@
     </div>
   </div>
 <% else %>
-  <div class="d-flex justify-content-center mt-5">
-    已经登录
+  <div class="d-flex flex-column">
+    <div class="mb-1"><%= link_to "基本信息", basic_path, class: "btn btn-sm btn-primary" %></div>
+    <div class="mb-1"><%= link_to "评论设置", comments_path, class: "btn btn-sm btn-primary" %></div>
+    <div class="mb-1"><%= link_to "地图设置", location_path, class: "btn btn-sm btn-primary" %></div>
   </div> 
 <% end -%>

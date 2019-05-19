@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration[5.2]
       t.integer :guest_id
       t.integer :user_id
       t.text :content
-      t.boolean :show, default: false
+      t.boolean :reveal
 
       t.timestamps
     end
