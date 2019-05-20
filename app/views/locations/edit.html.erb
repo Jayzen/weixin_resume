@@ -1,8 +1,33 @@
-<%= link_to "获取坐标", "https://lbs.qq.com/tool/getpoint/", target: "_blank" %>
 <%= form_for(@location, url: location_path) do |f| %>
-  <%= f.text_field :name %>
-  <%= f.text_field :address %>
-  <%= f.text_field :latitude %>
-  <%= f.text_field :longitude %>
-  <%= f.submit "更新" %>
+  <% unless @location.errors.blank? %>
+    <div class="alert alert-danger">
+      <ul class="list-unstyled">
+        <% @location.errors.messages.values.flatten.each do |error| %>
+          <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
+        <% end -%>
+      </ul>
+    </div>
+  <% end -%>
+  <div class="d-flex flex-column">
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">名称:</div>
+      <div class="col-sm-8"><%= f.text_field :name, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">详细地址:</div>
+      <div class="col-sm-8"><%= f.text_field :address, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">经度:</div>
+      <div class="col-sm-8"><%= f.text_field :longitude, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">纬度:</div>
+      <div class="col-sm-8"><%= f.text_field :latitude, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right"><%= link_to "获取坐标", "https://lbs.qq.com/tool/getpoint/", target: "_blank", class: "badge badge-primary" %></div>
+      <div class="col-sm-8 text-left"><%= f.submit "更新", class: "btn btn-primary btn-sm" %></div>
+    </div>  
+  </div>
 <% end -%>

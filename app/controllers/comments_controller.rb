@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:delete, :destroy]
 
   def index
-    @comments = current_user.comments.includes(:guest).order(created_at: :desc).page(params[:page])
+    @comments = current_user.comments.includes(:guest).order(created_at: :desc).page(params[:page]).per(50)
   end
 
   def delete

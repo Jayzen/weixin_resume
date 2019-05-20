@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :clients
   mount API::Base => '/api'
   mount GrapeSwaggerRails::Engine => '/api/doc' 
 
@@ -10,6 +9,10 @@ Rails.application.routes.draw do
 
   resource :basic
   resource :location
+
+  resources :clients do
+    get 'delete', on: :member
+  end
 
   resources :comments do
     get 'delete', on: :member

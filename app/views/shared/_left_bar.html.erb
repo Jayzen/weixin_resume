@@ -1,0 +1,22 @@
+<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky">
+    <ul class="nav flex-column">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "基本信息", basic_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "地址设置", location_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "评论管理", comments_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "客户联系", clients_path, class: "nav-link" %>
+        </li>
+      <% else %>
+        <%= link_to "登录", new_user_session_path, class: "nav-link" %>
+      <% end -%>
+    </ul>
+  </div>
+</nav>
