@@ -1,28 +1,38 @@
-<%= link_to "编辑", edit_basic_path, class: "btn btn-primary btn-sm" %>
-<ul>
+<div class="d-flex flex-column">
   <% @attributes.each do |attribute| %>
-    <% if attribute == "avatar"%>
-      <li class="mb-1">
-        <% if @basic.is_avatar %>
-          <div class="btn btn-primary btn-sm">已显示</div>
-        <% else %>
-          <div class="btn btn-danger btn-sm">已隐藏</div>
-        <% end -%>
-        <% if @basic.avatar.url %>
-          <%= image_tag @basic.avatar.url, height: "150" %>
-        <% end -%>
-      </li>
-    <% else %>
-      <li class="mb-1">
+    <% if attribute != "avatar"%>
+      <div class="form-group row">
         <% is_attribute = "is_" + attribute %>
-        <% if @basic.send(is_attribute) %>
-          <div class="btn btn-primary btn-sm">已显示</div>
-        <% else %>
-          <div class="btn btn-danger btn-sm">已隐藏</div>
-        <% end -%>
-        <%= t attribute %>:
-        <%= @basic.send(attribute) %>
-      </li>
-     <% end -%>
+        <div class="col-sm-2 text-right col-form-label">
+          <% if @basic.send(is_attribute) %>
+            <div class="badge badge-primary">已显示</div>
+          <% else %>
+            <div class="badge badge-danger">已隐藏</div>
+          <% end -%>
+          <%= t attribute %>:
+        </div>
+        <div class="col-sm-8 text-left col-form-label">
+          <%= @basic.send(attribute) %>
+        </div>
+      </div>
+    <% else %>
+      <div class="form-group row">
+        <div class="col-sm-2 text-right">
+          <% if @basic.is_avatar %>
+            <div class="badge badge-primary">已显示</div>
+          <% else %>
+            <div class="badge badge-danger">已隐藏</div>
+          <% end -%>
+          头像:</div>
+         <div class="col-sm-8 text-left">
+           <% if @basic.avatar.url %>
+             <%= image_tag @basic.avatar.url, height: "150" %>
+           <% end -%>
+         </div>
+      </div> 
+    <% end -%>
   <% end -%>
-</ul>
+  <div class="form-group row">
+    <div class="col-sm-2 text-right"></div>
+    <div class="col-sm-8 text-left"><%= link_to "编辑", edit_basic_path, class: "btn btn-primary btn-sm" %></div>
+</div>

@@ -22,6 +22,30 @@ module API
         build_response code: 0, data: location
       end
 
+      desc 'find carousels'
+      get '/carousels' do
+        @user = User.find_by(appkey: request.headers["Appkey"])
+        @carousels = @user.carousels
+        carousels = present @carousels, with: API::Entities::Carousel
+        build_response code: 0, data: carousels
+      end
+
+      desc 'find categories'
+      get '/categories' do
+        @user = User.find_by(appkey: request.headers["Appkey"])
+        @categories = @user.categories
+        categories = present @categories, with: API::Entities::Category
+        build_response code: 0, data: categories
+      end
+
+      desc 'find one category'
+      get 'categories/:id' do
+        @user = User.find_by(appkey: request.headers["Appkey"])
+        @category = @user.categories.find(params[:id])
+        category = present @category, with: API::Entities::Category
+        build_response code: 0, data: category
+      end
+
       desc 'get openid'
       params do
         requires :code, type: String
@@ -94,8 +118,29 @@ module API
         requires :name, type: String, allow_blank: false
         requires :contact, type: String, allow_blank: false
       end
-      post 'client' do
+      post '/client' do
         Client.create(name: params[:name], contact: params[:contact])
+      end
+
+      desc 'create consult'
+      params do 
+        requires :name, type: String, allow_blank: false
+        requires :contact, type: String, allow_blank: false
+      end
+      post '/consult' do
+        @user = User.find_by(appkey: request.headers["Appkey"])
+        @user.consults.create(name: params[:name], contact: params[:contact])
+      end
+
+      desc 'create appointment'
+      params do
+        requires :name, type: String, allow_blank: false
+        requires :contact, type: String, allow_blank: false
+        requires :content, type: String, allow_blank: false
+      end
+      post '/appointment' do
+        @user = User.find_by(appkey: request.headers["Appkey"])
+        @user.appointments.create(name: params[:name], contact: params[:contact], content: params[:content])
       end
     end
   end

@@ -3,16 +3,16 @@
     <ul class="nav flex-column">
       <% if user_signed_in? %>
         <li class="nav-item">
-          <%= link_to "基本信息", basic_path, class: "nav-link" %>
+          <%= link_to "基本信息", basic_path, class: "nav-link #{ (controller_name == 'basics') ? 'active' : '' } " %>
         </li>
         <li class="nav-item">
-          <%= link_to "地址设置", location_path, class: "nav-link" %>
+          <%= link_to "地址设置", location_path, class: "nav-link #{ (controller_name == 'locations') ? 'active' : '' }" %>
         </li>
         <li class="nav-item">
-          <%= link_to "评论管理", comments_path, class: "nav-link" %>
+          <%= link_to "评论管理", comments_path, class: "nav-link #{ (controller_name == 'comments') ? 'active' : '' }" %>
         </li>
         <li class="nav-item">
-          <%= link_to "客户联系", clients_path, class: "nav-link" %>
+          <%= link_to "客户联系", clients_path, class: "nav-link #{ (controller_name == 'clients') ? 'active' : '' }" %>
         </li>
       <% else %>
         <%= link_to "登录", new_user_session_path, class: "nav-link" %>

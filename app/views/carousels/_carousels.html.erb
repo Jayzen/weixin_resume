@@ -1,0 +1,14 @@
+<div id="carousels">
+  <% @carousels.each_with_index do |carousel, index| %>
+    <div class="d-flex justify-content-between">
+      <div>
+        <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+        <%= carousel.name %>
+      </div>
+      <div>
+        <%= link_to '编辑', edit_carousel_path(carousel), class: "badge badge-primary"%>
+        <%= link_to '删除', delete_carousel_path(carousel), remote: true, class: "badge badge-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

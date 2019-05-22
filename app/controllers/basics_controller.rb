@@ -1,10 +1,9 @@
 class BasicsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_basic, only: [:show, :edit, :update]
-  before_action :set_attributes, only: [:show, :edit]
+  before_action :set_attributes, only: [:show, :edit, :update]
 
   def show
-    
   end
 
   def edit
@@ -13,7 +12,7 @@ class BasicsController < ApplicationController
   def update
     if @basic.update(basic_params)
       flash[:success] = "更新成功"
-      redirect_to basic_path
+      redirect_to edit_basic_path
     else
       render :edit
     end

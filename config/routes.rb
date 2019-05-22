@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resource :basic
   resource :location
 
-  resources :clients do
+  resources :clients, :carousels, :categories, :consults, :appointments do
     get 'delete', on: :member
   end
 

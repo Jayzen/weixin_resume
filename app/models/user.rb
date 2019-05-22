@@ -16,6 +16,10 @@ class User < ApplicationRecord
   has_one :basic
   has_one :location
   has_many :comments
+  has_many :carousels
+  has_many :categories
+  has_many :consults
+  has_many :appointments
 
   after_create :set_role, :generate_token, :create_default_basic, :create_default_location
 
@@ -34,7 +38,7 @@ class User < ApplicationRecord
   end
 
   def create_default_basic
-    self.create_basic(name: "name", motto: "motto", introduction: "introduction", phone: "phone", avatar: "phone", wechat: "wechat", qq: "qq", email: "email", company: "company", job: "job", address: "address")
+    self.create_basic(name: "jayzen", avatar: "uploads/basic/avatar/1/user.png", motto: "生如夏花", introduction: "自我介绍", phone: "18888888888", wechat: "wechat", qq: "645112211", email: "jayzen@foxmail.com", company: "company", job: "job", address: "address")
   end
 
   def create_default_location

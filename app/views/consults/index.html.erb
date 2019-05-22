@@ -1,0 +1,15 @@
+  <% @consults.each_with_index do |consult, index| %>
+    <div class="d-flex justify-content-between">
+      <div>
+        <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+        <small><%= consult.created_at.strftime("%F") %></small>
+        <%= consult.name %> | 
+        <%= consult.contact %>
+      </div>
+      <div>
+        <%= link_to '删除', delete_consult_path(consult), remote: true, class: "badge badge-primary" %>
+      </div>  
+    </div>
+  <% end -%>
+  <%= paginate @consults %>
+  <%= render 'shared/confirm_modal' %>
