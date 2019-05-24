@@ -14,6 +14,12 @@
         <li class="nav-item">
           <%= link_to "客户联系", clients_path, class: "nav-link #{ (controller_name == 'clients') ? 'active' : '' }" %>
         </li>
+        <li class="nav-item">
+          <%= link_to "轮播图", carousels_path, class: "nav-link #{ (controller_name == 'carousels') ? 'active' : '' }" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "分类", categories_path, class: "nav-link #{ (controller_name == 'categories') ? 'active' : '' }" %>
+        </li>
       <% else %>
         <%= link_to "登录", new_user_session_path, class: "nav-link" %>
       <% end -%>

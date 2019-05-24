@@ -21,7 +21,7 @@ class CarouselsController < ApplicationController
 
     if @carousel.save
       flash[:success] = "创建成功"
-      redirect_to carousels_path
+      redirect_to carousel_path(@carousel)
     else
       render :new
     end
@@ -30,7 +30,7 @@ class CarouselsController < ApplicationController
   def update
     if @carousel.update(carousel_params)
       flash[:success] = "更新成功"
-      redirect_to carousels_path
+      redirect_to carousel_path(@carousel)
     else
       render :edit
     end

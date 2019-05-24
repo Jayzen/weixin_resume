@@ -1,12 +1,18 @@
-<div class="row">
-  <div class="col-md-9">
-    <div id="carousels">
-      <%= render 'carousels' %>
+<% @carousels.each_with_index do |carousel, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= carousel.name %>
     </div>
-    <div class="d-flex justify-content-between mt-2">
-      <div><%= link_to '新建', new_carousel_path, class: "btn btn-primary" %></div>
-      <div><%= paginate @carousels %></div>
+    <div>
+      <%= link_to '查看', carousel_path(carousel), class: "badge badge-primary"%>
+      <%= link_to '编辑', edit_carousel_path(carousel), class: "badge badge-primary"%>
+      <%= link_to '删除', delete_carousel_path(carousel), remote: true, class: "badge badge-primary" %>
     </div>
   </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '新建', new_carousel_path, class: "btn btn-primary btn-sm" %></div>
+  <div><%= paginate @carousels %></div>
 </div>
 <%= render 'shared/confirm_modal' %>

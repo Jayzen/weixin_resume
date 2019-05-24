@@ -9,20 +9,16 @@ module API
 
       content_type :json, 'application/json'
       content_type :txt, 'text/plain'
-      # content_type :xml, 'application/xml'
-      # content_type :binary, 'application/octet-stream'
 
       default_format :json
 
       rescue_from ActiveRecord::RecordNotFound do |e|
-        error!({code: 1, error: 'not fould'}, 404)
+        error!({code: 102, error: '不存这条记录'}, 404)
       end
 
       rescue_from NoMethodError do |e|
         error!({code: 1, error: 'system error'}, 422)
       end
-      # rescue_from :all
-
     end
   end
 end

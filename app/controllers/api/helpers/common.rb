@@ -107,12 +107,17 @@ module API
              end
           end
 
-          params :id_validator do
-            requires :id, type: Integer
+          def validate_appkey
+            if request.headers["Appkey"] == "[object Undefined]"
+              error!({code: 100, error: 'appkey不存在'})
+            elsif User.find_by(appkey: request.headers["Appkey"]) == nil
+              error!({code: 101, error: 'appkey不正确'})
+            else
+              @user = User.find_by(appkey: request.headers["Appkey"])
+            end
           end
         end
       end
-
     end
   end
 end
