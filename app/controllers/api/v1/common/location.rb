@@ -7,8 +7,7 @@ module API
 
         desc 'find location'
         get '/location' do
-          #@user = User.find_by(appkey: request.headers["Appkey"])
-          find_user
+          validate_appkey
           @location = @user.location
           location = present @location, with: API::Entities::Location
           build_response code: 0, data: location
