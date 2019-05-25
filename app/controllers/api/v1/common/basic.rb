@@ -7,7 +7,7 @@ module API
 
         desc 'find basic'
         get '/basic' do
-          @user = User.find_by(appkey: request.headers["Appkey"])
+          validate_appkey
           @basic = @user.basic
           @basic.visit = @basic.visit+1
           @basic.save

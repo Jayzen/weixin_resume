@@ -30,7 +30,7 @@ module API
 
       desc 'get all comments'
       get '/comments' do
-        @user = User.find_by(appkey: request.headers["Appkey"])
+        validate_appkey
         @comments = @user.comments.includes(:guest)
         comments = present @comments, with: API::Entities::Comment
         build_response code: 0, data: comments

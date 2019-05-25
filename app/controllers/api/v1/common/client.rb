@@ -6,12 +6,11 @@ module API
         include Grape::Rails::Cache
 
         desc 'create client'
-        params do 
-          requires :name, type: String, allow_blank: false
-          requires :contact, type: String, allow_blank: false
-        end
         post '/client' do
-          Client.create(name: params[:name], contact: params[:contact])
+          @client = ::Client.create(name: params[:name], contact: params[:contact])
+          if @client.errors.messages.size != 0
+            error!({code: 102, error:  @client.errors.messages.values.flatten.first})
+          end
         end
       end
     end

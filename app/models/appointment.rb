@@ -1,7 +1,9 @@
 class Appointment < ApplicationRecord
   belongs_to :user
+  VALID_TEL_REGEX = /\A1\d{10}\z/
 
-  validates :name, presence: { message: "名称不能为空" }
-  validates :contact, presence: { message: "联系方式不能为空" } 
+  validates :name, presence: { message: "姓名不能为空" }
+  validates :contact, presence: { message: "手机号码不能为空" } 
   validates :content, presence: { message: "内容不能为空" }
+  validates :contact, format: { with: VALID_TEL_REGEX, message: "手机号码格式不正确" }, unless: proc{ |appointment| appointment.contact.blank? }
 end
