@@ -6,7 +6,12 @@ class CreateCategories < ActiveRecord::Migration[5.2]
       t.string :big_pic
       t.integer :order
       t.string :price
-      t.text :content
+      t.string :merit
+      t.string :age
+      t.string :clothing
+      t.string :picture
+      t.string :photographer
+      t.text :others
       t.integer :user_id
 
       t.timestamps

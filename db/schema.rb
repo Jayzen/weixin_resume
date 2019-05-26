@@ -90,7 +90,12 @@ ActiveRecord::Schema.define(version: 2019_05_22_075807) do
     t.string "big_pic"
     t.integer "order"
     t.string "price"
-    t.text "content"
+    t.string "merit"
+    t.string "age"
+    t.string "clothing"
+    t.string "picture"
+    t.string "photographer"
+    t.text "others"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

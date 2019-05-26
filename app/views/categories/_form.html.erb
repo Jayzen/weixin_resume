@@ -1,44 +1,62 @@
-<%= form_with(model: category, local: true) do |form| %>
-  <% unless category.errors.blank? %>
+<%= form_for(@category) do |f| %>
+  <% unless @category.errors.blank? %>
     <div class="alert alert-danger">
       <ul class="list-unstyled">
-        <% category.errors.messages.values.flatten.each do |error| %>
+        <% @category.errors.messages.values.flatten.each do |error| %>
           <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
         <% end -%>
       </ul>
     </div>
   <% end -%>
+  <div class="d-flex flex-column">
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">标题:</div>
+      <div class="col-sm-8"><%= f.text_field :name, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">小图标:</div>
+      <div class="col-sm-8"><%= f.file_field :small_pic, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">大照片:</div>
+      <div class="col-sm-8"><%= f.file_field :big_pic, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">价格:</div>
+      <div class="col-sm-8"><%= f.text_field :price, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">本单特色:</div>
+      <div class="col-sm-8"><%= f.text_field :merit, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">适用年龄:</div>
+      <div class="col-sm-8"><%= f.text_field :age, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">服装说明:</div>
+      <div class="col-sm-8"><%= f.text_field :clothing, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">照片说明:</div>
+      <div class="col-sm-8"><%= f.text_field :picture, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">摄影师:</div>
+      <div class="col-sm-8"><%= f.text_field :photographer, class: "form-control" %></div>
+    </div> 
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">其他说明:</div>
+      <div class="col-sm-8"><%= f.text_area :others, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">排序:</div>
+      <div class="col-sm-8"><%= f.number_field :order, class: "form-control" %></div>
+    </div>   
 
-  <div class="form-group">
-    <%= form.text_field :name, placeholder: "输入标题", class: "form-control" %>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right"></div>
+      <div class="col-sm-8 text-left"><%= f.submit (category.new_record? ? "新建" : "更新"), class: "btn btn-primary btn-sm" %></div>
+    </div>
   </div>
-  
-
-  <div class="form-group">
-    <%= form.file_field :big_pic, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.file_field :small_pic, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.text_field :price, placehoder: "输入价格",class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.text_field :order, placehoder: "输入排序", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.text_area :content, placehoder: "输入内容", class: "form-control" %>
-  </div> 
-
-  <div class="form-group">
-    <%= form.submit "提交", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-  </div>
-<% end %>
-
+<% end -%>

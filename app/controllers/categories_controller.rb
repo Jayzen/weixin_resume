@@ -52,7 +52,7 @@ class CategoriesController < ApplicationController
     end
 
     def category_params
-      params.require(:category).permit(:name, :big_pic, :small_pic, :order, :price, :content)
+      params.require(:category).permit(:name, :big_pic, :small_pic, :order, :price, :others, :merit, :age, :clothing, :picture, :photographer)
     end
 
     def set_categories

@@ -6,7 +6,12 @@ module API
       expose :small_pic
       expose :big_pic
       expose :price
-      expose :content
+      expose :merit
+      expose :age
+      expose :clothing
+      expose :picture
+      expose :photographer
+      expose :others
 
       private
         def small_pic
