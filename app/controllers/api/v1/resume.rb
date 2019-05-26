@@ -23,8 +23,11 @@ module API
       post '/comment' do
         if token = Rails.cache.fetch(params[:token])
           guest_id = JSON.parse(token)["guest_id"]
-          user_id = User.find_by(appkey: request.headers["Appkey"]).id
-          Comment.create(guest_id: guest_id, user_id: user_id, content: params[:content])
+          validate_appkey
+          @comment = Comment.create(guest_id: guest_id, user_id: @user.id, content: params[:content])
+          if @comment.errors.messages.size != 0
+            error!({code: 102, error:  @comment.errors.messages.values.flatten.first})
+          end
         end
       end
 

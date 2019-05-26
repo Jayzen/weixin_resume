@@ -4,6 +4,7 @@ class Appointment < ApplicationRecord
 
   validates :name, presence: { message: "姓名不能为空" }
   validates :contact, presence: { message: "手机号码不能为空" } 
-  validates :content, presence: { message: "内容不能为空" }
+  validates :date, presence: { message: "请选择日期" }
+  validates :time, presence: { message: "请选择时间" }
   validates :contact, format: { with: VALID_TEL_REGEX, message: "手机号码格式不正确" }, unless: proc{ |appointment| appointment.contact.blank? }
 end

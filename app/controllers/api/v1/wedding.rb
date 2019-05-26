@@ -12,6 +12,14 @@ module API
         build_response code: 0, data: carousels
       end
 
+      desc 'find one carousels'
+      get '/first_carousel' do
+        validate_appkey
+        @carousel = @user.carousels.first
+        carousel = present @carousel, with: API::Entities::Carousel
+        build_response code: 0, data: carousel
+      end
+
       desc 'find categories'
       get '/categories' do
         validate_appkey
@@ -40,7 +48,7 @@ module API
       desc 'create appointment'
       post '/appointment' do
         validate_appkey
-        @appointment = @user.appointments.create(name: params[:name], contact: params[:contact], content: params[:content])
+        @appointment = @user.appointments.create(name: params[:name], contact: params[:contact], date: params[:date], time: params[:time])
         if @appointment.errors.messages.size != 0
           error!({code: 102, error:  @appointment.errors.messages.values.flatten.first})
         end
