@@ -84,24 +84,6 @@ ActiveRecord::Schema.define(version: 2019_05_22_075807) do
     t.index ["user_id"], name: "index_carousels_on_user_id"
   end
 
-  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.string "small_pic"
-    t.string "big_pic"
-    t.integer "order"
-    t.string "price"
-    t.string "merit"
-    t.string "age"
-    t.string "clothing"
-    t.string "picture"
-    t.string "photographer"
-    t.text "others"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_categories_on_user_id"
-  end
-
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "contact"
@@ -147,6 +129,24 @@ ActiveRecord::Schema.define(version: 2019_05_22_075807) do
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
+  create_table "photographs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "small_pic"
+    t.string "big_pic"
+    t.integer "order"
+    t.string "price"
+    t.string "merit"
+    t.string "age"
+    t.string "clothing"
+    t.string "picture"
+    t.string "photographer"
+    t.text "others"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_photographs_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -158,10 +158,6 @@ ActiveRecord::Schema.define(version: 2019_05_22_075807) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
@@ -171,7 +167,6 @@ ActiveRecord::Schema.define(version: 2019_05_22_075807) do
     t.datetime "updated_at", null: false
     t.string "roles"
     t.index ["appkey"], name: "index_users_on_appkey", unique: true
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

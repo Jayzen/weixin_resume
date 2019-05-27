@@ -1,6 +1,7 @@
 class LocationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_location, only: [:show, :edit, :update]
+  access location: :all, message: "当前用户无权访问"
 
   def show
   end

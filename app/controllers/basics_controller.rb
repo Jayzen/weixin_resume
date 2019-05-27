@@ -2,6 +2,7 @@ class BasicsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_basic, only: [:show, :edit, :update]
   before_action :set_attributes, only: [:show, :edit, :update]
+  access basic: :all, message: "当前用户无权访问"
 
   def show
   end

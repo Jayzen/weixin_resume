@@ -1,0 +1,60 @@
+  <div class="card">
+    <div class="card-header text-center">
+      权限设置
+    </div>
+    <div class="card-body">
+      <%= form_for(@user,
+                   url: update_privilege_admin_path(@user),
+                   method: 'put'
+                  ) do |f| %>
+        <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[basic]"  value=true <%= (@user.has_roles?(:basic) ? "checked" : "") %>>
+              <label class="form-check-label">
+                基本信息
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[location]"  value=true <%= (@user.has_roles?(:location) ? "checked" : "") %>>
+              <label class="form-check-label">
+                地址设置
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[comment]"  value=true <%= (@user.has_roles?(:comment) ? "checked" : "") %>>
+              <label class="form-check-label">
+                评论管理
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[carousel]"  value=true <%= (@user.has_roles?(:carousel) ? "checked" : "") %>>
+              <label class="form-check-label">
+                轮播图管理
+              </label>
+            </div>
+            <div class="form-check">
+               <input class="form-check-input" type="checkbox" name="privilege[category]"  value=true <%= (@user.has_roles?(:category) ? "checked" : "") %>>
+               <label class="form-check-label">
+                 摄影分类
+               </label>
+             </div> 
+             <div class="form-check">
+               <input class="form-check-input" type="checkbox" name="privilege[consult]"  value=true <%= (@user.has_roles?(:consult) ? "checked" : "") %>>
+               <label class="form-check-label">
+                 摄影咨询
+                </label>
+             </div>
+             <div class="form-check">
+               <input class="form-check-input" type="checkbox" name="privilege[appointment]"  value=true <%= (@user.has_roles?(:appointment) ? "checked" : "") %>>
+               <label class="form-check-label">
+                 摄影预约         
+               </label>
+             </div>
+            <%= hidden_field_tag "privilege[not_nil]", true %>
+        </div>
+        <div class="form-group">
+            <%= f.submit "更新权限", class: "btn btn-primary btn-sm"%>
+        </div>
+      <% end %>
+    </div>
+  </div>

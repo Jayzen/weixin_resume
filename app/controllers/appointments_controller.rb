@@ -1,6 +1,7 @@
 class AppointmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_appointment, only: [:destroy, :delete]
+  access appointment: :all, message: "当前用户无权访问"
 
   def index
     @appointments = current_user.appointments.page(params[:page])

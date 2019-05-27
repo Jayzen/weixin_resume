@@ -1,6 +1,7 @@
 class ConsultsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_consult, only: [:destroy, :delete]
+  access consult: :all, message: "当前用户无权访问"
 
   def index
     @consults = current_user.consults.page(params[:page])

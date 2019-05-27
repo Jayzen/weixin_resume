@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_comment, only: [:delete, :destroy]
+  access comment: :all, message: "当前用户无权访问"
 
   def index
     @comments = current_user.comments.includes(:guest).order(created_at: :desc).page(params[:page]).per(50)

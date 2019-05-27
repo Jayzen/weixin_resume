@@ -2,24 +2,50 @@
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to "基本信息", basic_path, class: "nav-link #{ (controller_name == 'basics') ? 'active' : '' } " %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "地址设置", location_path, class: "nav-link #{ (controller_name == 'locations') ? 'active' : '' }" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "评论管理", comments_path, class: "nav-link #{ (controller_name == 'comments') ? 'active' : '' }" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "客户联系", clients_path, class: "nav-link #{ (controller_name == 'clients') ? 'active' : '' }" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "摄影轮播图", carousels_path, class: "nav-link #{ (controller_name == 'carousels') ? 'active' : '' }" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "摄影分类", categories_path, class: "nav-link #{ (controller_name == 'categories') ? 'active' : '' }" %>
-        </li>
+        <% if current_user.has_roles?(:root_admin) %>
+          <li class="nav-item">
+            <%= link_to "客户联系", clients_path, class: "nav-link #{ (controller_name == 'clients') ? 'active' : '' }" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "用户管理", admins_path, class: "nav-link #{ (controller_name == 'admins') ? 'active' : '' }" %>
+          </li>
+        <% else %>
+          <% if current_user.has_roles?(:basic) %>
+            <li class="nav-item">
+              <%= link_to "基本信息", basic_path, class: "nav-link #{ (controller_name == 'basics') ? 'active' : '' } " %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:location) %>
+            <li class="nav-item">
+              <%= link_to "地址设置", location_path, class: "nav-link #{ (controller_name == 'locations') ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:comment) %>
+            <li class="nav-item">
+              <%= link_to "评论管理", comments_path, class: "nav-link #{ (controller_name == 'comments') ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:carousel) %>
+            <li class="nav-item">
+              <%= link_to "轮播图", carousels_path, class: "nav-link #{ (controller_name == 'carousels') ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:photograph) %>
+            <li class="nav-item">
+              <%= link_to "摄影分类", photographs_path, class: "nav-link #{ (controller_name == 'photographs') ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:consult) %>
+            <li class="nav-item">
+              <%= link_to "咨询", consults_path, class: "nav-link #{ (controller_name == 'consults') ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:appointment) %>
+            <li class="nav-item">
+              <%= link_to "预约", appointments_path, class: "nav-link #{ (controller_name == 'appointments') ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+        <% end -%>
       <% else %>
         <%= link_to "登录", new_user_session_path, class: "nav-link" %>
       <% end -%>

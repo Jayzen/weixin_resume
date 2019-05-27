@@ -5,12 +5,14 @@ Rails.application.routes.draw do
   resources :admins do
     get 'delete', on: :member
     get 'search', on: :collection
+    get 'privileges', on: :member
+    put 'update_privilege', on: :member
   end
 
   resource :basic
   resource :location
 
-  resources :clients, :carousels, :categories, :consults, :appointments do
+  resources :clients, :carousels, :photographs, :consults, :appointments do
     get 'delete', on: :member
   end
 

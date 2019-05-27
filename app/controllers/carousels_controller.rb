@@ -2,6 +2,7 @@ class CarouselsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_carousel, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_carousels, only: [:index]
+  access carousel: :all, message: "当前用户无权访问"
 
   def index
   end

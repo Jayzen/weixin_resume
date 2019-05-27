@@ -20,20 +20,20 @@ module API
         build_response code: 0, data: carousel
       end
 
-      desc 'find categories'
-      get '/categories' do
+      desc 'find photographs'
+      get '/photographs' do
         validate_appkey
-        @categories = @user.categories
-        categories = present @categories, with: API::Entities::Category
-        build_response code: 0, data: categories
+        @photographs = @user.photographs
+        photographs = present @photographs, with: API::Entities::Photograph
+        build_response code: 0, data: photographs
       end
 
-      desc 'find one category'
-      get 'categories/:id' do
+      desc 'find one photograph'
+      get 'photographs/:id' do
         validate_appkey
-        @category = @user.categories.find(params[:id])
-        category = present @category, with: API::Entities::Category
-        build_response code: 0, data: category
+        @photograph = @user.photographs.find(params[:id])
+        photograph = present @photograph, with: API::Entities::Photograph
+        build_response code: 0, data: photograph
       end
 
       desc 'create consult'

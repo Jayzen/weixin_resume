@@ -1,6 +1,6 @@
 module API
   module Entities
-    class Category < Grape::Entity
+    class Photograph < Grape::Entity
       expose :id
       expose :name
       expose :small_pic

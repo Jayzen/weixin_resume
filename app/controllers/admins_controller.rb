@@ -1,6 +1,6 @@
 class AdminsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:delete, :destroy, :show]
+  before_action :set_user, only: [:delete, :destroy, :show, :privileges, :update_privilege]
 
   access root_admin: :all, message: "当前用户无权访问"
 
@@ -24,6 +24,24 @@ class AdminsController < ApplicationController
     @user.destroy
     flash[:success] = "用户删除成功"
     redirect_to admins_path
+  end
+
+  def privileges
+  end
+
+  def update_privilege
+    basic = params[:privilege][:basic] ? :basic : nil
+    location = params[:privilege][:location] ? :location :nil
+    comment = params[:privilege][:comment] ? :comment : nil
+    carousel = params[:privilege][:carousel] ? :carousel : nil
+    category = params[:privilege][:category] ? :category : nil
+    consult = params[:privilege][:consult] ? :consult : nil
+    appointment = params[:privilege][:appointment] ? :appointment : nil
+    @user.roles = [basic, location, comment, carousel, category, consult, appointment].compact
+    @user.save
+
+    flash[:success] = "权限更新成功"
+    redirect_to privileges_admin_path(@user)
   end
 
   private

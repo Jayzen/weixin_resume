@@ -1,8 +1,8 @@
-<%= form_for(@category) do |f| %>
-  <% unless @category.errors.blank? %>
+<%= form_for(@photograph) do |f| %>
+  <% unless @photograph.errors.blank? %>
     <div class="alert alert-danger">
       <ul class="list-unstyled">
-        <% @category.errors.messages.values.flatten.each do |error| %>
+        <% @photograph.errors.messages.values.flatten.each do |error| %>
           <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
         <% end -%>
       </ul>
@@ -56,7 +56,7 @@
 
     <div class="form-group row">
       <div class="col-sm-2 text-right"></div>
-      <div class="col-sm-8 text-left"><%= f.submit (category.new_record? ? "新建" : "更新"), class: "btn btn-primary btn-sm" %></div>
+      <div class="col-sm-8 text-left"><%= f.submit (photograph.new_record? ? "新建" : "更新"), class: "btn btn-primary btn-sm" %></div>
     </div>
   </div>
 <% end -%>

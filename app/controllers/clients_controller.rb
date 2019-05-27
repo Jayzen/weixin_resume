@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
-  access root_admin: :all, message: "当前用户无权访问"
   before_action :set_client, only: [:destroy, :delete]
+  access root_admin: :all, message: "当前用户无权访问"
 
   def index
     @clients = Client.page(params[:page])

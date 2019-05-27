@@ -1,6 +1,6 @@
-class CreateCategories < ActiveRecord::Migration[5.2]
+class CreatePhotographs < ActiveRecord::Migration[5.2]
   def change
-    create_table :categories do |t|
+    create_table :photographs do |t|
       t.string :name
       t.string :small_pic
       t.string :big_pic
@@ -16,6 +16,6 @@ class CreateCategories < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :categories, :user_id
+    add_index :photographs, :user_id
   end
 end
