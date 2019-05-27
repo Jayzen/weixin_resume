@@ -35,19 +35,19 @@
             <div class="form-check">
                <input class="form-check-input" type="checkbox" name="privilege[category]"  value=true <%= (@user.has_roles?(:category) ? "checked" : "") %>>
                <label class="form-check-label">
-                 摄影分类
+                 摄影内容
                </label>
              </div> 
              <div class="form-check">
                <input class="form-check-input" type="checkbox" name="privilege[consult]"  value=true <%= (@user.has_roles?(:consult) ? "checked" : "") %>>
                <label class="form-check-label">
-                 摄影咨询
+                 咨询管理
                 </label>
              </div>
              <div class="form-check">
                <input class="form-check-input" type="checkbox" name="privilege[appointment]"  value=true <%= (@user.has_roles?(:appointment) ? "checked" : "") %>>
                <label class="form-check-label">
-                 摄影预约         
+                 预约管理         
                </label>
              </div>
             <%= hidden_field_tag "privilege[not_nil]", true %>
