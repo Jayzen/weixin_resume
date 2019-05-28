@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resource :basic
+  resource :wedding_basic
   resource :location
 
   resources :clients, :carousels, :photographs, :consults, :appointments do

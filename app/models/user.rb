@@ -4,7 +4,7 @@ class User < ApplicationRecord
   ## The :user role is added by default and shouldn't be included in this list.             ##
   ## The :root_admin can access any page regardless of access settings. Use with caution!   ##
   ## The multiple option can be set to true if you need users to have multiple roles.       ##
-  petergate(roles: [:root_admin, :basic, :location, :comment, :carousel, :category, :consult, :appointment], multiple: true)                                      ##
+  petergate(roles: [:root_admin, :basic, :wedding_basic,:location, :comment, :carousel, :category, :consult, :appointment], multiple: true)                                      ##
   ############################################################################################ 
  
 
@@ -14,6 +14,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :timeoutable
 
   has_one :basic
+  has_one :wedding_basic
   has_one :location
   has_many :comments
   has_many :carousels
@@ -39,6 +40,7 @@ class User < ApplicationRecord
 
   def create_default_basic
     self.create_basic(name: "jayzen", avatar: "uploads/basic/avatar/1/user.png", motto: "生如夏花", introduction: "自我介绍", phone: "18888888888", wechat: "wechat", qq: "645112211", email: "jayzen@foxmail.com", company: "company", job: "job", address: "address")
+    self.create_wedding_basic(name: "jayzen", phone: "18868818399")
   end
 
   def create_default_location

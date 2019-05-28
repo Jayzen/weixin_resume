@@ -1,7 +1,6 @@
 class AdminsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user, only: [:delete, :destroy, :show, :privileges, :update_privilege]
-
   access root_admin: :all, message: "当前用户无权访问"
 
   def index
@@ -37,7 +36,8 @@ class AdminsController < ApplicationController
     category = params[:privilege][:category] ? :category : nil
     consult = params[:privilege][:consult] ? :consult : nil
     appointment = params[:privilege][:appointment] ? :appointment : nil
-    @user.roles = [basic, location, comment, carousel, category, consult, appointment].compact
+    wedding_basic = params[:privilege][:wedding_basic] ? :wedding_basic : nil
+    @user.roles = [basic, location, comment, carousel, category, consult, appointment, wedding_basic].compact
     @user.save
 
     flash[:success] = "权限更新成功"

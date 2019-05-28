@@ -15,6 +15,11 @@
               <%= link_to "基本信息", basic_path, class: "nav-link #{ (controller_name == 'basics') ? 'active' : '' } " %>
             </li>
           <% end -%>
+          <% if current_user.has_roles?(:wedding_basic) %>
+            <li class="nav-item">
+              <%= link_to "基本信息", wedding_basic_path, class: "nav-link #{ (controller_name == 'wedding_basics') ? 'active' : '' } " %>
+            </li>
+          <% end -%>
           <% if current_user.has_roles?(:location) %>
             <li class="nav-item">
               <%= link_to "地址设置", location_path, class: "nav-link #{ (controller_name == 'locations') ? 'active' : '' }" %>

@@ -11,7 +11,13 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="privilege[basic]"  value=true <%= (@user.has_roles?(:basic) ? "checked" : "") %>>
               <label class="form-check-label">
-                基本信息
+                名片基本信息
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[wedding_basic]"  value=true <%= (@user.has_roles?(:wedding_basic) ? "checked" : "") %>>
+              <label class="form-check-label">
+                摄影基本信息
               </label>
             </div>
             <div class="form-check">

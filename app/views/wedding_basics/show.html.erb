@@ -1,0 +1,15 @@
+  <div class="d-flex flex-column">
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">名称:</div>
+      <div class="col-sm-8 col-form-label"><%= @wedding_basic.name %></div>
+    </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">手机号码:</div>
+      <div class="col-sm-8 col-form-label"><%= @wedding_basic.phone %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label"></div>
+      <div class="col-sm-8 text-left"><%= link_to "编辑", edit_wedding_basic_path(@wedding_basic), class: "btn btn-primary btn-sm" %></div>
+    </div>  
+  </div>
