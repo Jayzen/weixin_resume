@@ -4,7 +4,7 @@ class User < ApplicationRecord
   ## The :user role is added by default and shouldn't be included in this list.             ##
   ## The :root_admin can access any page regardless of access settings. Use with caution!   ##
   ## The multiple option can be set to true if you need users to have multiple roles.       ##
-  petergate(roles: [:root_admin, :basic, :wedding_basic,:location, :comment, :carousel, :category, :consult, :appointment], multiple: true)                                      ##
+  petergate(roles: [:root_admin, :basic, :wedding_basic,:location, :comment, :carousel, :photograph, :consult, :appointment], multiple: true)                                      ##
   ############################################################################################ 
  
 
