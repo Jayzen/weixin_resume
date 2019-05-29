@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+    <%= form_for(@user, url: admins_path, method: :post) do |f| %>
+      <% unless @user.errors.blank? %>
+        <div class="alert alert-danger">
+          <ul class="list-unstyled">
+            <% @user.errors.messages.values.flatten.each do |error| %>
+              <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
+            <% end -%>
+          </ul>
+        </div>
+      <% end -%> 
+      <div class="form-group">
+        <%= f.email_field :email, autofocus: false, class: 'form-control', placeholder: "邮箱" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.text_field :name, class: 'form-control', placeholder: "名字" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: '密码' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: '密码确认' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "新增", class: "btn btn-primary btn-block btn-lg" %>
+      </div>
+    <% end %>
+  </div>
+</div>

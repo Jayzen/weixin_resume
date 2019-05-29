@@ -7,6 +7,20 @@ class AdminsController < ApplicationController
     @users = User.all.page(params[:page])
   end
 
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(email: params[:user][:email], name: params[:user][:name], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
+    if @user.save
+      flash[:success] = "创建成功"
+      redirect_to admins_path
+    else
+      render :new
+    end
+  end
+
   def show
   end
   

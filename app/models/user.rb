@@ -9,9 +9,18 @@ class User < ApplicationRecord
  
 
   # Include default devise modules. Others available are:
-  # :omniauthable, :confirmable
-  devise :database_authenticatable, :registerable, :lockable, :trackable,
-         :recoverable, :rememberable, :validatable, :timeoutable
+  # :omniauthable, :confirmable, :validatable, :registerable, :lockable, :recoverable
+  devise :database_authenticatable, :registerable, :trackable, :rememberable, :timeoutable
+  
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :name, presence: { message: "名字不能为空" }
+  validates :email, presence: { message: "邮箱不能为空" }
+  validates :email, format: { with: VALID_EMAIL_REGEX, message: "邮件格式不正确" }, unless: proc{ |user| user.email.blank? }
+  validates :password, presence: { message: "密码不能为空" }
+  validates :password, length: { minimum: 6, message: "密码不能少于6个字符" }, unless: proc{ |user| user.password.blank? }
+  validates :password_confirmation, presence: { message: "密码确认不能为空" }
+  validates :password_confirmation, length: { minimum: 6, message: "密码确认不能少于6个字符" }, unless: proc{ |user| user.password_confirmation.blank? }
+  validates :password, confirmation: { message: "两次密码不一致"}, unless: proc{ |user| user.password.blank? && user.password_confirmation.blank? }
 
   has_one :basic
   has_one :wedding_basic

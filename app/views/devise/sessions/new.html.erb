@@ -1,7 +1,5 @@
 <div class="row">
   <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-    <h1 class="text-center">登录</h1>
-
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group">
         <%= f.email_field :email, autofocus: true, placeholder: '邮箱地址', class: 'form-control' %>
@@ -24,9 +22,5 @@
         <%= f.submit "登录", class: "btn btn-primary btn-block btn-lg" %>
       </div>
     <% end %>
-
-    <div class="text-center">
-      <%= render "devise/shared/links" %>
-    </div>
   </div>
 </div>
