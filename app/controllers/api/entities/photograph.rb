@@ -16,7 +16,7 @@ module API
       private
         def small_pic
           if Rails.env == "production"
-            link = "https://zhengjiajun.com" + object.small_pic.url.to_s
+            link = "https://eco-news.cn" + object.small_pic.url.to_s
           else
             link = "http://localhost:3000" + object.small_pic.url.to_s
           end
