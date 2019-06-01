@@ -53,7 +53,7 @@ class CarouselsController < ApplicationController
     end
 
     def carousel_params
-      params.require(:carousel).permit(:name, :pic, :weight)
+      params.require(:carousel).permit(:name, :pic, :reveal, :weight)
     end
 
     def set_carousels

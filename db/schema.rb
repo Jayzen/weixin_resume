@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_022638) do
+ActiveRecord::Schema.define(version: 2019_05_31_113232) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_022638) do
     t.string "pic"
     t.integer "order", default: 0
     t.integer "user_id"
+    t.boolean "reveal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_carousels_on_user_id"
@@ -129,11 +130,37 @@ ActiveRecord::Schema.define(version: 2019_05_28_022638) do
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
+  create_table "menus", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.string "pic"
+    t.integer "order", default: 0
+    t.boolean "reveal"
+    t.string "price"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_menus_on_user_id"
+  end
+
+  create_table "movies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.string "movie"
+    t.integer "order", default: 0
+    t.boolean "reveal"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_movies_on_user_id"
+  end
+
   create_table "photographs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "small_pic"
     t.string "big_pic"
-    t.integer "order"
+    t.integer "order", default: 0
+    t.boolean "reveal"
     t.string "price"
     t.string "merit"
     t.string "age"
@@ -180,6 +207,16 @@ ActiveRecord::Schema.define(version: 2019_05_28_022638) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_wedding_basics_on_user_id"
+  end
+
+  create_table "workshop_basics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "business_hour"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_workshop_basics_on_user_id"
   end
 
 end

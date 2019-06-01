@@ -15,13 +15,6 @@ module API
         build_response code: 0, data: wedding_basic
       end
 
-      desc 'find carousels'
-      get '/carousels' do
-        @carousels = @user.carousels
-        carousels = present @carousels, with: API::Entities::Carousel
-        build_response code: 0, data: carousels
-      end
-
       desc 'find one carousels'
       get '/first_carousel' do
         @carousel = @user.carousels.first

@@ -4,7 +4,8 @@ class CreatePhotographs < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :small_pic
       t.string :big_pic
-      t.integer :order
+      t.integer :order, default: 0
+      t.boolean :reveal
       t.string :price
       t.string :merit
       t.string :age

@@ -23,6 +23,11 @@
               <%= link_to "基本信息", wedding_basic_path, class: "nav-link #{ (controller_name == 'wedding_basics') ? 'active' : '' } " %>
             </li>
           <% end -%>
+          <% if current_user.has_roles?(:workshop_basic) %>
+            <li class="nav-item">
+              <%= link_to "基本信息", workshop_basic_path, class: "nav-link #{ (controller_name == 'workshop_basics') ? 'active' : '' } " %>
+            </li>
+          <% end -%>
           <% if current_user.has_roles?(:location) %>
             <li class="nav-item">
               <%= link_to "地址设置", location_path, class: "nav-link #{ (controller_name == 'locations') ? 'active' : '' }" %>
@@ -55,7 +60,7 @@
           <% end -%>
         <% end -%>
         <li class="nav-item">
-          <%= link_to "修改密码", edit_user_registration_path, class: "nav-link #{ (controller_name == 'sessions') ? 'active' : '' }" %>
+          <%= link_to "修改密码", edit_user_registration_path, class: "nav-link #{ ((controller_name == 'registrations')&&(action_name=="edit")) ? 'active' : '' }" %>
         </li>
       <% else %>
         <%= link_to "登录", new_user_session_path, class: "nav-link" %>

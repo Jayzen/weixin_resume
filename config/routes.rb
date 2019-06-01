@@ -9,14 +9,17 @@ Rails.application.routes.draw do
     put 'update_privilege', on: :member
   end
 
-  resource :basic
-  resource :wedding_basic
-  resource :location
+  resource :basic, :wedding_basic, :workshop_basic, :location
 
-  resources :clients, :carousels, :photographs, :consults, :appointments do
+  resources :clients, :carousels, :photographs, :consults, :appointments, :movies do
     get 'delete', on: :member
   end
 
+  resources :menus do
+    get 'delete', on: :member
+    get 'menu_detail', on: :member
+  end
+  
   resources :comments do
     get 'delete', on: :member
   end

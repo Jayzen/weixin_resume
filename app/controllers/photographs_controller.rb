@@ -53,7 +53,7 @@ class PhotographsController < ApplicationController
     end
 
     def photograph_params
-      params.require(:photograph).permit(:name, :big_pic, :small_pic, :order, :price, :others, :merit, :age, :clothing, :picture, :photographer)
+      params.require(:photograph).permit(:name, :big_pic, :small_pic, :order, :price, :others, :merit, :age, :clothing, :picture, :photographer, :reveal)
     end
 
     def set_photographs
