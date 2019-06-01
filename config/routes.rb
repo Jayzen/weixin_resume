@@ -18,8 +18,12 @@ Rails.application.routes.draw do
   resources :menus do
     get 'delete', on: :member
     get 'menu_detail', on: :member
+    get 'new_detail', on: :member
+    post 'create_detail', on: :member
+    get 'delete_detail', on: :member
+    get 'show_detail', on: :member
   end
-  
+
   resources :comments do
     get 'delete', on: :member
   end

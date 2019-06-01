@@ -12,6 +12,15 @@ module API
           menus = present @menus, with: API::Entities::Menu
           build_response code: 0, data: menus
         end
+
+        desc 'find menu details'
+        get '/menus/:id' do
+          validate_appkey
+          @menu = @user.menus.find(params[:id])
+          @menu_details = @menu.menu_details
+          menu_details = present @menu_details, with: API::Entities::MenuDetail
+          build_response code: 0, data: menu_details
+        end
       end
     end
   end

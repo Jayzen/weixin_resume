@@ -11,7 +11,42 @@ class MenusController < ApplicationController
   end
 
   def menu_detail
-    @menu = Menu.find(params[:id])
+    @menu = current_user.menus.find(params[:id])
+    @menu_details = @menu.menu_details
+  end
+
+  def new_detail
+    @menu_detail = current_user.menu_details.new
+  end
+
+  def show_detail
+    @menu = current_user.menus.find(params[:id])
+    @menu_detail = @menu.menu_details.find(params[:menu_detail])
+  end
+
+  def delete_detail
+    @menu = current_user.menus.find(params[:id])
+    @menu_detail = @menu.menu_details.find(params[:menu_detail])
+    @menu_detail.destroy
+    flash[:success] = "删除成功"
+    redirect_to menu_detail_menu_path
+  end
+
+  def create_detail
+    @menu = current_user.menus.find(params[:id])
+    @menu_detail = current_user.menu_details.new(
+      title: params[:menu_detail][:title],
+      pic: params[:menu_detail][:pic],
+      reveal: params[:menu_detail][:reveal],
+      order: params[:menu_detail][:order],
+      menu_id: params[:id]
+    )
+    if @menu_detail.save
+      flash[:success] = "创建成功"
+      redirect_to menu_detail_menu_path
+    else
+      render :new_detail
+    end
   end
 
   def new

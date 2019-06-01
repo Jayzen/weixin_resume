@@ -1,7 +1,7 @@
-class Menu < ApplicationRecord
+class MenuDetail < ApplicationRecord
   mount_uploader :pic, ImageUploader
-  has_many :menu_details
   belongs_to :user
+  belongs_to :menu
 
   module Status
     On = true
