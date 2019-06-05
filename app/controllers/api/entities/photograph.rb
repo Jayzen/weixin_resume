@@ -24,7 +24,7 @@ module API
         
         def big_pic
           if Rails.env == "production"
-            link = "https://zhengjiajun.com" + object.big_pic.url.to_s
+            link = "https://eco-news.cn" + object.big_pic.url.to_s
           else
             link = "http://localhost:3000" + object.big_pic.url.to_s
           end

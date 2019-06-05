@@ -34,6 +34,7 @@ class User < ApplicationRecord
   has_many :movies
   has_many :menus
   has_many :menu_details
+  has_many :headers
 
   after_create :set_role, :generate_token, :create_default_basic, :create_default_location
 

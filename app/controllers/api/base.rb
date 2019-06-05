@@ -7,6 +7,7 @@ module API
     mount V1::Common::Carousel
     mount V1::Common::Movie
     mount V1::Common::Menu
+    mount V1::Common::Header
     mount V1::Wedding
     mount V1::Resume
     mount V1::Workshop

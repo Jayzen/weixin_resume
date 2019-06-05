@@ -26,7 +26,7 @@ module API
       private
         def avatar
           if Rails.env == "production"
-            link = "https://zhengjiajun.com" + object.avatar.url.to_s
+            link = "https://eco-news.cn" + object.avatar.url.to_s
           else
             link = "http://localhost:3000" + object.avatar.url.to_s
           end
