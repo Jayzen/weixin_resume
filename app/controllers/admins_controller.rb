@@ -44,6 +44,7 @@ class AdminsController < ApplicationController
 
   def update_privilege
     basic = params[:privilege][:basic] ? :basic : nil
+    top = params[:privilege][:top] ? :top : nil
     location = params[:privilege][:location] ? :location :nil
     comment = params[:privilege][:comment] ? :comment : nil
     carousel = params[:privilege][:carousel] ? :carousel : nil
@@ -52,7 +53,7 @@ class AdminsController < ApplicationController
     appointment = params[:privilege][:appointment] ? :appointment : nil
     wedding_basic = params[:privilege][:wedding_basic] ? :wedding_basic : nil
     workshop_basic = params[:privilege][:workshop_basic] ? :workshop_basic : nil
-    @user.roles = [workshop_basic, basic, location, comment, carousel, photograph, consult, appointment, wedding_basic].compact
+    @user.roles = [top, workshop_basic, basic, location, comment, carousel, photograph, consult, appointment, wedding_basic].compact
     @user.save
 
     flash[:success] = "权限更新成功"

@@ -1,4 +1,4 @@
-class Header < ApplicationRecord
+class Top < ApplicationRecord
   mount_uploader :pic, ImageUploader
   belongs_to :user
 

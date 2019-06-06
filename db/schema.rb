@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_081937) do
+ActiveRecord::Schema.define(version: 2019_06_06_082137) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -119,17 +119,6 @@ ActiveRecord::Schema.define(version: 2019_06_03_081937) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "headers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.string "pic"
-    t.integer "order", default: 0
-    t.integer "user_id"
-    t.boolean "reveal"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_headers_on_user_id"
-  end
-
   create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -196,6 +185,40 @@ ActiveRecord::Schema.define(version: 2019_06_03_081937) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_photographs_on_user_id"
+  end
+
+  create_table "states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "content"
+    t.string "pic"
+    t.integer "order", default: 0
+    t.integer "user_id"
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_states_on_user_id"
+  end
+
+  create_table "tap_carousels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "pic"
+    t.integer "order", default: 0
+    t.integer "user_id"
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tap_carousels_on_user_id"
+  end
+
+  create_table "tops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "pic"
+    t.integer "order", default: 0
+    t.integer "user_id"
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tops_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

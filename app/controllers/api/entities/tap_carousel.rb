@@ -1,6 +1,6 @@
 module API
   module Entities
-    class Header < Grape::Entity
+    class TapCarousel < Grape::Entity
       expose :name
       expose :pic
 

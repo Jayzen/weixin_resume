@@ -27,6 +27,12 @@
               </label>
             </div>           
             <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[top]"  value=true <%= (@user.has_roles?(:top) ? "checked" : "") %>>
+              <label class="form-check-label">
+                头部图片信息
+              </label>
+            </div> 
+            <div class="form-check">
               <input class="form-check-input" type="checkbox" name="privilege[location]"  value=true <%= (@user.has_roles?(:location) ? "checked" : "") %>>
               <label class="form-check-label">
                 地址设置

@@ -1,6 +1,6 @@
-class CreateHeaders < ActiveRecord::Migration[5.2]
+class CreateTops < ActiveRecord::Migration[5.2]
   def change
-    create_table :headers do |t|
+    create_table :tops do |t|
       t.string :name
       t.string :pic
       t.integer :order, default: 0
@@ -9,6 +9,6 @@ class CreateHeaders < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :headers, :user_id
+    add_index :tops, :user_id
   end
 end
