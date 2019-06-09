@@ -3,6 +3,7 @@ module API
     class TapCarousel < Grape::Entity
       expose :name
       expose :pic
+      expose :id
 
       private
         def pic

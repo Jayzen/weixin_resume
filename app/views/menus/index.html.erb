@@ -11,7 +11,7 @@
     </div>
     <div>
       <%= link_to '查看', menu_path(menu), class: "badge badge-primary"%>
-      <%= link_to '价格明细', menu_detail_menu_path(menu), class: "badge badge-primary" %>
+      <%= link_to '价格明细', detail_menu_path(menu), class: "badge badge-primary" %>
       <%= link_to '编辑', edit_menu_path(menu), class: "badge badge-primary"%>
       <%= link_to '删除', delete_menu_path(menu), remote: true, class: "badge badge-primary" %>
     </div>

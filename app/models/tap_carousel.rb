@@ -1,6 +1,7 @@
 class TapCarousel < ApplicationRecord
   mount_uploader :pic, ImageUploader
   belongs_to :user
+  has_many :tap_carousel_photographs
 
   module Status
     On = true

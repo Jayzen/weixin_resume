@@ -29,6 +29,8 @@ class User < ApplicationRecord
   has_many :comments
   has_many :carousels
   has_many :tap_carousels
+  has_many :tap_carousel_photographs
+  has_many :tap_carousel_details
   has_many :photographs
   has_many :consults
   has_many :appointments

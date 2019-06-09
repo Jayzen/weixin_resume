@@ -15,9 +15,9 @@ Rails.application.routes.draw do
     get 'delete', on: :member
   end
 
-  resources :menus do
+  resources :menus, :tap_carousel_photographs do
     get 'delete', on: :member
-    get 'menu_detail', on: :member
+    get 'detail', on: :member
     get 'new_detail', on: :member
     post 'create_detail', on: :member
     get 'delete_detail', on: :member

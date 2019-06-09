@@ -1,0 +1,41 @@
+<%= form_for(@tap_carousel_photograph) do |f| %>
+  <% unless @tap_carousel_photograph.errors.blank? %>
+    <div class="alert alert-danger">
+      <ul class="list-unstyled">
+        <% @tap_carousel_photograph.errors.messages.values.flatten.each do |error| %>
+          <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
+        <% end -%>
+      </ul>
+    </div>
+  <% end -%>
+  <div class="d-flex flex-column">
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">标题:</div>
+      <div class="col-sm-8"><%= f.text_field :name, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">首页照片:</div>
+      <div class="col-sm-8"><%= f.file_field :home_pic, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">分类照片:</div>
+      <div class="col-sm-8"><%= f.file_field :category_pic, class: "form-control" %></div>
+    </div> 
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">分类:</div>
+      <div class="col-sm-8"><%= f.collection_select :tap_carousel_id, @tap_carousels, :id, :name, {}, {class: "form-control"}%></div>
+    </div> 
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">显示:</div>
+      <div class="col-sm-8"><%= f.collection_select :reveal, [[TapCarouselPhotograph::Status::On, '发布'], [TapCarouselPhotograph::Status::Off, '不发布']], :first, :last, {}, {class: "form-control"}%></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">排序:</div>
+      <div class="col-sm-8"><%= f.number_field :order, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right"></div>
+      <div class="col-sm-8 text-left"><%= f.submit (@tap_carousel_photograph.new_record? ? "新建" : "更新"), class: "btn btn-primary btn-sm" %></div>
+    </div>  
+  </div>
+<% end -%>

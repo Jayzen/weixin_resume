@@ -1,0 +1,21 @@
+<% @tap_carousel_details.each_with_index do |tap_carousel_detail, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= tap_carousel_detail.title %>
+      <% if tap_carousel_detail.reveal? %>
+        <span class="badge badge-primary">已发布</span>
+      <% else %>
+        <span class="badge badge-danger">未发布</span>
+      <% end -%> 
+    </div>
+    <div>
+      <%= link_to '查看', show_detail_tap_carousel_photograph_path(tap_carousel_detail, tap_carousel_detail: tap_carousel_detail), class: "badge badge-primary"%>
+      <%= link_to '删除', delete_detail_tap_carousel_photograph_path(tap_carousel_detail, tap_carousel_detail: tap_carousel_detail), class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '新建', new_detail_tap_carousel_photograph_path, class: "btn btn-primary btn-sm" %></div>
+</div>
+<%= render 'shared/confirm_modal' %>

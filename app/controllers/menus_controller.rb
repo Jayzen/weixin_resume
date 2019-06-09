@@ -10,7 +10,7 @@ class MenusController < ApplicationController
   def show
   end
 
-  def menu_detail
+  def detail
     @menu = current_user.menus.find(params[:id])
     @menu_details = @menu.menu_details
   end
@@ -29,7 +29,7 @@ class MenusController < ApplicationController
     @menu_detail = @menu.menu_details.find(params[:menu_detail])
     @menu_detail.destroy
     flash[:success] = "删除成功"
-    redirect_to menu_detail_menu_path
+    redirect_to detail_menu_path
   end
 
   def create_detail
@@ -43,7 +43,7 @@ class MenusController < ApplicationController
     )
     if @menu_detail.save
       flash[:success] = "创建成功"
-      redirect_to menu_detail_menu_path
+      redirect_to detail_menu_path
     else
       render :new_detail
     end

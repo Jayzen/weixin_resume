@@ -5,12 +5,12 @@ module API
     mount V1::Common::Location
     mount V1::Common::Token
     mount V1::Common::Carousel
-    mount V1::Common::TapCarousel
     mount V1::Common::Movie
     mount V1::Common::Menu
     mount V1::Common::Top
     mount V1::Common::State
     mount V1::Wedding
+    mount V1::WeddingOne
     mount V1::Resume
     mount V1::Workshop
 
