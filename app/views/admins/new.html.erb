@@ -1,34 +1,37 @@
-<div class="row">
-  <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-    <%= form_for(@user, url: admins_path, method: :post) do |f| %>
-      <% unless @user.errors.blank? %>
-        <div class="alert alert-danger">
-          <ul class="list-unstyled">
-            <% @user.errors.messages.values.flatten.each do |error| %>
-              <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
-            <% end -%>
-          </ul>
-        </div>
-      <% end -%> 
-      <div class="form-group">
-        <%= f.email_field :email, autofocus: false, class: 'form-control', placeholder: "邮箱" %>
+ <%= form_for(@user, url: admins_path, method: :post) do |f| %>
+   <% unless @user.errors.blank? %>
+     <div class="alert alert-danger">
+       <ul class="list-unstyled">
+         <% @user.errors.messages.values.flatten.each do |error| %>
+           <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
+         <% end -%>
+       </ul>
+     </div>
+   <% end -%> 
+   <div class="d-flex flex-column">
+      <div class="form-group row">
+        <div class="col-sm-2 text-right col-form-label">邮箱:</div> 
+        <div class="col-sm-8"><%= f.email_field :email, autofocus: false, class: 'form-control', placeholder: "邮箱" %></div>
       </div>
-
-      <div class="form-group">
-        <%= f.text_field :name, class: 'form-control', placeholder: "名字" %>
+      <div class="form-group row">
+        <div class="col-sm-2 text-right col-form-label">名字:</div>
+        <div class="col-sm-8"><%= f.text_field :name, class: 'form-control', placeholder: "名字" %></div>
       </div>
-
-      <div class="form-group">
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: '密码' %>
+      <div class="form-group row">
+        <div class="col-sm-2 text-right col-form-label">样式:</div>
+        <div class="col-sm-8"><%= f.collection_select :style, [["", "选择样式.."],["resume", '简历'], ["workshop", '工作室'], ['wedding_one',"婚纱样式一"], ['wedding_two', '婚纱样式二']], :first, :last, {}, {class: "form-control"}%></div>
       </div>
-
-      <div class="form-group">
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: '密码确认' %>
+      <div class="form-group row">
+        <div class="col-sm-2 text-right col-form-label">密码:</div>
+        <div class="col-sm-8"><%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: '密码' %></div>
       </div>
-
-      <div class="form-group">
-        <%= f.submit "新增", class: "btn btn-primary btn-block btn-lg" %>
+      <div class="form-group row">
+        <div class="col-sm-2 text-right col-form-label">密码确认:</div>
+        <div class="col-sm-8"><%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: '密码确认' %></div>
       </div>
-    <% end %>
-  </div>
-</div>
+      <div class="form-group row">
+        <div class="col-sm-2 text-right"></div>
+        <div class="col-sm-8 text-left"><%= f.submit "新增", class: "btn btn-primary btn-sm" %></div>
+      </div>
+    </div>
+<% end %>

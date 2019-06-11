@@ -31,6 +31,18 @@
               <label class="form-check-label">
                 头部图片信息
               </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[state]"  value=true <%= (@user.has_roles?(:state) ? "checked" : "") %>>
+              <label class="form-check-label">
+                摄影说明
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[movie]"  value=true <%= (@user.has_roles?(:movie) ? "checked" : "") %>>
+              <label class="form-check-label">
+                影像说明
+              </label>
             </div> 
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="privilege[location]"  value=true <%= (@user.has_roles?(:location) ? "checked" : "") %>>
@@ -50,6 +62,24 @@
                 轮播图管理
               </label>
             </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[tap_carousel]"  value=true <%= (@user.has_roles?(:tap_carousel) ? "checked" : "") %>>
+              <label class="form-check-label">
+                点击轮播图管理
+              </label>
+            </div> 
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[menu]"  value=true <%= (@user.has_roles?(:menu) ? "checked" : "") %>>
+              <label class="form-check-label">
+                价目表
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="privilege[tap_carousel_photograph]"  value=true <%= (@user.has_roles?(:tap_carousel_photograph) ? "checked" : "") %>>
+              <label class="form-check-label">
+                点击摄影内容
+              </label>
+            </div> 
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="privilege[photograph]"  value=true <%= (@user.has_roles?(:photograph) ? "checked" : "") %>>
                <label class="form-check-label">

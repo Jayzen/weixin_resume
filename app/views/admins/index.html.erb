@@ -33,7 +33,9 @@
       </div>
       <div>
         <% unless user == current_user %>
-          <%= link_to '删除', delete_admin_path(user), remote: true, class: "badge badge-primary" %>
+          <% unless user.has_roles?(:root_admin) %>
+            <%= link_to '删除', delete_admin_path(user), remote: true, class: "badge badge-primary" %>
+          <% end %>
         <% end -%>
         <% unless user.has_roles?(:root_admin) %>
           <%= link_to "设置", privileges_admin_path(user), class: "badge badge-primary" %>

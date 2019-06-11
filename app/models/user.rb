@@ -4,7 +4,11 @@ class User < ApplicationRecord
   ## The :user role is added by default and shouldn't be included in this list.             ##
   ## The :root_admin can access any page regardless of access settings. Use with caution!   ##
   ## The multiple option can be set to true if you need users to have multiple roles.       ##
-  petergate(roles: [:root_admin, :movie, :basic, :wedding_basic, :workshop_basic,:location, :comment, :carousel, :photograph, :consult, :appointment, :top], multiple: true)                                      ##
+  petergate(roles: [:root_admin, 
+                    :location, :basic, :wedding_basic, :workshop_basic, :top, :consult, :appointment, :comment,
+                    :carousel, :photograph,
+                    :movie, :menu, :tap_carousel, :tap_carousel_photograph, :state
+                    ], multiple: true)                                      ##
   ############################################################################################ 
  
 
@@ -15,6 +19,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: { message: "名字不能为空" }
   validates :email, presence: { message: "邮箱不能为空" }
+  validates :style, presence: { message: "样式不能为空" }
   validates :email, format: { with: VALID_EMAIL_REGEX, message: "邮件格式不正确" }, unless: proc{ |user| user.email.blank? }
   validates :password, presence: { message: "密码不能为空" }, allow_nil: true
   validates :password, length: { minimum: 6, message: "密码不能少于6个字符" }, unless: proc{ |user| user.password.blank? }
@@ -22,28 +27,39 @@ class User < ApplicationRecord
   validates :password_confirmation, length: { minimum: 6, message: "密码确认不能少于6个字符" }, unless: proc{ |user| user.password_confirmation.blank? }
   validates :password, confirmation: { message: "两次密码不一致"}, unless: proc{ |user| user.password.blank? && user.password_confirmation.blank? }
 
-  has_one :basic
-  has_one :wedding_basic
-  has_one :workshop_basic
-  has_one :location
-  has_many :comments
-  has_many :carousels
-  has_many :tap_carousels
-  has_many :tap_carousel_photographs
-  has_many :tap_carousel_details
-  has_many :photographs
-  has_many :consults
-  has_many :appointments
-  has_many :movies
-  has_many :menus
-  has_many :menu_details
-  has_many :tops
-  has_many :states
+  has_one :basic, dependent: :destroy
+  has_one :wedding_basic, dependent: :destroy
+  has_one :workshop_basic, dependent: :destroy
+  has_one :location, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :carousels, dependent: :destroy
+  has_many :tap_carousels, dependent: :destroy
+  has_many :tap_carousel_photographs, dependent: :destroy
+  has_many :tap_carousel_details, dependent: :destroy
+  has_many :photographs, dependent: :destroy
+  has_many :consults, dependent: :destroy
+  has_many :appointments, dependent: :destroy
+  has_many :movies, dependent: :destroy
+  has_many :menus, dependent: :destroy
+  has_many :menu_details, dependent: :destroy
+  has_many :tops, dependent: :destroy
+  has_many :states, dependent: :destroy
 
-  after_create :set_role, :generate_token, :create_default_basic, :create_default_location
+  after_create :set_style, :generate_token, :create_default_basic, :create_default_location
 
-  def set_role
-    self.roles = 'editor'
+  def set_style
+    case self.style
+    when "resume"
+      self.roles = [:basic, :location, :comment]
+    when "wedding_one"
+      self.roles = [:wedding_basic, :location, :carousel, :photograph, :consult, :top, :appointment]
+    when "wedding_two"
+      self.roles = [:wedding_basic, :location, :tap_carousel, :tap_carousel_photograph, :menu, :movie, :top]
+    when "workshop"
+      self.roles = [:workshop_basic, :location, :carousel]
+    else 
+      self.roles = "editor"
+    end
     self.save
   end
 

@@ -1,6 +1,7 @@
 module API
   class Base < Grape::API
     mount V1::Common::Basic
+    mount V1::Common::WeddingBasic
     mount V1::Common::Client
     mount V1::Common::Location
     mount V1::Common::Token

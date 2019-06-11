@@ -8,20 +8,6 @@ module API
         validate_appkey
       end
 
-      desc 'find basic'
-      get '/wedding_basic' do
-        @wedding_basic = @user.wedding_basic
-        wedding_basic = present @wedding_basic, with: API::Entities::WeddingBasic
-        build_response code: 0, data: wedding_basic
-      end
-
-      desc 'find one carousels'
-      get '/first_carousel' do
-        @carousel = @user.carousels.first
-        carousel = present @carousel, with: API::Entities::Carousel
-        build_response code: 0, data: carousel
-      end
-
       desc 'find photographs'
       get '/photographs' do
         @photographs = @user.photographs

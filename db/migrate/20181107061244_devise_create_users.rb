@@ -31,8 +31,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.datetime :locked_at
 
       t.string :name
+      t.string :style
+
       t.string :appkey
-     
       t.string :app_id
       t.string :app_secret
 

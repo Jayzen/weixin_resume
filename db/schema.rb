@@ -263,6 +263,7 @@ ActiveRecord::Schema.define(version: 2019_06_07_887232) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.string "name"
+    t.string "style"
     t.string "appkey"
     t.string "app_id"
     t.string "app_secret"

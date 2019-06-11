@@ -12,7 +12,12 @@ class AdminsController < ApplicationController
   end
 
   def create
-    @user = User.new(email: params[:user][:email], name: params[:user][:name], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
+    @user = User.new(email: params[:user][:email], 
+                     name: params[:user][:name], 
+                     password: params[:user][:password], 
+                     password_confirmation: params[:user][:password_confirmation],
+                     style: params[:user][:style]
+                    )
     if @user.save
       flash[:success] = "创建成功"
       redirect_to admins_path
@@ -43,17 +48,30 @@ class AdminsController < ApplicationController
   end
 
   def update_privilege
-    basic = params[:privilege][:basic] ? :basic : nil
-    top = params[:privilege][:top] ? :top : nil
+    #common
     location = params[:privilege][:location] ? :location :nil
-    comment = params[:privilege][:comment] ? :comment : nil
-    carousel = params[:privilege][:carousel] ? :carousel : nil
-    photograph = params[:privilege][:photograph] ? :photograph : nil
-    consult = params[:privilege][:consult] ? :consult : nil
-    appointment = params[:privilege][:appointment] ? :appointment : nil
+    basic = params[:privilege][:basic] ? :basic : nil
     wedding_basic = params[:privilege][:wedding_basic] ? :wedding_basic : nil
     workshop_basic = params[:privilege][:workshop_basic] ? :workshop_basic : nil
-    @user.roles = [top, workshop_basic, basic, location, comment, carousel, photograph, consult, appointment, wedding_basic].compact
+    top = params[:privilege][:top] ? :top : nil
+    consult = params[:privilege][:consult] ? :consult : nil
+    appointment = params[:privilege][:appointment] ? :appointment : nil
+    comment = params[:privilege][:comment] ? :comment : nil
+    
+    #wedding one
+    photograph = params[:privilege][:photograph] ? :photograph : nil
+    carousel = params[:privilege][:carousel] ? :carousel : nil
+
+    #wedding two
+    movie = params[:privilege][:movie] ? :movie : nil
+    menu = params[:privilege][:menu] ? :menu : nil
+    tap_carousel = params[:privilege][:tap_carousel] ? :tap_carousel : nil
+    tap_carousel_photograph = params[:privilege][:tap_carousel_photograph] ? :tap_carousel_photograph : nil
+    state = params[:privilege][:state] ? :state : nil
+    @user.roles = [location, basic, wedding_basic, workshop_basic, top, consult, appointment, comment,
+                   carousel, photograph,
+                   movie, menu, tap_carousel, tap_carousel_photograph, state
+                  ].compact
     @user.save
 
     flash[:success] = "权限更新成功"

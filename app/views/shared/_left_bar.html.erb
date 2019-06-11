@@ -43,6 +43,21 @@
               <%= link_to "轮播图", carousels_path, class: "nav-link #{ (controller_name == 'carousels') ? 'active' : '' }" %>
             </li>
           <% end -%>
+          <% if current_user.has_roles?(:tap_carousel) %>
+            <li class="nav-item">
+              <%= link_to "轮播图", tap_carousels_path, class: "nav-link #{ (controller_name == 'tap_carousels') ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:menu) %>
+            <li class="nav-item">
+              <%= link_to "价目表", menus_path, class: "nav-link #{ (controller_name == 'menus') ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:tap_carousel_photograph) %>
+            <li class="nav-item">
+              <%= link_to "摄影分类", tap_carousel_photographs_path, class: "nav-link #{ (controller_name == 'tap_carousel_photographs') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:top) %>
             <li class="nav-item">
               <%= link_to "头部图片", tops_path, class: "nav-link #{ (controller_name == 'tops') ? 'active' : '' }" %>
