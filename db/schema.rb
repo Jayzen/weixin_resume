@@ -264,6 +264,8 @@ ActiveRecord::Schema.define(version: 2019_06_07_887232) do
     t.datetime "locked_at"
     t.string "name"
     t.string "appkey"
+    t.string "app_id"
+    t.string "app_secret"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "roles"

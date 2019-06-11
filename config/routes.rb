@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     put 'update_privilege', on: :member
   end
 
-  resource :basic, :wedding_basic, :workshop_basic, :location
+  resource :basic, :wedding_basic, :workshop_basic, :location, :weixin_basic
 
   resources :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
     get 'delete', on: :member

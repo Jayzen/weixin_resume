@@ -67,6 +67,9 @@
         <li class="nav-item">
           <%= link_to "修改密码", edit_user_registration_path, class: "nav-link #{ ((controller_name == 'registrations')&&(action_name=="edit")) ? 'active' : '' }" %>
         </li>
+        <li class="nav-item">
+          <%= link_to "微信设置", edit_weixin_basic_path, class: "nav-link #{ ((controller_name == 'weixin_basics')) ? 'active' : '' }" %>
+        </li>
       <% else %>
         <%= link_to "登录", new_user_session_path, class: "nav-link" %>
       <% end -%>

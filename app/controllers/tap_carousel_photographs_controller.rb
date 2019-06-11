@@ -27,7 +27,7 @@ class TapCarouselPhotographsController < ApplicationController
 
   def delete_detail
     @tap_carousel_photograph = current_user.tap_carousel_photographs.find(params[:id])
-    @tap_carousel__detail = @tap_carousel_photograph.tap_carousel_details.find(params[:tap_carousel_detail])
+    @tap_carousel_detail = @tap_carousel_photograph.tap_carousel_details.find(params[:tap_carousel_detail])
     @tap_carousel_detail.destroy
     flash[:success] = "删除成功"
     redirect_to detail_tap_carousel_photograph_path

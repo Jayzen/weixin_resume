@@ -10,8 +10,8 @@
       <% end -%> 
     </div>
     <div>
-      <%= link_to '查看', show_detail_tap_carousel_photograph_path(tap_carousel_detail, tap_carousel_detail: tap_carousel_detail), class: "badge badge-primary"%>
-      <%= link_to '删除', delete_detail_tap_carousel_photograph_path(tap_carousel_detail, tap_carousel_detail: tap_carousel_detail), class: "badge badge-primary" %>
+      <%= link_to '查看', show_detail_tap_carousel_photograph_path(@tap_carousel_photograph, tap_carousel_detail: tap_carousel_detail), class: "badge badge-primary"%>
+      <%= link_to '删除', delete_detail_tap_carousel_photograph_path(@tap_carousel_photograph, tap_carousel_detail: tap_carousel_detail), class: "badge badge-primary" %>
     </div>
   </div>
 <% end %>
