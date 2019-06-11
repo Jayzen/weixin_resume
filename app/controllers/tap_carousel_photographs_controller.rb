@@ -3,7 +3,7 @@ class TapCarouselPhotographsController < ApplicationController
   before_action :set_tap_carousel_photograph, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_tap_carousel_photographs, only: [:index]
   before_action :set_tap_carousels, only: [:new, :edit]
-  #access tap_carousel_photograph: :all, message: "当前用户无权访问"
+  access tap_carousel: :all, message: "当前用户无权访问"
 
   def index
   end

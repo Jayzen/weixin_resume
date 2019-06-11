@@ -58,6 +58,11 @@
               <%= link_to "摄影分类", tap_carousel_photographs_path, class: "nav-link #{ (controller_name == 'tap_carousel_photographs') ? 'active' : '' }" %>
             </li>
           <% end -%> 
+          <% if current_user.has_roles?(:movie) %>
+            <li class="nav-item">
+              <%= link_to "摄像分类", movies_path, class: "nav-link #{ (controller_name == 'movies') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:top) %>
             <li class="nav-item">
               <%= link_to "头部图片", tops_path, class: "nav-link #{ (controller_name == 'tops') ? 'active' : '' }" %>

@@ -19,7 +19,7 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: { message: "名字不能为空" }
   validates :email, presence: { message: "邮箱不能为空" }
-  validates :style, presence: { message: "样式不能为空" }
+  validates :style, presence: { message: "样式不能为空" }, allow_nil:true
   validates :email, format: { with: VALID_EMAIL_REGEX, message: "邮件格式不正确" }, unless: proc{ |user| user.email.blank? }
   validates :password, presence: { message: "密码不能为空" }, allow_nil: true
   validates :password, length: { minimum: 6, message: "密码不能少于6个字符" }, unless: proc{ |user| user.password.blank? }

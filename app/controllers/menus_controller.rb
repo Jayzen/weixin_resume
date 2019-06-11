@@ -2,7 +2,7 @@ class MenusController < ApplicationController
   before_action :authenticate_user!
   before_action :set_menu, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_menus, only: [:index]
-  #access menu: :all, message: "当前用户无权访问"
+  access menu: :all, message: "当前用户无权访问"
 
   def index
   end
