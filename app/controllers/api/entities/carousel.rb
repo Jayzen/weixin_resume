@@ -6,7 +6,6 @@ module API
 
       private
         def pic
-          debugger
           if Rails.env == "production"
             link = Rails.application.credentials.pr_base_url + object.pic.url.to_s
           else

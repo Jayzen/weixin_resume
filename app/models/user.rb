@@ -81,4 +81,10 @@ class User < ApplicationRecord
   def create_default_location
     self.create_location(name: "浙江大学", address: "杭州市西湖区浙大路38号", latitude: 30.263964, longitude: 120.123218)
   end
+
+  def get_openid(code)
+    uri = "https://api.weixin.qq.com/sns/jscode2session?appid=#{self.app_id}&secret=#{self.app_secret}&js_code=#{code}&grant_type=authorization_code"
+    response = Net::HTTP.get(URI(uri))
+    ActiveSupport::JSON.decode(response)
+  end
 end

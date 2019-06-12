@@ -10,7 +10,8 @@ module API
           requires :code, type: String
         end
         post '/token/achieve' do
-          openid_message = Guest.get_openid(params[:code])
+          validate_appkey
+          openid_message = @user.get_openid(params[:code])
           if openid_message["errcode"]
             error!({code: 1, message: 'opendid获取错误'})
           else
