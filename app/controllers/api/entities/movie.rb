@@ -9,9 +9,9 @@ module API
       private
         def movie
           if Rails.env == "production"
-            link = "https://eco-news.cn" + object.movie.url.to_s
+            link = Rails.application.credentials.pr_base_url + object.movie.url.to_s
           else
-            link = "http://localhost:3000" + object.movie.url.to_s
+            link = Rails.application.credentials.de_base_url + object.movie.url.to_s
           end
         end
     end

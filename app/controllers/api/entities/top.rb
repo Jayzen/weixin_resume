@@ -7,9 +7,9 @@ module API
       private
         def pic
           if Rails.env == "production"
-            link = "https://eco-news.cn" + object.pic.url.to_s
+            link = Rails.application.credentials.pr_base_url + object.pic.url.to_s
           else
-            link = "http://localhost:3000" + object.pic.url.to_s
+            link = Rails.application.credentials.de_base_url + object.pic.url.to_s
           end
         end 
     end

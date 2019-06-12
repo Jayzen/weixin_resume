@@ -8,9 +8,9 @@ module API
         def pic
           debugger
           if Rails.env == "production"
-            link = "https://eco-new.cn" + object.pic.url.to_s
+            link = Rails.application.credentials.pr_base_url + object.pic.url.to_s
           else
-            link = "http://localhost:3000" + object.pic.url.to_s
+            link = Rails.application.credentials.de_base_url + object.pic.url.to_s
           end
         end 
     end

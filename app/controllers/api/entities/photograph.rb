@@ -16,17 +16,17 @@ module API
       private
         def small_pic
           if Rails.env == "production"
-            link = "https://eco-news.cn" + object.small_pic.url.to_s
+            link = Rails.application.credentials.pr_base_url + object.small_pic.url.to_s
           else
-            link = "http://localhost:3000" + object.small_pic.url.to_s
+            link = Rails.application.credentials.de_base_url + object.small_pic.url.to_s
           end
         end
         
         def big_pic
           if Rails.env == "production"
-            link = "https://eco-news.cn" + object.big_pic.url.to_s
+            link = Rails.application.credentials.pr_base_url + object.big_pic.url.to_s
           else
-            link = "http://localhost:3000" + object.big_pic.url.to_s
+            link = Rails.application.credentials.de_base_url + object.big_pic.url.to_s
           end
         end
     end
