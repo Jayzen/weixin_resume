@@ -10,7 +10,7 @@ module API
 
       desc 'find photographs'
       get '/photographs' do
-        @photographs = @user.photographs
+        @photographs = @user.photographs.where(reveal: true).order(order: :asc)
         photographs = present @photographs, with: API::Entities::Photograph
         build_response code: 0, data: photographs
       end

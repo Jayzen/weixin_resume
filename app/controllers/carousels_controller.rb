@@ -22,7 +22,7 @@ class CarouselsController < ApplicationController
 
     if @carousel.save
       flash[:success] = "创建成功"
-      redirect_to carousel_path(@carousel)
+      redirect_to carousels_path
     else
       render :new
     end
@@ -31,7 +31,7 @@ class CarouselsController < ApplicationController
   def update
     if @carousel.update(carousel_params)
       flash[:success] = "更新成功"
-      redirect_to carousel_path(@carousel)
+      redirect_to carousels_path
     else
       render :edit
     end
@@ -53,10 +53,10 @@ class CarouselsController < ApplicationController
     end
 
     def carousel_params
-      params.require(:carousel).permit(:name, :pic, :reveal, :weight)
+      params.require(:carousel).permit(:name, :pic, :reveal, :order)
     end
-
+    
     def set_carousels
-      @carousels = current_user.carousels.page(params[:page])
+      @carousels = current_user.carousels.order(order: :asc).page(params[:page])
     end
 end

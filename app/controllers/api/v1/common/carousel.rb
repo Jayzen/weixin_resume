@@ -8,7 +8,7 @@ module API
         desc 'find carousels'
         get '/carousels' do
           validate_appkey
-          @carousels = @user.carousels
+          @carousels = @user.carousels.where(reveal: true).order(order: :asc)
           carousels = present @carousels, with: API::Entities::Carousel
           build_response code: 0, data: carousels
         end 
