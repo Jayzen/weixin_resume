@@ -1,6 +1,6 @@
 class TopsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_top, only: [:show, :edit, :update, :destroy, :delete]
+  before_action :set_top, only: [:show, :edit, :update, :destroy, :delete, :set_weight]
   before_action :set_tops, only: [:index]
   access top: :all, message: "当前用户无权访问"
 
@@ -22,7 +22,7 @@ class TopsController < ApplicationController
 
     if @top.save
       flash[:success] = "创建成功"
-      redirect_to top_path(@top)
+      redirect_to tops_path
     else
       render :new
     end
@@ -31,7 +31,7 @@ class TopsController < ApplicationController
   def update
     if @top.update(top_params)
       flash[:success] = "更新成功"
-      redirect_to top_path(@top)
+      redirect_to tops_path
     else
       render :edit
     end
@@ -47,6 +47,12 @@ class TopsController < ApplicationController
     redirect_to tops_path
   end
 
+  def set_weight
+    @top.update(weight: Time.now, reveal: true)
+    flash[:success] = "权重更新成功"
+    redirect_to tops_path
+  end 
+
   private
     def set_top
       @top = current_user.tops.find(params[:id])
@@ -57,6 +63,7 @@ class TopsController < ApplicationController
     end
 
     def set_tops
-      @tops = current_user.tops.page(params[:page])
+      @top = current_user.tops.where(reveal: true).order(weight: :desc).first
+      @tops = current_user.tops.order(weight: :desc).page(params[:page])
     end
 end

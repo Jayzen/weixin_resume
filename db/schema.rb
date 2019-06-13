@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(version: 2019_06_07_887232) do
   create_table "tops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "pic"
-    t.integer "order", default: 0
+    t.datetime "weight"
     t.integer "user_id"
     t.boolean "reveal"
     t.datetime "created_at", null: false

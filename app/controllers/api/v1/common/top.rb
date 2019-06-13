@@ -8,7 +8,7 @@ module API
         desc 'find top'
         get '/top' do
           validate_appkey
-          @top = @user.tops.first
+          @top = @user.tops.where(reveal: true).order(weight: :desc).first
           top = present @top, with: API::Entities::Top
           build_response code: 0, data: top
         end 

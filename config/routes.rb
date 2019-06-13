@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     get 'delete', on: :member
   end
 
+  resources :tops do
+    get 'set_weight', on: :member
+    get 'delete', on: :member
+  end
+  
   resources :menus, :tap_carousel_photographs do
     get 'delete', on: :member
     get 'detail', on: :member

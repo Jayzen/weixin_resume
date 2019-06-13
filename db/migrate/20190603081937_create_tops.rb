@@ -3,7 +3,7 @@ class CreateTops < ActiveRecord::Migration[5.2]
     create_table :tops do |t|
       t.string :name
       t.string :pic
-      t.integer :order, default: 0
+      t.datetime :weight
       t.integer :user_id
       t.boolean :reveal
 
