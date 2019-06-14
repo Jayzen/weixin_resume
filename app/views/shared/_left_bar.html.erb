@@ -60,7 +60,7 @@
           <% end -%> 
           <% if current_user.has_roles?(:movie) %>
             <li class="nav-item">
-              <%= link_to "摄像分类", movies_path, class: "nav-link #{ (controller_name == 'movies') ? 'active' : '' }" %>
+              <%= link_to "视频上传", movies_path, class: "nav-link #{ (controller_name == 'movies') ? 'active' : '' }" %>
             </li>
           <% end -%> 
           <% if current_user.has_roles?(:top) %>
