@@ -99,13 +99,23 @@ class User < ApplicationRecord
     touser = "oxaRd5ZMUpZbwQYcvBFi75zVNTFg"
     template_id = "O2oVtzuW93AS4YRHVQ_ILZB2mmpY5J_xIKyRqYuhBa8"
     page = "pages/home/index"
-    emphasis_keyword = "hello world"
-    data = {keyword1: {value: "111"}, keyword2: {value: "222"}}
-    uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}&touser=#{touser}&template_id=#{template_id}&page=#{page}&emphasis_keyword=#{emphasis_keyword}&data=#{data}&form_id=#{form_id}"
-    response = Net::HTTP.get(URI(uri))
+    emphasis_keyword = ""
+    data = {"keyword1":{"value":"339208499"},
+            "keyword2":{"value":"2015年01月05日"}}
+    uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
+    content = {
+      "touser": touser,
+      "weapp_template_msg":{
+        "template_id": template_id,
+        "page": page,
+        "form_id": form_id,
+        "data": data,
+        "emphasis_keyword": emphasis_keyword
+      } 
+    } 
+
+    response = Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
     name = ActiveSupport::JSON.decode(response)
-    logger.info form_id
     logger.info name
-    return name
   end
 end
