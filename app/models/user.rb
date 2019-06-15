@@ -100,7 +100,7 @@ class User < ApplicationRecord
     template_id = "O2oVtzuW93AS4YRHVQ_ILZB2mmpY5J_xIKyRqYuhBa8"
     page = "pages/home/index"
     emphasis_keyword = "hello world"
-    data = {keyword1: {value: "111"}}
+    data = {keyword1: {value: "111"}, keyword2: {value: "222"}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}&touser=#{touser}&template_id=#{template_id}&page=#{page}&emphasis_keyword=#{emphasis_keyword}&data=#{data}&form_id=#{form_id}"
     response = Net::HTTP.get(URI(uri))
     name = ActiveSupport::JSON.decode(response)
