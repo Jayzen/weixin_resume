@@ -8,8 +8,8 @@ module API
         desc 'get template'
         params do
           requires :form_id, type: String
-          requires :name, type: String
-          requires :contact, type: String 
+          optional :name, type: String
+          optional :contact, type: String 
         end
         post '/template/achieve' do
           validate_appkey
