@@ -102,8 +102,8 @@ class User < ApplicationRecord
     emphasis_keyword = "hello world"
     data = {keyword1: {value: "111"}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}&touser=#{touser}&template_id=#{template_id}&page=#{page}&emphasis_keyword=#{emphasis_keyword}&data=#{data}&form_id=#{form_id}"
-    debugger
     response = Net::HTTP.get(URI(uri))
     name = ActiveSupport::JSON.decode(response)
+    logger.info name
   end
 end
