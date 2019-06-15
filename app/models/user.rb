@@ -106,5 +106,6 @@ class User < ApplicationRecord
     name = ActiveSupport::JSON.decode(response)
     logger.info form_id
     logger.info name
+    return name
   end
 end
