@@ -8,10 +8,12 @@ module API
         desc 'get template'
         params do
           requires :form_id, type: String
+          requires :name, type: String
+          requires :contact, type: String 
         end
         post '/template/achieve' do
           validate_appkey
-          openid_message = @user.send_template(params[:form_id])
+          openid_message = @user.send_template(params[:form_id], params[:name], params[:contact])
         end
       end
     end

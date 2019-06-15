@@ -94,14 +94,13 @@ class User < ApplicationRecord
     name = ActiveSupport::JSON.decode(response)
   end
 
-  def send_template(form_id)
+  def send_template(form_id, name, contact)
     access_token = self.get_access_token["access_token"]
     touser = "oxaRd5ZMUpZbwQYcvBFi75zVNTFg"
-    template_id = "O2oVtzuW93AS4YRHVQ_ILZB2mmpY5J_xIKyRqYuhBa8"
+    template_id = "iZfL6-huU3tjrPv3gM79a5LT-5OdvD1CKQuKCreOhNI"
     page = "pages/home/index"
     emphasis_keyword = ""
-    data = {"keyword1":{"value":"339208499"},
-            "keyword2":{"value":"2015年01月05日"}}
+    data = {"keyword1":{"value": name}, "keyword2":{"value": contact}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
       "touser": touser,
