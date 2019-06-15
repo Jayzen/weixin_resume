@@ -114,5 +114,6 @@ class User < ApplicationRecord
     } 
 
     response = Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
+    logger.info response
   end
 end
