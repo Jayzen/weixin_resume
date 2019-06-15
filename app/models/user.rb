@@ -87,4 +87,23 @@ class User < ApplicationRecord
     response = Net::HTTP.get(URI(uri))
     ActiveSupport::JSON.decode(response)
   end
+
+  def get_access_token
+    uri = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=#{self.app_id}&secret=#{self.app_secret}"
+    response = Net::HTTP.get(URI(uri))
+    name = ActiveSupport::JSON.decode(response)
+  end
+
+  def send_template(form_id)
+    access_token = self.get_access_token["access_token"]
+    touser = "oxaRd5ZMUpZbwQYcvBFi75zVNTFg"
+    template_id = "O2oVtzuW93AS4YRHVQ_ILZB2mmpY5J_xIKyRqYuhBa8"
+    page = "pages/home/index"
+    emphasis_keyword = "hello world"
+    data = {keyword1: {value: "111"}}
+    uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}&touser=#{touser}&template_id=#{template_id}&page=#{page}&emphasis_keyword=#{emphasis_keyword}&data=#{data}&form_id=#{form_id}"
+    debugger
+    response = Net::HTTP.get(URI(uri))
+    name = ActiveSupport::JSON.decode(response)
+  end
 end
