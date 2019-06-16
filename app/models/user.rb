@@ -113,6 +113,28 @@ class User < ApplicationRecord
       } 
     } 
 
-    response = Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
+    Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
+  end
+
+  def send_appointment_template(form_id)
+    access_token = self.get_access_token["access_token"]
+    touser = "oxaRd5ZMUpZbwQYcvBFi75zVNTFg"
+    template_id = "CzcXQjGXXqqxxwmUzCqSdrQ0HrKV18QB67a8uio6pmc"
+    page = "pages/home/index"
+    emphasis_keyword = ""
+    data = {"keyword1":{"value": "jayzen"}, "keyword2":{"value": 18868818399}, "keyword3":{"value": "中午12点"}}
+    uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
+    content = {
+      "touser": touser,
+      "weapp_template_msg":{
+        "template_id": template_id,
+        "page": page,
+        "form_id": form_id,
+        "data": data,
+        "emphasis_keyword": emphasis_keyword
+      }
+    }
+
+    Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
   end
 end
