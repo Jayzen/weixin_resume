@@ -94,7 +94,7 @@ class User < ApplicationRecord
     name = ActiveSupport::JSON.decode(response)
   end
 
-  def send_template(form_id, name, contact)
+  def send_consult_template(form_id, name, contact)
     access_token = self.get_access_token["access_token"]
     touser = "oxaRd5ZMUpZbwQYcvBFi75zVNTFg"
     template_id = "iZfL6-huU3tjrPv3gM79a5LT-5OdvD1CKQuKCreOhNI"
@@ -116,10 +116,10 @@ class User < ApplicationRecord
     Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
   end
 
-  def send_appointment_template(form_id)
+  def send_appointment_template(form_id, name, contact, date)
     access_token = self.get_access_token["access_token"]
     touser = "oxaRd5ZMUpZbwQYcvBFi75zVNTFg"
-    template_id = "CzcXQjGXXqqxxwmUzCqSdrQ0HrKV18QB67a8uio6pmc"
+    template_id = "CzcXQjGXXqqxxwmUzCqSdvceFI_8MYmMluLP-KnO_LI"
     page = "pages/home/index"
     emphasis_keyword = ""
     data = {"keyword1":{"value": "jayzen"}, "keyword2":{"value": 18868818399}, "keyword3":{"value": "中午12点"}}
