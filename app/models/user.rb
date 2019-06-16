@@ -16,6 +16,8 @@ class User < ApplicationRecord
   # :omniauthable, :confirmable, :validatable, :registerable, :lockable, :recoverable
   devise :database_authenticatable, :registerable, :trackable, :rememberable, :timeoutable
   
+  mount_uploader :merchant, ImageUploader
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: { message: "名字不能为空" }
   validates :email, presence: { message: "邮箱不能为空" }

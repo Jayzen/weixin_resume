@@ -1,7 +1,7 @@
   <div class="d-flex flex-column">
     <div class="form-group row">
       <div class="col-sm-2 text-right col-form-label">appkey:</div>
-      <div class="col-sm-8 form-control"><%= @user.appkey %></div>
+      <div class="col-sm-8 col-form-label"><%= @user.appkey %></div>
     </div> 
     <div class="form-group row">
       <div class="col-sm-2 text-right col-form-label">app_id:</div>
@@ -12,6 +12,14 @@
       <div class="col-sm-2 text-right col-form-label">app_secret:</div>
       <div class="col-sm-8 col-form-label"><%= @user.app_secret %></div>
     </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">商户绑定:</div>
+      <div class="col-sm-8 col-form-label">
+        <% if @user.merchant.url %>
+          <%= image_tag @user.merchant.url, height: "150" %>
+        <% end -%>
+      </div>
+    </div> 
     <div class="form-group row">
       <div class="col-sm-2 text-right col-form-label"></div>
       <div class="col-sm-8 text-left"><%= link_to "编辑", edit_weixin_basic_path, class: "btn btn-primary btn-sm" %></div>
