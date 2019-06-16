@@ -123,7 +123,7 @@ class User < ApplicationRecord
     page = "pages/home/index"
     emphasis_keyword = ""
     date_time = date + " " + time
-    data = {"keyword1":{"value": name}, "keyword2":{"value": date_time}, "keyword3":{"value": date}}
+    data = {"keyword1":{"value": name}, "keyword2":{"value": contact}, "keyword3":{"value": date_time}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
       "touser": touser,
