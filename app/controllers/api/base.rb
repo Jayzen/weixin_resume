@@ -5,6 +5,7 @@ module API
     mount V1::Common::Client
     mount V1::Common::Location
     mount V1::Common::Token
+    mount V1::Common::Merchant
     mount V1::Common::Template
     mount V1::Common::Carousel
     mount V1::Common::Movie

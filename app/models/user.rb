@@ -96,14 +96,13 @@ class User < ApplicationRecord
 
   def send_consult_template(form_id, name, contact)
     access_token = self.get_access_token["access_token"]
-    touser = "oxaRd5ZMUpZbwQYcvBFi75zVNTFg"
     template_id = "iZfL6-huU3tjrPv3gM79a5LT-5OdvD1CKQuKCreOhNI"
     page = "pages/home/index"
     emphasis_keyword = ""
     data = {"keyword1":{"value": name}, "keyword2":{"value": contact}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
-      "touser": touser,
+      "touser": self.openid,
       "weapp_template_msg":{
         "template_id": template_id,
         "page": page,
@@ -118,7 +117,6 @@ class User < ApplicationRecord
 
   def send_appointment_template(form_id, name, contact, date, time)
     access_token = self.get_access_token["access_token"]
-    touser = "oxaRd5ZMUpZbwQYcvBFi75zVNTFg"
     template_id = "CzcXQjGXXqqxxwmUzCqSdvceFI_8MYmMluLP-KnO_LI"
     page = "pages/home/index"
     emphasis_keyword = ""
@@ -126,7 +124,7 @@ class User < ApplicationRecord
     data = {"keyword1":{"value": name}, "keyword2":{"value": contact}, "keyword3":{"value": date_time}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
-      "touser": touser,
+      "touser": self.openid,
       "weapp_template_msg":{
         "template_id": template_id,
         "page": page,
