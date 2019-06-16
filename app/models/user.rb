@@ -116,13 +116,14 @@ class User < ApplicationRecord
     Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
   end
 
-  def send_appointment_template(form_id, name, contact, date)
+  def send_appointment_template(form_id, name, contact, date, time)
     access_token = self.get_access_token["access_token"]
     touser = "oxaRd5ZMUpZbwQYcvBFi75zVNTFg"
     template_id = "CzcXQjGXXqqxxwmUzCqSdvceFI_8MYmMluLP-KnO_LI"
     page = "pages/home/index"
     emphasis_keyword = ""
-    data = {"keyword1":{"value": name}, "keyword2":{"value": contact}, "keyword3":{"value": date}}
+    date_time = date + " " + time
+    data = {"keyword1":{"value": name}, "keyword2":{"value": date_time}, "keyword3":{"value": date}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
       "touser": touser,

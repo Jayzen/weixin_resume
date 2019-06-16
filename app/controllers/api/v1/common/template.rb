@@ -22,10 +22,11 @@ module API
           optional :name, type: String
           optional :contact, type: String
           optional :date, type: String
+          optional :time, type: String
         end
         post '/appointment_template' do
           validate_appkey
-          @user.send_appointment_template(params[:form_id], params[:name], params[:contact], params[:date])
+          @user.send_appointment_template(params[:form_id], params[:name], params[:contact], params[:date], params[:time])
         end
       end
     end
