@@ -2,9 +2,10 @@
     <div class="d-flex justify-content-between">
       <div>
         <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
-        <small><%= appointment.created_at.strftime("%F") %></small>
         <%= appointment.name %> | 
-        <%= appointment.contact %>
+        <%= appointment.contact %> |
+        <%= appointment.date %>
+        <%= appointment.time %>
       </div>
       <div>
         <%= link_to '删除', delete_appointment_path(appointment), remote: true, class: "badge badge-primary" %>
