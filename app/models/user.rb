@@ -122,7 +122,7 @@ class User < ApplicationRecord
     template_id = "CzcXQjGXXqqxxwmUzCqSdvceFI_8MYmMluLP-KnO_LI"
     page = "pages/home/index"
     emphasis_keyword = ""
-    data = {"keyword1":{"value": "jayzen"}, "keyword2":{"value": 18868818399}, "keyword3":{"value": "中午12点"}}
+    data = {"keyword1":{"value": name}, "keyword2":{"value": contact}, "keyword3":{"value": date}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
       "touser": touser,
