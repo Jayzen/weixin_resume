@@ -10,6 +10,7 @@ module API
           requires :form_id, type: String
           optional :name, type: String
           optional :contact, type: String 
+          optional :content, type: String
         end
         post '/consult_template' do
           validate_appkey
