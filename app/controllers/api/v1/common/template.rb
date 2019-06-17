@@ -13,7 +13,7 @@ module API
         end
         post '/consult_template' do
           validate_appkey
-          @user.send_consult_template(params[:form_id], params[:name], params[:contact])
+          @user.send_consult_template(params[:form_id], params[:name], params[:contact], params[:content])
         end
 
         desc 'get appointment template'

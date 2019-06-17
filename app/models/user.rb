@@ -96,12 +96,12 @@ class User < ApplicationRecord
     name = ActiveSupport::JSON.decode(response)
   end
 
-  def send_consult_template(form_id, name, contact)
+  def send_consult_template(form_id, name, contact, content)
     access_token = self.get_access_token["access_token"]
-    template_id = "iZfL6-huU3tjrPv3gM79a5LT-5OdvD1CKQuKCreOhNI"
+    template_id = "iZfL6-huU3tjrPv3gM79a3OVvBUp8ON3qpC4TwryJ4s"
     page = "pages/home/index"
     emphasis_keyword = ""
-    data = {"keyword1":{"value": name}, "keyword2":{"value": contact}}
+    data = {"keyword1":{"value": name}, "keyword2":{"value": contact}, "keyword3":{"value": content}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
       "touser": self.openid,
