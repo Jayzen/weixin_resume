@@ -33,7 +33,7 @@ module API
       desc 'get consults'
       get '/consults' do 
         @consults = @user.consults
-        consutls = present @consults, with: API::Entities::Consult
+        consults = present @consults, with: API::Entities::Consult
         build_response code: 0, data: consults
       end
 
@@ -48,7 +48,7 @@ module API
       desc 'get appointments'
       get '/appointments' do
         @appointments = @user.appointments
-        appointments = present @appointmentss, with: API::Entities::Appointment
+        appointments = present @appointments, with: API::Entities::Appointment
         build_response code: 0, data: appointments
       end
     end
