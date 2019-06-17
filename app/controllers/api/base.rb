@@ -12,6 +12,7 @@ module API
     mount V1::Common::Menu
     mount V1::Common::Top
     mount V1::Common::State
+    
     mount V1::Wedding
     mount V1::WeddingTwo
     mount V1::Resume
