@@ -24,7 +24,7 @@ module API
 
       desc 'create consult'
       post '/consult' do
-        @consult = @user.consults.create(name: params[:name], contact: params[:contact], params[:content])
+        @consult = @user.consults.create(name: params[:name], contact: params[:contact], content: params[:content])
         if @consult.errors.messages.size != 0
           error!({code: 102, error:  @consult.errors.messages.values.flatten.first})
         end
