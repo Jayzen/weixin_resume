@@ -99,7 +99,7 @@ class User < ApplicationRecord
   def send_consult_template(form_id, name, contact, content)
     access_token = self.get_access_token["access_token"]
     template_id = "iZfL6-huU3tjrPv3gM79a3OVvBUp8ON3qpC4TwryJ4s"
-    page = "pages/home/index"
+    page = "pages/merchant-consult/index"
     emphasis_keyword = ""
     data = {"keyword1":{"value": name}, "keyword2":{"value": contact}, "keyword3":{"value": content}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
@@ -120,7 +120,7 @@ class User < ApplicationRecord
   def send_appointment_template(form_id, name, contact, date, time)
     access_token = self.get_access_token["access_token"]
     template_id = "CzcXQjGXXqqxxwmUzCqSdvceFI_8MYmMluLP-KnO_LI"
-    page = "pages/home/index"
+    page = "pages/merchant-appointment/index"
     emphasis_keyword = ""
     date_time = date + " " + time
     data = {"keyword1":{"value": name}, "keyword2":{"value": contact}, "keyword3":{"value": date_time}}
