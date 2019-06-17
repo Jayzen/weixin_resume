@@ -30,12 +30,26 @@ module API
         end
       end
 
+      desc 'get consults'
+      get '/consults' do 
+        @consults = @user.consults
+        consutls = present @consults, with: API::Entities::Consult
+        build_response code: 0, data: consults
+      end
+
       desc 'create appointment'
       post '/appointment' do
         @appointment = @user.appointments.create(name: params[:name], contact: params[:contact], date: params[:date], time: params[:time])
         if @appointment.errors.messages.size != 0
           error!({code: 102, error:  @appointment.errors.messages.values.flatten.first})
         end
+      end
+
+      desc 'get appointments'
+      get '/appointments' do
+        @appointments = @user.appointments
+        appointments = present @appointmentss, with: API::Entities::Appointment
+        build_response code: 0, data: appointments
       end
     end
   end
