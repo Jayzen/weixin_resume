@@ -8,18 +8,10 @@
       <div class="col-sm-8 col-form-label"><%= @photograph.price %></div>
     </div> 
     <div class="form-group row">
-      <div class="col-sm-2 text-right col-form-label">小图标:</div>
+      <div class="col-sm-2 text-right col-form-label">照片:</div>
       <div class="col-sm-8 col-form-label">
-        <% if @photograph.small_pic.url %>
-          <%= image_tag @photograph.small_pic.url, height: "50" %>
-        <% end -%>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-sm-2 text-right col-form-label">大照片:</div>
-      <div class="col-sm-8 col-form-label">
-        <% if @photograph.big_pic.url %>
-          <%= image_tag @photograph.big_pic.url, height: "150" %>
+        <% if @photograph.pic.url %>
+          <%= image_tag @photograph.pic.url, height: "150" %>
         <% end -%>
       </div>
     </div>
