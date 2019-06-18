@@ -3,6 +3,7 @@ module API
     class Carousel < Grape::Entity
       expose :name
       expose :pic
+      expose :photograph, using: API::Entities::Photograph
 
       private
         def pic

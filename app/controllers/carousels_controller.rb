@@ -2,6 +2,7 @@ class CarouselsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_carousel, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_carousels, only: [:index]
+  before_action :set_photographs, only: [:new, :edit]
   access carousel: :all, message: "当前用户无权访问"
 
   def index
@@ -53,10 +54,14 @@ class CarouselsController < ApplicationController
     end
 
     def carousel_params
-      params.require(:carousel).permit(:name, :pic, :reveal, :order)
+      params.require(:carousel).permit(:name, :pic, :reveal, :order, :photograph_id)
     end
     
     def set_carousels
       @carousels = current_user.carousels.order(order: :asc).page(params[:page])
+    end
+
+    def set_photographs
+      @photographs = current_user.photographs
     end
 end
