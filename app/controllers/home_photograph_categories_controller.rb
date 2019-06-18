@@ -3,7 +3,7 @@ class HomePhotographCategoriesController < ApplicationController
   before_action :set_home_photograph_category, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_home_photograph_categories, only: [:index]
   before_action :set_photographs, only: [:new, :edit]
-  #access home_photograph_category: :all, message: "当前用户无权访问"
+  access home_photograph_category: :all, message: "当前用户无权访问"
 
   def index
   end

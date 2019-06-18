@@ -3,7 +3,7 @@ class RecentsController < ApplicationController
   before_action :set_recent, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_recents, only: [:index]
   before_action :set_photographs, only: [:new, :edit]
-  #access recent: :all, message: "当前用户无权访问"
+  access recent: :all, message: "当前用户无权访问"
 
   def index
   end

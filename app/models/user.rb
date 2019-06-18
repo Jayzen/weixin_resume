@@ -5,7 +5,7 @@ class User < ApplicationRecord
   ## The :root_admin can access any page regardless of access settings. Use with caution!   ##
   ## The multiple option can be set to true if you need users to have multiple roles.       ##
   petergate(roles: [:root_admin, 
-                    :location, :basic, :wedding_basic, :workshop_basic, :top, :consult, :appointment, :comment,
+                    :location, :basic, :wedding_basic, :workshop_basic, :top, :consult, :appointment, :comment, :recent, :home_photograph_category,
                     :carousel, :photograph,
                     :movie, :menu, :tap_carousel, :tap_carousel_photograph, :state
                     ], multiple: true)                                      ##
@@ -57,7 +57,7 @@ class User < ApplicationRecord
     when "resume"
       self.roles = [:basic, :location, :comment]
     when "wedding_one"
-      self.roles = [:wedding_basic, :location, :carousel, :photograph, :consult, :top, :appointment]
+      self.roles = [:wedding_basic, :location, :carousel, :photograph, :consult, :top, :appointment, :recent, :home_photograph_category]
     when "wedding_two"
       self.roles = [:wedding_basic, :location, :tap_carousel, :tap_carousel_photograph, :menu, :movie, :top]
     when "workshop"
