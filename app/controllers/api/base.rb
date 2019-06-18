@@ -13,6 +13,7 @@ module API
     mount V1::Common::Top
     mount V1::Common::State
     mount V1::Common::Recent
+    mount V1::Common::HomePhotographCategory
 
     mount V1::Wedding
     mount V1::WeddingTwo

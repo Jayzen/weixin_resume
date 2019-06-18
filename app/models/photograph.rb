@@ -3,6 +3,7 @@ class Photograph < ApplicationRecord
   mount_uploader :small_pic, ImageUploader
   belongs_to :user
   has_one :recent
+  has_one :home_photograph_category
 
   module Status
     On = true
