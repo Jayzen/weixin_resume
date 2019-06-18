@@ -33,6 +33,7 @@ class User < ApplicationRecord
   has_one :wedding_basic, dependent: :destroy
   has_one :workshop_basic, dependent: :destroy
   has_one :location, dependent: :destroy
+  has_many :recents, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :carousels, dependent: :destroy
   has_many :tap_carousels, dependent: :destroy

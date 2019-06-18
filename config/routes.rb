@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resource :basic, :wedding_basic, :workshop_basic, :location, :weixin_basic
 
-  resources :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
+  resources :recents, :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
     get 'delete', on: :member
   end
 
