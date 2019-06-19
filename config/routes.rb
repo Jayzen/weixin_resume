@@ -33,6 +33,13 @@ Rails.application.routes.draw do
     get 'delete', on: :member
   end
 
+  resources :affairs do
+    get 'delete', on: :member
+    resources :affair_images do
+      get 'delete', on: :member
+    end
+  end
+
   devise_for :users, path: "", path_names:{ sign_in: 'login', sign_out: 'logout' }
   root "welcomes#index"
 end

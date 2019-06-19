@@ -36,6 +36,8 @@ class User < ApplicationRecord
   has_many :recents, dependent: :destroy
   has_many :home_photograph_categories, dependent: :destroy
 
+  has_many :affair_images, dependent: :destroy
+  has_many :affairs, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :carousels, dependent: :destroy
   has_many :tap_carousels, dependent: :destroy

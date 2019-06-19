@@ -1,0 +1,26 @@
+  <div class="d-flex flex-column">
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">标题:</div>
+      <div class="col-sm-8 col-form-label"><%= @affair_image.name %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">显示:</div>
+      <div class="col-sm-8 col-form-label"><%= @affair_image.reveal? ? "显示" : "隐藏" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">图片:</div>
+      <div class="col-sm-8 col-form-label">
+        <% if @affair_image.pic.url %>
+          <%= image_tag @affair_image.pic.url, height: "150" %>
+        <% end -%>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">排序:</div>
+      <div class="col-sm-8 col-form-label"><%= @affair_image.order %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label"></div>
+      <div class="col-sm-8 text-left"><%= link_to "编辑", edit_affair_affair_image_path(@affair, @affair_image), class: "btn btn-primary btn-sm" %></div>
+    </div>  
+  </div>
