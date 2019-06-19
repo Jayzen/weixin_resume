@@ -9,7 +9,15 @@
       <div class="col-sm-8 col-form-label"><%= @wedding_basic.phone %></div>
     </div>
     <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">头像:</div>
+      <div class="col-sm-8 col-form-label">
+        <% if @wedding_basic.avatar.url %>
+          <%= image_tag @wedding_basic.avatar.url, height: "50" %>
+        <% end -%>
+      </div>
+    </div> 
+    <div class="form-group row">
       <div class="col-sm-2 text-right col-form-label"></div>
-      <div class="col-sm-8 text-left"><%= link_to "编辑", edit_wedding_basic_path(@wedding_basic), class: "btn btn-primary btn-sm" %></div>
+      <div class="col-sm-8 text-left"><%= link_to "编辑", edit_wedding_basic_path, class: "btn btn-primary btn-sm" %></div>
     </div>  
   </div>

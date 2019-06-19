@@ -12,7 +12,7 @@ class WeddingBasicsController < ApplicationController
   def update
     if @wedding_basic.update(wedding_basic_params)
       flash[:success] = "更新成功"
-      redirect_to edit_wedding_basic_path
+      redirect_to wedding_basic_path
     else
       render :edit
     end
@@ -24,6 +24,6 @@ class WeddingBasicsController < ApplicationController
     end
 
     def wedding_basic_params
-      params.require(:wedding_basic).permit(:name, :phone)
+      params.require(:wedding_basic).permit(:name, :phone, :avatar)
     end
 end
