@@ -8,5 +8,7 @@ class Affair < ApplicationRecord
     Off = false
   end
 
+  #default_scope { order(created_at: :desc).where(reveal: true) }  
+  
   validates :name, presence: { message: "名称不能为空" }
 end

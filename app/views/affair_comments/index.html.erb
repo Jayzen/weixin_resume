@@ -17,7 +17,6 @@
   </div>
 <% end %>
 <div class="d-flex justify-content-between mt-2">
-  <div><%= link_to '新建', new_affair_affair_comment_path(@affair), class: "btn btn-primary btn-sm" %></div>
   <div><%= paginate @affair_comments %></div>
 </div>
 <%= render 'shared/confirm_modal' %>

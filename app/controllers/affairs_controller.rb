@@ -57,6 +57,6 @@ class AffairsController < ApplicationController
     end
     
     def set_affairs
-      @affairs = current_user.affairs.order(order: :asc).page(params[:page])
+      @affairs = current_user.affairs.order(order: :desc).page(params[:page])
     end
 end

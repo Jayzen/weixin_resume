@@ -11,6 +11,14 @@ module API
         def updated_at
           updated_at = object.updated_at.strftime("%F %H:%M")
         end
+
+        def affair_images
+          affair_images = object.affair_images.where(reveal: true).order(order: :desc)
+        end
+
+        def affair_comments
+          affair_comments = object.affair_comments.where(reveal: true).order(created_at: :desc)
+        end
     end
   end
 end

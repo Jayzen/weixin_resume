@@ -5,7 +5,7 @@ class AffairImagesController < ApplicationController
   access affair: :all, message: "当前用户无权访问"
 
   def index
-    @affair_images = @affair.affair_images.order(order: :asc).page(params[:page])
+    @affair_images = @affair.affair_images.order(order: :desc).page(params[:page])
   end
 
   def show

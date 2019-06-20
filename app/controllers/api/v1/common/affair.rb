@@ -8,7 +8,7 @@ module API
         desc 'find location'
         get '/affairs' do
           validate_appkey
-          @affairs = @user.affairs.includes(:affair_images, [affair_comments: :guest]).where(reveal: true).order(order: :asc)
+          @affairs = @user.affairs.includes(:affair_images, [affair_comments: :guest]).where(reveal: true).order(order: :desc)
           affairs = present @affairs, with: API::Entities::Affair
           build_response code: 0, data: affairs
         end
