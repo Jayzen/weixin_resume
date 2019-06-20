@@ -14,7 +14,7 @@ module API
         post '/affair_comment' do
           if token = Rails.cache.fetch(params[:token])
             guest_id = JSON.parse(token)["guest_id"]
-            @affair_comment = AffairComment.create(guest_id: guest_id, affair_id: params[:affair_id], content: params[:content])
+            @affair_comment = ::AffairComment.create(guest_id: guest_id, affair_id: params[:affair_id], content: params[:content])
             if @affair_comment.errors.messages.size != 0
               error!({code: 102, error:  @affair_comment.errors.messages.values.flatten.first})
             end
