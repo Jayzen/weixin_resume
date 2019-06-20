@@ -2,7 +2,7 @@ class AffairCommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_affair
   before_action :set_affair_comment, only: [:show, :edit, :update, :destroy, :delete]
-  #access affair_comment: :all, message: "当前用户无权访问"
+  access affair: :all, message: "当前用户无权访问"
 
   def index
     @affair_comments = @affair.affair_comments.page(params[:page])

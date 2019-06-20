@@ -2,7 +2,7 @@ class AffairImagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_affair
   before_action :set_affair_image, only: [:show, :edit, :update, :destroy, :delete]
-  #access affair_image: :all, message: "当前用户无权访问"
+  access affair: :all, message: "当前用户无权访问"
 
   def index
     @affair_images = @affair.affair_images.order(order: :asc).page(params[:page])

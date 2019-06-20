@@ -43,6 +43,11 @@
               <%= link_to "轮播图", carousels_path, class: "nav-link #{ (controller_name == 'carousels') ? 'active' : '' }" %>
             </li>
           <% end -%>
+          <% if current_user.has_roles?(:affair) %>
+            <li class="nav-item">
+              <%= link_to "最新动态", affairs_path, class: "nav-link #{ (controller_name == 'affairs') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:recent) %>
             <li class="nav-item">
               <%= link_to "最新活动", recents_path, class: "nav-link #{ (controller_name == 'recents') ? 'active' : '' }" %>

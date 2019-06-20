@@ -59,6 +59,7 @@ class AdminsController < ApplicationController
     comment = params[:privilege][:comment] ? :comment : nil
     
     #wedding one
+    affair = params[:privilege][:affair] ? :affair : nil
     photograph = params[:privilege][:photograph] ? :photograph : nil
     carousel = params[:privilege][:carousel] ? :carousel : nil
     recent = params[:privilege][:recent] ? :recent : nil
@@ -70,7 +71,7 @@ class AdminsController < ApplicationController
     tap_carousel = params[:privilege][:tap_carousel] ? :tap_carousel : nil
     tap_carousel_photograph = params[:privilege][:tap_carousel_photograph] ? :tap_carousel_photograph : nil
     state = params[:privilege][:state] ? :state : nil
-    @user.roles = [location, basic, wedding_basic, workshop_basic, top, consult, appointment, comment, recent, home_photograph_category,
+    @user.roles = [location, basic, wedding_basic, workshop_basic, top, consult, appointment, comment, recent, home_photograph_category, affair,
                    carousel, photograph,
                    movie, menu, tap_carousel, tap_carousel_photograph, state
                   ].compact
