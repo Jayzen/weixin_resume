@@ -14,6 +14,7 @@
       <%= link_to '编辑', edit_affair_path(affair), class: "badge badge-primary"%>
       <%= link_to '删除', delete_affair_path(affair), remote: true, class: "badge badge-primary" %>
       <%= link_to '照片', affair_affair_images_path(affair), class: "badge badge-primary" %>
+      <%= link_to '评论', affair_affair_comments_path(affair), class: "badge badge-primary" %>
     </div>
   </div>
 <% end %>

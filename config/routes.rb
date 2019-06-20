@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     resources :affair_images do
       get 'delete', on: :member
     end
+    resources :affair_comments do
+      get 'delete', on: :member
+    end
   end
 
   devise_for :users, path: "", path_names:{ sign_in: 'login', sign_out: 'logout' }

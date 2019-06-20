@@ -1,0 +1,23 @@
+<% @affair_comments.each_with_index do |affair_comment, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= affair_comment.content %>
+      <% if affair_comment.reveal? %>
+        <span class="badge badge-primary">已发布</span>
+      <% else %>
+        <span class="badge badge-danger">未发布</span>
+      <% end -%>
+    </div>
+    <div>
+      <%= link_to '查看', affair_affair_comment_path(@affair, affair_comment), class: "badge badge-primary"%>
+      <%= link_to "编辑", edit_affair_affair_comment_path(@affair, affair_comment), class: "badge badge-primary" %>
+      <%= link_to '删除', delete_affair_affair_comment_path(@affair, affair_comment), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '新建', new_affair_affair_comment_path(@affair), class: "btn btn-primary btn-sm" %></div>
+  <div><%= paginate @affair_comments %></div>
+</div>
+<%= render 'shared/confirm_modal' %>

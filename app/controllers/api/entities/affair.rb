@@ -5,7 +5,8 @@ module API
       expose :name
       expose :updated_at
       expose :affair_images, using: API::Entities::AffairImage
-    
+      expose :affair_comments, using: API::Entities::AffairComment
+
       private
         def updated_at
           updated_at = object.updated_at.strftime("%F %H:%M")

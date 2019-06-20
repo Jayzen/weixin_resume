@@ -2,6 +2,7 @@ require 'net/http'
 
 class Guest < ApplicationRecord
   has_many :comments, dependent: :destroy
+  has_many :affair_comments, dependent: :destroy
 
   def self.get_openid(code)
     uri = "https://api.weixin.qq.com/sns/jscode2session?appid=#{Rails.application.credentials.weixin_appid}&secret=#{Rails.application.credentials.weixin_secret}&js_code=#{code}&grant_type=authorization_code"

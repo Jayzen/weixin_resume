@@ -81,7 +81,7 @@ class User < ApplicationRecord
 
   def create_default_basic
     self.create_basic(name: "jayzen", avatar: "uploads/basic/avatar/1/user.png", motto: "生如夏花", introduction: "自我介绍", phone: "18888888888", wechat: "wechat", qq: "645112211", email: "jayzen@foxmail.com", company: "company", job: "job", address: "address")
-    self.create_wedding_basic(name: "jayzen", phone: "18868818399")
+    self.create_wedding_basic(name: "jayzen", phone: "18868818399", avatar: "uploads/basic/avatar/1/user.png")
     self.create_workshop_basic(name: "jayzen", phone: "18868818399", business_hour: "18")
   end
 
