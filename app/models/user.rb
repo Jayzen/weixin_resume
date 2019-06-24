@@ -7,7 +7,7 @@ class User < ApplicationRecord
   petergate(roles: [:root_admin, 
                     :affair, :location, :basic, :wedding_basic, :workshop_basic, :top, :consult, :appointment, :comment, :recent, :home_photograph_category,
                     :carousel, :photograph,
-                    :movie, :menu, :tap_carousel, :tap_carousel_photograph, :state
+                    :official_account, :movie, :menu, :tap_carousel, :tap_carousel_photograph, :state
                     ], multiple: true)                                      ##
   ############################################################################################ 
  
@@ -62,7 +62,7 @@ class User < ApplicationRecord
     when "wedding_one"
       self.roles = [:affair, :wedding_basic, :location, :carousel, :photograph, :consult, :top, :appointment, :recent, :home_photograph_category]
     when "wedding_two"
-      self.roles = [:wedding_basic, :location, :tap_carousel, :tap_carousel_photograph, :menu, :movie, :top]
+      self.roles = [:state, :official_account, :wedding_basic, :location, :tap_carousel, :tap_carousel_photograph, :menu, :movie, :top]
     when "workshop"
       self.roles = [:workshop_basic, :location, :carousel]
     else 

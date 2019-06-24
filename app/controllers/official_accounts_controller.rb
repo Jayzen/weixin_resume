@@ -2,7 +2,7 @@ class OfficialAccountsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_official_account, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_official_accounts, only: [:index]
-  #access official_account: :all, message: "当前用户无权访问"
+  access official_account: :all, message: "当前用户无权访问"
 
   def index
   end

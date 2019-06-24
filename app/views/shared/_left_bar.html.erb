@@ -33,6 +33,7 @@
               <%= link_to "地址设置", location_path, class: "nav-link #{ (controller_name == 'locations') ? 'active' : '' }" %>
             </li>
           <% end -%>
+          
           <% if current_user.has_roles?(:comment) %>
             <li class="nav-item">
               <%= link_to "评论管理", comments_path, class: "nav-link #{ (controller_name == 'comments') ? 'active' : '' }" %>
@@ -66,6 +67,16 @@
           <% if current_user.has_roles?(:menu) %>
             <li class="nav-item">
               <%= link_to "价目表", menus_path, class: "nav-link #{ ( /menu/ =~ controller_name ) ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:state) %>
+            <li class="nav-item">
+              <%= link_to "摄影说明", states_path, class: "nav-link #{ (controller_name == 'states') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
+          <% if current_user.has_roles?(:official_account) %>
+            <li class="nav-item">
+              <%= link_to "公众号", official_accounts_path, class: "nav-link #{ (controller_name == 'official_accounts') ? 'active' : '' }" %>
             </li>
           <% end -%>
           <% if current_user.has_roles?(:tap_carousel_photograph) %>
