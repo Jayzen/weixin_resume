@@ -33,8 +33,12 @@ class User < ApplicationRecord
   has_one :wedding_basic, dependent: :destroy
   has_one :workshop_basic, dependent: :destroy
   has_one :location, dependent: :destroy
+  
   has_many :recents, dependent: :destroy
   has_many :home_photograph_categories, dependent: :destroy
+  has_many :tap_sorts, dependent: :destroy
+  has_many :tap_photographs, dependent: :destroy
+  has_many :tap_photograph_images, dependent: :destroy
 
   has_many :affair_images, dependent: :destroy
   has_many :official_accounts, dependent: :destroy

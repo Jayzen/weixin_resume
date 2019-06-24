@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resource :basic, :wedding_basic, :workshop_basic, :location, :weixin_basic
 
-  resources :official_accounts, :home_photograph_categories, :recents, :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
+  resources :tap_sorts, :official_accounts, :home_photograph_categories, :recents, :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
     get 'delete', on: :member
   end
 
@@ -19,7 +19,14 @@ Rails.application.routes.draw do
     get 'set_weight', on: :member
     get 'delete', on: :member
   end
- 
+  
+  resources :tap_photographs do
+    get 'delete', on: :member
+    resources :tap_photograph_images do
+      get 'delete', on: :member
+    end
+  end
+
   resources :menus do
     get 'delete', on: :member
     resources :menu_details do

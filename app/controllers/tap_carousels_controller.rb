@@ -22,7 +22,7 @@ class TapCarouselsController < ApplicationController
 
     if @tap_carousel.save
       flash[:success] = "创建成功"
-      redirect_to tap_carousel_path(@tap_carousel)
+      redirect_to tap_carousels_path
     else
       render :new
     end
@@ -31,7 +31,7 @@ class TapCarouselsController < ApplicationController
   def update
     if @tap_carousel.update(tap_carousel_params)
       flash[:success] = "更新成功"
-      redirect_to tap_carousel_path(@tap_carousel)
+      redirect_to tap_carousels_path
     else
       render :edit
     end
@@ -53,7 +53,7 @@ class TapCarouselsController < ApplicationController
     end
 
     def tap_carousel_params
-      params.require(:tap_carousel).permit(:name, :pic, :reveal, :weight)
+      params.require(:tap_carousel).permit(:name, :pic, :reveal, :weight, :tap_carousel_id)
     end
 
     def set_tap_carousels

@@ -61,7 +61,7 @@
           <% end -%> 
           <% if current_user.has_roles?(:tap_carousel) %>
             <li class="nav-item">
-              <%= link_to "轮播图", tap_carousels_path, class: "nav-link #{ (controller_name == 'tap_carousels') ? 'active' : '' }" %>
+              <%= link_to "轮播分类", tap_carousels_path, class: "nav-link #{ (controller_name == 'tap_carousels') ? 'active' : '' }" %>
             </li>
           <% end -%>
           <% if current_user.has_roles?(:menu) %>
