@@ -3,6 +3,10 @@ class Affair < ApplicationRecord
   has_many :affair_images, dependent: :destroy
   has_many :affair_comments, dependent: :destroy
 
+  #like relationships
+  has_many :like_affairs
+  has_many :guests, through: :like_affairs
+
   module Status
     On = true
     Off = false

@@ -4,6 +4,8 @@ module API
       expose :id
       expose :name
       expose :updated_at
+      expose :like_counts
+      expose :like_guests
       expose :affair_images, using: API::Entities::AffairImage
       expose :affair_comments, using: API::Entities::AffairComment
 
@@ -18,6 +20,14 @@ module API
 
         def affair_comments
           affair_comments = object.affair_comments.where(reveal: true).order(created_at: :desc)
+        end
+
+        def like_counts
+          like_counts = object.guests.size
+        end
+
+        def like_guests
+          like_counts = object.guests.pluck(:id)
         end
     end
   end

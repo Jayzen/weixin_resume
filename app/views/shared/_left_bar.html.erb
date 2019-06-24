@@ -45,7 +45,7 @@
           <% end -%>
           <% if current_user.has_roles?(:affair) %>
             <li class="nav-item">
-              <%= link_to "最新动态", affairs_path, class: "nav-link #{ (controller_name == 'affairs') ? 'active' : '' }" %>
+              <%= link_to "最新动态", affairs_path, class: "nav-link #{ (/affair/ =~ controller_name) ? 'active' : '' }" %>
             </li>
           <% end -%> 
           <% if current_user.has_roles?(:recent) %>

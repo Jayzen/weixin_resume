@@ -2,6 +2,7 @@
   <div class="d-flex justify-content-between">
     <div>
       <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= affair_comment.guest.nickname %>|
       <%= affair_comment.content %>
       <% if affair_comment.reveal? %>
         <span class="badge badge-primary">已发布</span>
@@ -17,6 +18,7 @@
   </div>
 <% end %>
 <div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '动态列表', affairs_path, class: "btn btn-primary btn-sm" %></div>
   <div><%= paginate @affair_comments %></div>
 </div>
 <%= render 'shared/confirm_modal' %>

@@ -1,4 +1,4 @@
-<%= form_for(@menu_detail, method: :post, url: create_detail_menu_path) do |f| %>
+<%= form_for([@menu, @menu_detail]) do |f| %>
   <% unless @menu_detail.errors.blank? %>
     <div class="alert alert-danger">
       <ul class="list-unstyled">
@@ -27,9 +27,10 @@
       <div class="col-sm-8"><%= f.number_field :order, class: "form-control" %></div>
     </div>   
 
+    <%= hidden_field_tag "menu_detail[user_id]", current_user.id %>
     <div class="form-group row">
       <div class="col-sm-2 text-right"></div>
-      <div class="col-sm-8 text-left"><%= f.submit "新建", class: "btn btn-primary btn-sm" %></div>
+      <div class="col-sm-8 text-left"><%= f.submit (@menu_detail.new_record? ? "新建" : "更新"), class: "btn btn-primary btn-sm" %></div>
     </div>
   </div>
 <% end -%>

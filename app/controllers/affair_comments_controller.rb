@@ -5,7 +5,7 @@ class AffairCommentsController < ApplicationController
   access affair: :all, message: "当前用户无权访问"
 
   def index
-    @affair_comments = @affair.affair_comments.order(created_at: :desc).page(params[:page])
+    @affair_comments = @affair.affair_comments.includes(:guest).order(created_at: :desc).page(params[:page])
   end
 
   def show
