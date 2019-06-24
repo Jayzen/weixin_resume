@@ -22,7 +22,7 @@ class StatesController < ApplicationController
 
     if @state.save
       flash[:success] = "创建成功"
-      redirect_to state_path(@state)
+      redirect_to states_path
     else
       render :new
     end
@@ -31,7 +31,7 @@ class StatesController < ApplicationController
   def update
     if @state.update(state_params)
       flash[:success] = "更新成功"
-      redirect_to state_path(@state)
+      redirect_to states_path
     else
       render :edit
     end
