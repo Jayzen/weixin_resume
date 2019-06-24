@@ -65,7 +65,7 @@
           <% end -%>
           <% if current_user.has_roles?(:menu) %>
             <li class="nav-item">
-              <%= link_to "价目表", menus_path, class: "nav-link #{ (controller_name == 'menus') ? 'active' : '' }" %>
+              <%= link_to "价目表", menus_path, class: "nav-link #{ ( /menu/ =~ controller_name ) ? 'active' : '' }" %>
             </li>
           <% end -%>
           <% if current_user.has_roles?(:tap_carousel_photograph) %>
