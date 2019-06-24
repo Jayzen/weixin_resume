@@ -17,10 +17,10 @@ module API
 
       desc 'find tap_carousel photographs'
       get '/tap_carousels/:id' do
-        @tap_carousel = @user.tap_carousels.find(params[:id])
-        @tap_carousel_photographs = @tap_carousel.tap_carousel_photographs
-        tap_carousel_photographs = present @tap_carousel_photographs, with: API::Entities::TapCarouselPhotograph
-        build_response code: 0, data: tap_carousel_photographs
+        @tap_carousel = @user.tap_carousels.includes(:tap_sorts).find(params[:id])
+        @tap_sorts = @tap_carousel.tap_sorts
+        tap_sorts = present @tap_sorts, with: API::Entities::TapSort
+        build_response code: 0, data: tap_sorts
       end
 
       desc 'find home tap carousel photograph'

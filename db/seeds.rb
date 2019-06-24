@@ -9,5 +9,5 @@
 #puts "finish add root_admin role to demo"
 @user = User.find_by(email: "wedding_two@demo.com")
 #@user.roles = [:affair, :wedding_basic, :location, :carousel, :photograph, :consult, :top, :appointment, :recent, :home_photograph_category]
-@user.roles = [:state, :official_account, :wedding_basic, :location, :tap_carousel, :tap_carousel_photograph, :menu, :movie, :top]
+@user.roles = [:tap_sort, :tap_photograph, :state, :official_account, :wedding_basic, :location, :tap_carousel, :tap_carousel_photograph, :menu, :movie, :top]
 @user.save
