@@ -7,7 +7,7 @@ class User < ApplicationRecord
   petergate(roles: [:root_admin, 
                     :affair, :location, :basic, :wedding_basic, :workshop_basic, :top, :consult, :appointment, :comment, :recent, :home_photograph_category,
                     :carousel, :photograph,
-                    :tap_sort, :tap_photograph, :tap_carousel, :official_account, :movie, :menu, :tap_carousel_photograph, :state
+                    :tap_sort, :tap_photograph, :tap_carousel, :official_account, :movie, :menu, :state
                     ], multiple: true)                                      ##
   ############################################################################################ 
  
@@ -46,8 +46,6 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :carousels, dependent: :destroy
   has_many :tap_carousels, dependent: :destroy
-  has_many :tap_carousel_photographs, dependent: :destroy
-  has_many :tap_carousel_details, dependent: :destroy
   has_many :photographs, dependent: :destroy
   has_many :consults, dependent: :destroy
   has_many :appointments, dependent: :destroy
@@ -66,7 +64,7 @@ class User < ApplicationRecord
     when "wedding_one"
       self.roles = [:affair, :wedding_basic, :location, :carousel, :photograph, :consult, :top, :appointment, :recent, :home_photograph_category]
     when "wedding_two"
-      self.roles = [:state, :official_account, :wedding_basic, :location, :tap_carousel, :tap_sort, :tap_photograph, :tap_carousel_photograph, :menu, :movie, :top]
+      self.roles = [:state, :official_account, :wedding_basic, :location, :tap_carousel, :tap_sort, :tap_photograph, :menu, :movie, :top]
     when "workshop"
       self.roles = [:workshop_basic, :location, :carousel]
     else 

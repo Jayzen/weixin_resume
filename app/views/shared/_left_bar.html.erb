@@ -88,11 +88,6 @@
               <%= link_to "公众号", official_accounts_path, class: "nav-link #{ (controller_name == 'official_accounts') ? 'active' : '' }" %>
             </li>
           <% end -%>
-          <% if current_user.has_roles?(:tap_carousel_photograph) %>
-            <li class="nav-item">
-              <%= link_to "摄影分类", tap_carousel_photographs_path, class: "nav-link #{ (controller_name == 'tap_carousel_photographs') ? 'active' : '' }" %>
-            </li>
-          <% end -%> 
           <% if current_user.has_roles?(:movie) %>
             <li class="nav-item">
               <%= link_to "视频上传", movies_path, class: "nav-link #{ (controller_name == 'movies') ? 'active' : '' }" %>

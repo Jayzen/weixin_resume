@@ -71,13 +71,12 @@ class AdminsController < ApplicationController
     tap_carousel = params[:privilege][:tap_carousel] ? :tap_carousel : nil
     tap_sort = params[:privilege][:tap_sort] ? :tap_sort : nil
     tap_photograph = params[:privilege][:tap_photograph] ? :tap_photograph : nil
-    tap_carousel_photograph = params[:privilege][:tap_carousel_photograph] ? :tap_carousel_photograph : nil
     state = params[:privilege][:state] ? :state : nil
     official_account = params[:privilege][:official_account] ? :official_account : nil
 
     @user.roles = [location, basic, wedding_basic, workshop_basic, top, consult, appointment, comment, recent, home_photograph_category, affair,
                    carousel, photograph,
-                   tap_sort, tap_photograph, movie, menu, tap_carousel, tap_carousel_photograph, state, official_account
+                   tap_sort, tap_photograph, movie, menu, tap_carousel, state, official_account
                   ].compact
     @user.save
 
