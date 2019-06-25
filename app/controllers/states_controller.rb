@@ -2,6 +2,7 @@ class StatesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_state, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_states, only: [:index]
+  before_action :set_tap_photographs, only: [:new, :edit]
   access state: :all, message: "当前用户无权访问"
 
   def index
@@ -53,10 +54,14 @@ class StatesController < ApplicationController
     end
 
     def state_params
-      params.require(:state).permit(:name, :content, :pic, :reveal, :weight)
+      params.require(:state).permit(:name, :content, :pic, :reveal, :weight, :tap_photograph_id)
     end
 
     def set_states
       @states = current_user.states.page(params[:page])
+    end
+
+    def set_tap_photographs
+      @tap_photographs = current_user.tap_photographs
     end
 end

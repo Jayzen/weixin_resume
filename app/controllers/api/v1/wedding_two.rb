@@ -30,6 +30,14 @@ module API
         build_response code: 0, data: tap_photograph
       end
 
+      desc 'find tap photograph'
+      get '/states/:id' do
+        @state = @user.states.includes(:tap_photograph).find(params[:id])
+        @tap_photograph = @state.tap_photograph
+        tap_photograph = present @tap_photograph, with: API::Entities::TapPhotograph
+        build_response code: 0, data: tap_photograph
+      end      
+ 
       desc 'find tap carousel'
       get '/tap_carousels/:id' do
         @tap_carousel = @user.tap_carousels.includes(:tap_sorts).find(params[:id])
