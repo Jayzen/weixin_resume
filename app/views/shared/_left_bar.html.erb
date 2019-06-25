@@ -113,6 +113,11 @@
               <%= link_to "咨询", consults_path, class: "nav-link #{ (controller_name == 'consults') ? 'active' : '' }" %>
             </li>
           <% end -%>
+          <% if current_user.has_roles?(:contact) %>
+            <li class="nav-item">
+              <%= link_to "客户联系", contacts_path, class: "nav-link #{ (controller_name == 'contacts') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:appointment) %>
             <li class="nav-item">
               <%= link_to "预约", appointments_path, class: "nav-link #{ (controller_name == 'appointments') ? 'active' : '' }" %>

@@ -1,0 +1,15 @@
+  <% @contacts.each_with_index do |contact, index| %>
+    <div class="d-flex justify-content-between">
+      <div>
+        <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+        <small><%= contact.created_at.strftime("%F") %></small>
+        <%= contact.name %> | 
+        <%= contact.telephone %>
+      </div>
+      <div>
+        <%= link_to '删除', delete_contact_path(contact), remote: true, class: "badge badge-primary" %>
+      </div>  
+    </div>
+  <% end -%>
+  <%= paginate @contacts %>
+  <%= render 'shared/confirm_modal' %>

@@ -123,6 +123,12 @@
                 </label>
              </div>
              <div class="form-check">
+               <input class="form-check-input" type="checkbox" name="privilege[contact]"  value=true <%= (@user.has_roles?(:contact) ? "checked" : "") %>>
+               <label class="form-check-label">
+                 客户联系
+                </label>
+             </div> 
+             <div class="form-check">
                <input class="form-check-input" type="checkbox" name="privilege[appointment]"  value=true <%= (@user.has_roles?(:appointment) ? "checked" : "") %>>
                <label class="form-check-label">
                  预约管理         

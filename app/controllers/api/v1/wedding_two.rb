@@ -53,7 +53,21 @@ module API
         tap_photograph = present @tap_photograph, with: API::Entities::TapPhotograph
         build_response code: 0, data: tap_photograph 
       end
+      
+      desc 'create contact'
+      post '/contact' do
+        @contact = @user.contacts.create(name: params[:name], telephone: params[:telephone])
+        if @contact.errors.messages.size != 0
+          error!({code: 102, error:  @contact.errors.messages.values.flatten.first})
+        end
+      end
 
+      desc 'get contacts'
+      get '/contacts' do
+        @contacts = @user.contacts.order(created_at: :desc)
+        contacts = present @contacts, with: API::Entities::Contact
+        build_response code: 0, data: contacts
+      end
     end
   end
 end
