@@ -149,7 +149,7 @@ class User < ApplicationRecord
     Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
   end
 
-  def send_contact_template(form_id, name, contact)
+  def send_contact_template(form_id, name, telephone)
     access_token = self.get_access_token["access_token"]
     template_id = "iZfL6-huU3tjrPv3gM79a5LT-5OdvD1CKQuKCreOhNI"
     page = "pages/merchant-contact/index"
