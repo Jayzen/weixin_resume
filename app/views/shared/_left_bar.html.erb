@@ -58,6 +58,11 @@
               <%= link_to "首页分类", home_photograph_categories_path, class: "nav-link #{ (controller_name == 'home_photograph_categories') ? 'active' : '' }" %>
             </li>
           <% end -%> 
+          <% if current_user.has_roles?(:home_photograph) %>
+            <li class="nav-item">
+              <%= link_to "首页摄影", home_photographs_path, class: "nav-link #{ (controller_name == 'home_photographs') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:tap_carousel) %>
             <li class="nav-item">
               <%= link_to "轮播分类", tap_carousels_path, class: "nav-link #{ (controller_name == 'tap_carousels') ? 'active' : '' }" %>

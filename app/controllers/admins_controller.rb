@@ -66,6 +66,7 @@ class AdminsController < ApplicationController
     home_photograph_category = params[:privilege][:home_photograph_category] ? :home_photograph_category : nil
     
     #wedding two
+    home_photograph = params[:privilege][:home_photograph] ? :home_photograph : nil
     movie = params[:privilege][:movie] ? :movie : nil
     menu = params[:privilege][:menu] ? :menu : nil
     tap_carousel = params[:privilege][:tap_carousel] ? :tap_carousel : nil
@@ -76,7 +77,7 @@ class AdminsController < ApplicationController
 
     @user.roles = [location, basic, wedding_basic, workshop_basic, top, consult, appointment, comment, recent, home_photograph_category, affair,
                    carousel, photograph,
-                   tap_sort, tap_photograph, movie, menu, tap_carousel, state, official_account
+                   home_photograph, tap_sort, tap_photograph, movie, menu, tap_carousel, state, official_account
                   ].compact
     @user.save
 

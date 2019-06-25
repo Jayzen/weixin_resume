@@ -3,7 +3,7 @@ class HomePhotographsController < ApplicationController
   before_action :set_home_photograph, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_home_photographs, only: [:index]
   before_action :set_tap_photographs, only: [:new, :edit]
-  #access home_photograph: :all, message: "当前用户无权访问"
+  access home_photograph: :all, message: "当前用户无权访问"
   def index
   end
 
