@@ -1,6 +1,7 @@
 module API
   module Entities
     class State < Grape::Entity
+      expose :id
       expose :name
       expose :content
       expose :pic
