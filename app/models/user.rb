@@ -39,6 +39,7 @@ class User < ApplicationRecord
   has_many :tap_sorts, dependent: :destroy
   has_many :tap_photographs, dependent: :destroy
   has_many :tap_photograph_images, dependent: :destroy
+  has_many :home_photographs, dependent: :destroy
 
   has_many :affair_images, dependent: :destroy
   has_many :official_accounts, dependent: :destroy

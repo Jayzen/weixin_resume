@@ -15,6 +15,13 @@ module API
         build_response code: 0, data: carousels
       end
 
+      desc 'find home photographs'
+      get '/home_photographs' do
+        @home_photographs = @user.home_photographs
+        home_photographs = present @home_photographs, with: API::Entities::HomePhotograph
+        build_response code: 0, data: home_photographs
+      end
+      
       desc 'find tap carousel'
       get '/tap_carousels/:id' do
         @tap_carousel = @user.tap_carousels.includes(:tap_sorts).find(params[:id])
