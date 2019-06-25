@@ -148,4 +148,25 @@ class User < ApplicationRecord
 
     Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
   end
+
+  def send_contact_template(form_id, name, contact)
+    access_token = self.get_access_token["access_token"]
+    template_id = "iZfL6-huU3tjrPv3gM79a5LT-5OdvD1CKQuKCreOhNI"
+    page = "pages/merchant-contact/index"
+    emphasis_keyword = ""
+    data = {"keyword1":{"value": name}, "keyword2":{"value": telephone}}
+    uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
+    content = {
+      "touser": self.openid,
+      "weapp_template_msg":{
+        "template_id": template_id,
+        "page": page,
+        "form_id": form_id,
+        "data": data,
+        "emphasis_keyword": emphasis_keyword
+      }
+    }
+
+    Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
+  end
 end

@@ -29,6 +29,17 @@ module API
           validate_appkey
           @user.send_appointment_template(params[:form_id], params[:name], params[:contact], params[:date], params[:time])
         end
+
+        desc 'get contact template'
+        params do
+          requires :form_id, type: String
+          optional :name, type: String
+          optional :telephone, type: String
+        end
+        post '/contact_template' do
+          validate_appkey
+          @user.send_contact_template(params[:form_id], params[:name], params[:telephone])
+        end
       end
     end
   end
