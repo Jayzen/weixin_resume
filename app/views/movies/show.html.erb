@@ -11,7 +11,7 @@
       <div class="col-sm-2 text-right col-form-label">视频:</div>
       <div class="col-sm-8 col-form-label">
         <% if @movie.movie.url %>
-          <%= video_tag @movie.movie.url %>
+          <%= video_tag @movie.movie.url, height: 100 %>
         <% end -%>
       </div>
     </div>
