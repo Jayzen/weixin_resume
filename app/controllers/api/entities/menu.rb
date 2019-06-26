@@ -3,7 +3,6 @@ module API
     class Menu < Grape::Entity
       expose :id
       expose :title
-      expose :content
       expose :pic
       expose :price
 
