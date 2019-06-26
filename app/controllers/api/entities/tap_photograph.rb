@@ -3,7 +3,16 @@ module API
     class TapPhotograph < Grape::Entity
       expose :name
       expose :id
-      expose :tap_photograph_images, using: API::Entities::TapPhotographImage
+      expose :pic
+    
+      private
+        def pic
+          if Rails.env == "production"
+            link = Rails.application.credentials.pr_base_url + object.pic.url.to_s
+          else
+            link = Rails.application.credentials.de_base_url + object.pic.url.to_s
+          end
+        end
     end
   end
 end

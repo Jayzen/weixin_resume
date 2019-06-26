@@ -68,11 +68,6 @@
               <%= link_to "轮播分类", tap_carousels_path, class: "nav-link #{ (controller_name == 'tap_carousels') ? 'active' : '' }" %>
             </li>
           <% end -%>
-          <% if current_user.has_roles?(:tap_sort) %>
-            <li class="nav-item">
-              <%= link_to "分类列表", tap_sorts_path, class: "nav-link #{ (controller_name == 'tap_sorts') ? 'active' : '' }" %>
-            </li>
-          <% end -%>
           <% if current_user.has_roles?(:tap_photograph) %>
             <li class="nav-item">
               <%= link_to "摄影照片", tap_photographs_path, class: "nav-link #{ (/tap_photograph/ =~ controller_name) ? 'active' : '' }" %>

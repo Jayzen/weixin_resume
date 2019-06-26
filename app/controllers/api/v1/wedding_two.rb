@@ -40,18 +40,18 @@ module API
  
       desc 'find tap carousel'
       get '/tap_carousels/:id' do
-        @tap_carousel = @user.tap_carousels.includes(:tap_sorts).find(params[:id])
-        @tap_sorts = @tap_carousel.tap_sorts
-        tap_sorts = present @tap_sorts, with: API::Entities::TapSort
-        build_response code: 0, data: tap_sorts
+        @tap_carousel = @user.tap_carousels.includes(:tap_photographs).find(params[:id])
+        @tap_photographs = @tap_carousel.tap_photographs
+        tap_photographs = present @tap_photographs, with: API::Entities::TapPhotograph
+        build_response code: 0, data: tap_photographs
       end
 
       desc 'find tap photograph'
-      get '/tap_sorts/:id' do
-        @tap_sort = @user.tap_sorts.includes([tap_photograph: :tap_photograph_images]).find(params[:id])
-        @tap_photograph = @tap_sort.tap_photograph
-        tap_photograph = present @tap_photograph, with: API::Entities::TapPhotograph
-        build_response code: 0, data: tap_photograph 
+      get '/tap_photographs/:id' do
+        @tap_photograph = @user.tap_photographs.includes(:tap_photograph_images).find(params[:id])
+        @tap_photograph_images = @tap_photograph.tap_photograph_images
+        tap_photograph_images = present @tap_photograph_images, with: API::Entities::TapPhotographImage
+        build_response code: 0, data: tap_photograph_images
       end
       
       desc 'create contact'

@@ -2,8 +2,8 @@ class TapPhotographsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_tap_photograph, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_tap_photographs, only: [:index]
-  before_action :set_tap_sorts, only: [:new, :edit]
-  #access tap_photograph: :all, message: "当前用户无权访问"
+  before_action :set_tap_carousels, only: [:new, :edit, :create, :update]
+  access tap_photograph: :all, message: "当前用户无权访问"
   def index
   end
 
@@ -53,14 +53,14 @@ class TapPhotographsController < ApplicationController
     end
 
     def tap_photograph_params
-      params.require(:tap_photograph).permit(:name, :reveal, :weight, :tap_sort_id)
+      params.require(:tap_photograph).permit(:name, :pic, :reveal, :order, :tap_carousel_id)
     end
 
     def set_tap_photographs
       @tap_photographs = current_user.tap_photographs.page(params[:page])
     end
 
-    def set_tap_sorts
-      @tap_sorts = current_user.tap_sorts
+    def set_tap_carousels
+      @tap_carousels = current_user.tap_carousels
     end
 end
