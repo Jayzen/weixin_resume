@@ -24,18 +24,18 @@ module API
 
       desc 'find tap photograph'
       get '/home_photographs/:id' do
-        @home_photograph = @user.home_photographs.includes(:tap_photograph).find(params[:id])
-        @tap_photograph = @home_photograph.tap_photograph
-        tap_photograph = present @tap_photograph, with: API::Entities::TapPhotograph
-        build_response code: 0, data: tap_photograph
+        @home_photograph = @user.home_photographs.includes([tap_photograph: :tap_photograph_images]).find(params[:id])
+        @tap_photograph_images = @home_photograph.tap_photograph.tap_photograph_images
+        tap_photograph_images = present @tap_photograph_images, with: API::Entities::TapPhotographImage
+        build_response code: 0, data: tap_photograph_images
       end
 
       desc 'find tap photograph'
       get '/states/:id' do
-        @state = @user.states.includes(:tap_photograph).find(params[:id])
-        @tap_photograph = @state.tap_photograph
-        tap_photograph = present @tap_photograph, with: API::Entities::TapPhotograph
-        build_response code: 0, data: tap_photograph
+        @state = @user.states.includes([tap_photograph: :tap_photograph_images]).find(params[:id])
+        @tap_photograph_images = @state.tap_photograph.tap_photograph_images
+        tap_photograph_images = present @tap_photograph_images, with: API::Entities::TapPhotographImage
+        build_response code: 0, data: tap_photograph_images
       end      
  
       desc 'find tap carousel'
