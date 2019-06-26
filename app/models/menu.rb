@@ -7,4 +7,8 @@ class Menu < ApplicationRecord
     On = true
     Off = false
   end
+  
+  validates :title, presence: { message: "标题不能为空" }
+  validates :pic, presence: { message: "照片不能为空" }
+  validates :price, presence: { message: "价格不能为空" }
 end
