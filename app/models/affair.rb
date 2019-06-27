@@ -2,7 +2,7 @@ class Affair < ApplicationRecord
   belongs_to :user
   has_many :affair_images, dependent: :destroy
   has_many :affair_comments, dependent: :destroy
-  belongs_to :product
+  belongs_to :product, optional: true
 
   #like relationships
   has_many :like_affairs
