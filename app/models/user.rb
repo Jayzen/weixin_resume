@@ -104,7 +104,7 @@ class User < ApplicationRecord
   end
 
   def create_default_merchant_basic
-    self.create_merchant_basic(duty: "8:00-22:00")
+    self.create_merchant_basic(duty: "8:00-22:00", name: "jayzen", phone: "18868818399")
   end
 
   def get_openid(code)
