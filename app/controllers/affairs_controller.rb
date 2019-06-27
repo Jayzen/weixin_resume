@@ -1,6 +1,6 @@
 class AffairsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_products, only: [:new, :edit]
+  before_action :set_products, only: [:new, :edit, :create, :update]
   before_action :set_affair, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_affairs, only: [:index]
   access affair: :all, message: "当前用户无权访问"

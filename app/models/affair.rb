@@ -16,4 +16,5 @@ class Affair < ApplicationRecord
   #default_scope { order(created_at: :desc).where(reveal: true) }  
   
   validates :name, presence: { message: "名称不能为空" }
+  validates :product_id, presence: { message: "必须关联商品" }
 end
