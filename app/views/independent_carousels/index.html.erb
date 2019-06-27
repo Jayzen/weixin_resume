@@ -1,0 +1,23 @@
+<% @independent_carousels.each_with_index do |independent_carousel, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= independent_carousel.name %>
+      <% if independent_carousel.reveal? %>
+        <span class="badge badge-primary">已发布</span>
+      <% else %>
+        <span class="badge badge-danger">未发布</span>
+      <% end -%>
+    </div>
+    <div>
+      <%= link_to '查看', independent_carousel_path(independent_carousel), class: "badge badge-primary"%>
+      <%= link_to '编辑', edit_independent_carousel_path(independent_carousel), class: "badge badge-primary"%>
+      <%= link_to '删除', delete_independent_carousel_path(independent_carousel), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '新建', new_independent_carousel_path, class: "btn btn-primary btn-sm" %></div>
+  <div><%= paginate @independent_carousels %></div>
+</div>
+<%= render 'shared/confirm_modal' %>

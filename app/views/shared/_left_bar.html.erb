@@ -28,6 +28,11 @@
               <%= link_to "基本信息", workshop_basic_path, class: "nav-link #{ (controller_name == 'workshop_basics') ? 'active' : '' } " %>
             </li>
           <% end -%>
+          <% if current_user.has_roles?(:merchant_basic) %>
+            <li class="nav-item">
+              <%= link_to "商户信息", merchant_basic_path, class: "nav-link #{ (/merchant_basic/ =~ controller_name ) ? 'active' : '' } " %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:location) %>
             <li class="nav-item">
               <%= link_to "地址设置", location_path, class: "nav-link #{ (controller_name == 'locations') ? 'active' : '' }" %>
@@ -43,6 +48,21 @@
               <%= link_to "轮播图", carousels_path, class: "nav-link #{ (controller_name == 'carousels') ? 'active' : '' }" %>
             </li>
           <% end -%>
+          <% if current_user.has_roles?(:independent_carousel) %>
+            <li class="nav-item">
+              <%= link_to "轮播照片", independent_carousels_path, class: "nav-link #{ (controller_name == 'independent_carousels') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
+          <% if current_user.has_roles?(:merchant_image) %>
+            <li class="nav-item">
+              <%= link_to "商户照片", merchant_images_path, class: "nav-link #{ (controller_name == 'merchant_images') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
+          <% if current_user.has_roles?(:product) %>
+            <li class="nav-item">
+              <%= link_to "商品管理", products_path, class: "nav-link #{ (/product/ =~ controller_name) ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:affair) %>
             <li class="nav-item">
               <%= link_to "最新动态", affairs_path, class: "nav-link #{ (/affair/ =~ controller_name) ? 'active' : '' }" %>

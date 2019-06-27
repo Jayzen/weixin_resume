@@ -11,7 +11,13 @@ Rails.application.routes.draw do
 
   resource :basic, :wedding_basic, :workshop_basic, :location, :weixin_basic
 
-  resources :contacts, :home_photographs, :official_accounts, :home_photograph_categories, :recents, :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
+  resource :merchant_basic do
+    resources :merchant_basic_images do
+      get 'delete', on: :member
+    end
+  end
+
+  resources :merchant_images, :independent_carousels, :contacts, :home_photographs, :official_accounts, :home_photograph_categories, :recents, :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
     get 'delete', on: :member
   end
 
@@ -30,6 +36,13 @@ Rails.application.routes.draw do
   resources :menus do
     get 'delete', on: :member
     resources :menu_details do
+      get 'delete', on: :member
+    end
+  end
+
+  resources :products do
+    get 'delete', on: :member
+    resources :product_images do
       get 'delete', on: :member
     end
   end

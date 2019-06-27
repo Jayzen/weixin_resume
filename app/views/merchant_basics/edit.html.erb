@@ -1,0 +1,56 @@
+<%= form_for(@merchant_basic) do |f| %>
+  <% unless @merchant_basic.errors.blank? %>
+    <div class="alert alert-danger">
+      <ul class="list-unstyled">
+        <% @merchant_basic.errors.messages.values.flatten.each do |error| %>
+          <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
+        <% end -%>
+      </ul>
+    </div>
+  <% end -%>
+  <div class="d-flex flex-column">
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">名称:</div>
+      <div class="col-sm-8"><%= f.text_field :name, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">联系方式:</div>
+      <div class="col-sm-8"><%= f.text_field :phone, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">商标照片:</div>
+      <div class="col-sm-8"><%= f.file_field :avatar, class: "form-control" %></div>
+    </div> 
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">商家介绍:</div>
+      <div class="col-sm-8"><%= f.text_field :description, class: "form-control" %></div>
+    </div> 
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">营业时间:</div>
+      <div class="col-sm-8"><%= f.text_field :duty, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">wifi:</div>
+      <div class="col-sm-8"><%= f.collection_select :is_wifi, [[MerchantBasic::Status::On, '有'], [MerchantBasic::Status::Off, '无']], :first, :last, {}, {class: "form-control"} %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">停车场:</div>
+      <div class="col-sm-8"><%= f.collection_select :is_parking, [[MerchantBasic::Status::On, '有'], [MerchantBasic::Status::Off, '无']], :first, :last, {}, {class: "form-control"} %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">微信支付:</div>
+      <div class="col-sm-8"><%= f.collection_select :is_wechat_pay, [[MerchantBasic::Status::On, '有'], [MerchantBasic::Status::Off, '无']], :first, :last, {}, {class: "form-control"} %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">支付宝支付:</div>
+      <div class="col-sm-8"><%= f.collection_select :is_alipay, [[MerchantBasic::Status::On, '有'], [MerchantBasic::Status::Off, '无']], :first, :last, {}, {class: "form-control"} %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right"></div>
+      <div class="col-sm-8 text-left">
+        <%= f.submit "更新", class: "btn btn-primary btn-sm" %>
+        <%= link_to "更多商户介绍", merchant_basic_merchant_basic_images_path, class: "btn btn-primary btn-sm" %>
+      </div>
+    </div>  
+  </div>
+<% end -%>

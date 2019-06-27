@@ -1,0 +1,23 @@
+<% @merchant_images.each_with_index do |merchant_image, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= merchant_image.name %>
+      <% if merchant_image.reveal? %>
+        <span class="badge badge-primary">已发布</span>
+      <% else %>
+        <span class="badge badge-danger">未发布</span>
+      <% end -%>
+    </div>
+    <div>
+      <%= link_to '查看', merchant_image_path(merchant_image), class: "badge badge-primary"%>
+      <%= link_to '编辑', edit_merchant_image_path(merchant_image), class: "badge badge-primary"%>
+      <%= link_to '删除', delete_merchant_image_path(merchant_image), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '新建', new_merchant_image_path, class: "btn btn-primary btn-sm" %></div>
+  <div><%= paginate @merchant_images %></div>
+</div>
+<%= render 'shared/confirm_modal' %>

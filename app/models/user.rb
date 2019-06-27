@@ -7,7 +7,8 @@ class User < ApplicationRecord
   petergate(roles: [:root_admin, 
                     :affair, :location, :basic, :wedding_basic, :workshop_basic, :top, :consult, :appointment, :comment, :recent, :home_photograph_category,
                     :carousel, :photograph,
-                    :contact, :home_photograph, :tap_photograph, :tap_carousel, :official_account, :movie, :menu, :state
+                    :contact, :home_photograph, :tap_photograph, :tap_carousel, :official_account, :movie, :menu, :state,
+                    :independent_carousel, :affair, :product, :merchant_image, :merchant_basic
                     ], multiple: true)                                      ##
   ############################################################################################ 
  
@@ -33,19 +34,26 @@ class User < ApplicationRecord
   has_one :wedding_basic, dependent: :destroy
   has_one :workshop_basic, dependent: :destroy
   has_one :location, dependent: :destroy
-  
+  has_one :merchant_basic, dependent: :destroy
+
+
   has_many :recents, dependent: :destroy
   has_many :home_photograph_categories, dependent: :destroy
   has_many :tap_photographs, dependent: :destroy
   has_many :tap_photograph_images, dependent: :destroy
   has_many :home_photographs, dependent: :destroy
 
+  has_many :merchant_basic_images, dependent: :destroy
+  has_many :products, dependent: :destroy
   has_many :affair_images, dependent: :destroy
+  has_many :merchant_images, dependent: :destroy
   has_many :official_accounts, dependent: :destroy
   has_many :affairs, dependent: :destroy
+  
   has_many :comments, dependent: :destroy
   has_many :carousels, dependent: :destroy
   has_many :tap_carousels, dependent: :destroy
+  has_many :independent_carousels, dependent: :destroy
   has_many :photographs, dependent: :destroy
   has_many :consults, dependent: :destroy
   has_many :contacts, dependent: :destroy
@@ -56,7 +64,7 @@ class User < ApplicationRecord
   has_many :tops, dependent: :destroy
   has_many :states, dependent: :destroy
 
-  after_create :set_style, :generate_token, :create_default_basic, :create_default_location
+  after_create :set_style, :generate_token, :create_default_basic, :create_default_location, :create_default_merchant_basic
 
   def set_style
     case self.style
@@ -68,6 +76,8 @@ class User < ApplicationRecord
       self.roles = [:contact, :home_photograph, :state, :official_account, :wedding_basic, :location, :tap_carousel,  :tap_photograph, :menu, :movie, :top]
     when "workshop"
       self.roles = [:workshop_basic, :location, :carousel]
+    when "mall"
+      self.roles = [:merchant_basic, :location, :independent_carousel, :affair, :product, :merchant_image]
     else 
       self.roles = "editor"
     end
@@ -91,6 +101,10 @@ class User < ApplicationRecord
 
   def create_default_location
     self.create_location(name: "浙江大学", address: "杭州市西湖区浙大路38号", latitude: 30.263964, longitude: 120.123218)
+  end
+
+  def create_default_merchant_basic
+    self.create_merchant_basic(duty: "8:00-22:00")
   end
 
   def get_openid(code)

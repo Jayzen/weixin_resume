@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_26_040002) do
+ActiveRecord::Schema.define(version: 2019_06_27_111240) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -191,6 +191,17 @@ ActiveRecord::Schema.define(version: 2019_06_26_040002) do
     t.index ["user_id"], name: "index_home_photographs_on_user_id"
   end
 
+  create_table "independent_carousels", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "pic"
+    t.integer "order", default: 0
+    t.integer "user_id"
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_independent_carousels_on_user_id"
+  end
+
   create_table "like_affairs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "guest_id"
     t.integer "affair_id"
@@ -236,6 +247,46 @@ ActiveRecord::Schema.define(version: 2019_06_26_040002) do
     t.index ["user_id"], name: "index_menus_on_user_id"
   end
 
+  create_table "merchant_basic_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "pic"
+    t.integer "user_id"
+    t.integer "merchant_basic_id"
+    t.integer "order", default: 0
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["merchant_basic_id"], name: "index_merchant_basic_images_on_merchant_basic_id"
+    t.index ["user_id"], name: "index_merchant_basic_images_on_user_id"
+  end
+
+  create_table "merchant_basics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "duty"
+    t.boolean "is_wifi"
+    t.boolean "is_parking"
+    t.boolean "is_wechat_pay"
+    t.boolean "is_alipay"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "phone"
+    t.string "avatar"
+    t.text "description"
+    t.index ["user_id"], name: "index_merchant_basics_on_user_id"
+  end
+
+  create_table "merchant_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "pic"
+    t.integer "order", default: 0
+    t.integer "user_id"
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_merchant_images_on_user_id"
+  end
+
   create_table "movies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "content"
@@ -275,6 +326,32 @@ ActiveRecord::Schema.define(version: 2019_06_26_040002) do
     t.datetime "updated_at", null: false
     t.string "pic"
     t.index ["user_id"], name: "index_photographs_on_user_id"
+  end
+
+  create_table "product_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "pic"
+    t.integer "order", default: 0
+    t.boolean "reveal"
+    t.integer "product_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_images_on_product_id"
+    t.index ["user_id"], name: "index_product_images_on_user_id"
+  end
+
+  create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "pic"
+    t.integer "order", default: 0
+    t.boolean "reveal"
+    t.string "price"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "recents", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
