@@ -10,6 +10,7 @@ module API
       expose :name
       expose :phone
       expose :description
+      expose :merchant_basic_images, using: API::Entities::MerchantBasicImage
 
       private
         def avatar
