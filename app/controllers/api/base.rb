@@ -22,6 +22,7 @@ module API
     mount V1::WeddingTwo
     mount V1::Resume
     mount V1::Workshop
+    mount V1::Mall
 
     add_swagger_documentation(
       info: {
