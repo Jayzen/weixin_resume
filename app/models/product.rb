@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   mount_uploader :pic, ImageUploader
   has_many :product_images, dependent: :destroy
-  has_one :affair, dependent: :destroy
+  has_many :affairs, dependent: :destroy
   belongs_to :user
 
   module Status

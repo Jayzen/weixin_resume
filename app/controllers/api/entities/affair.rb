@@ -4,22 +4,15 @@ module API
       expose :id
       expose :name
       expose :updated_at
-      expose :like_counts
-      expose :like_guests
+      #expose :like_counts
+      #expose :like_guests
       expose :affair_images, using: API::Entities::AffairImage
       expose :affair_comments, using: API::Entities::AffairComment
+      expose :product, using: API::Entities::Product
 
       private
         def updated_at
           updated_at = object.updated_at.strftime("%F %H:%M")
-        end
-
-        def affair_images
-          affair_images = object.affair_images.where(reveal: true).order(order: :desc)
-        end
-
-        def affair_comments
-          affair_comments = object.affair_comments.where(reveal: true).order(created_at: :desc)
         end
 
         def like_counts
