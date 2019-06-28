@@ -1,8 +1,9 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_product_sorts, only: [:edit, :update, :new, :create]
   before_action :set_product, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_products, only: [:index]
-  #access product: :all, message: "当前用户无权访问"
+  access product: :all, message: "当前用户无权访问"
 
   def index
   end
@@ -53,10 +54,14 @@ class ProductsController < ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:name, :description, :pic, :order, :price, :reveal, :set_home)
+      params.require(:product).permit(:name, :description, :pic, :order, :price, :reveal, :set_home, :product_sort_id)
     end
 
     def set_products
       @products = current_user.products.page(params[:page])
+    end
+
+    def set_product_sorts
+      @product_sorts = current_user.product_sorts
     end
 end

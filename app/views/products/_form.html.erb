@@ -26,6 +26,10 @@
       <div class="col-sm-8"><%= f.file_field :pic, class: "form-control" %></div>
     </div>
     <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">关联商品分类:</div>
+      <div class="col-sm-8"><%= f.collection_select :product_sort_id, @product_sorts, :id, :name, {}, {class: "form-control"}%></div>
+    </div> 
+    <div class="form-group row">
       <div class="col-sm-2 text-right col-form-label">显示:</div>
       <div class="col-sm-8"><%= f.collection_select :reveal, [[Product::Status::On, '发布'], [Product::Status::Off, '不发布']], :first, :last, {}, {class: "form-control"}%></div>
     </div> 

@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_many :product_images, dependent: :destroy
   has_many :affairs, dependent: :destroy
   belongs_to :user
+  belongs_to :product_sort, optional: true
 
   module Status
     On = true
@@ -13,4 +14,5 @@ class Product < ApplicationRecord
   validates :description, presence: { message: "描述不能为空" }
   validates :pic, presence: { message: "照片不能为空" }
   validates :price, presence: { message: "价格不能为空" }
+  validates :product_sort_id, presence: { message: "必须关联商品分类" }
 end

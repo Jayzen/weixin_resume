@@ -49,7 +49,8 @@ class User < ApplicationRecord
   has_many :merchant_images, dependent: :destroy
   has_many :official_accounts, dependent: :destroy
   has_many :affairs, dependent: :destroy
-  
+  has_many :product_sorts, dependent: :destroy
+
   has_many :comments, dependent: :destroy
   has_many :carousels, dependent: :destroy
   has_many :tap_carousels, dependent: :destroy

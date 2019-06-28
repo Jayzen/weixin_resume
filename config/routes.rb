@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :merchant_images, :independent_carousels, :contacts, :home_photographs, :official_accounts, :home_photograph_categories, :recents, :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
+  resources :product_sorts, :merchant_images, :independent_carousels, :contacts, :home_photographs, :official_accounts, :home_photograph_categories, :recents, :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
     get 'delete', on: :member
   end
 
