@@ -1,12 +1,8 @@
 module API
   module Entities
-    class Product < Grape::Entity
+    class ProductImage < Grape::Entity
       expose :id
-      expose :name
-      expose :description
       expose :pic
-      expose :price
-      expose :product_images, using: API::Entities::ProductImage
 
       private
         def pic
