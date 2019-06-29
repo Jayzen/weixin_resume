@@ -33,6 +33,9 @@ gem 'rack-cors'
 gem 'grape-rails-cache'
 
 
+#pay
+gem 'wx_pay'
+
 gem 'devise'
 gem 'petergate'
 gem 'bootstrap', '~> 4.0.0'
