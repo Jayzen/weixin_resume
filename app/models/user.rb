@@ -183,4 +183,15 @@ class User < ApplicationRecord
 
     Net::HTTP.post(URI(uri), content.to_json, "Content-Type": "application/json")
   end
+
+  def self.generate_token len = 8
+    a = lambda { rand(36).to_s(36) }
+    token = ""
+    len.times { |t| token << a.call.to_s }
+    token
+  end
+ 
+  def self.generate_order_uuid
+    Date.today.to_s.split('-').join()[2..-1] << generate_token(8).upcase
+  end
 end
