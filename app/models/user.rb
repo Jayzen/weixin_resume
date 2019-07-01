@@ -45,6 +45,8 @@ class User < ApplicationRecord
 
   has_many :merchant_basic_images, dependent: :destroy
   has_many :products, dependent: :destroy
+  has_many :product_images, dependent: :destroy
+  has_many :product_details, dependent: :destroy
   has_many :affair_images, dependent: :destroy
   has_many :merchant_images, dependent: :destroy
   has_many :official_accounts, dependent: :destroy

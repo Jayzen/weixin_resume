@@ -45,6 +45,9 @@ Rails.application.routes.draw do
     resources :product_images do
       get 'delete', on: :member
     end
+    resources :product_details do
+      get 'delete', on: :member
+    end
   end
 
   resources :comments do

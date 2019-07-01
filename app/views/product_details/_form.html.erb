@@ -1,0 +1,36 @@
+<%= form_for([@product, @product_detail]) do |f| %>
+  <% unless @product_detail.errors.blank? %>
+    <div class="alert alert-danger">
+      <ul class="list-unstyled">
+        <% @product_detail.errors.messages.values.flatten.each do |error| %>
+          <li><i class="fa fa-exclamation-circle"></i> <%= error %></li>
+        <% end -%>
+      </ul>
+    </div>
+  <% end -%>
+  <div class="d-flex flex-column">
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">标题:</div>
+      <div class="col-sm-8"><%= f.text_field :title, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">图片:</div>
+      <div class="col-sm-8"><%= f.file_field :pic, class: "form-control" %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">显示:</div>
+      <div class="col-sm-8"><%= f.collection_select :reveal, [[ProductDetail::Status::On, '发布'], [ProductDetail::Status::Off, '不发布']], :first, :last, {}, {class: "form-control"}%></div>
+    </div> 
+
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">排序:</div>
+      <div class="col-sm-8"><%= f.number_field :order, class: "form-control" %></div>
+    </div>   
+
+    <%= hidden_field_tag "product_detail[user_id]", current_user.id %>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right"></div>
+      <div class="col-sm-8 text-left"><%= f.submit (@product_detail.new_record? ? "新建" : "更新"), class: "btn btn-primary btn-sm" %></div>
+    </div>
+  </div>
+<% end -%>
