@@ -8,7 +8,7 @@ class User < ApplicationRecord
                     :affair, :location, :basic, :wedding_basic, :workshop_basic, :top, :consult, :appointment, :comment, :recent, :home_photograph_category,
                     :carousel, :photograph,
                     :contact, :home_photograph, :tap_photograph, :tap_carousel, :official_account, :movie, :menu, :state,
-                    :independent_carousel, :affair, :product, :merchant_image, :merchant_basic
+                    :independent_carousel, :affair, :product, :merchant_image, :merchant_basic, :hot_word
                     ], multiple: true)                                      ##
   ############################################################################################ 
  
@@ -52,6 +52,7 @@ class User < ApplicationRecord
   has_many :official_accounts, dependent: :destroy
   has_many :affairs, dependent: :destroy
   has_many :product_sorts, dependent: :destroy
+  has_many :hot_words, dependent: :destroy
 
   has_many :comments, dependent: :destroy
   has_many :carousels, dependent: :destroy
@@ -80,7 +81,7 @@ class User < ApplicationRecord
     when "workshop"
       self.roles = [:workshop_basic, :location, :carousel]
     when "mall"
-      self.roles = [:merchant_basic, :location, :independent_carousel, :affair, :product, :merchant_image]
+      self.roles = [:merchant_basic, :location, :independent_carousel, :affair, :product, :merchant_image, :hot_word]
     else 
       self.roles = "editor"
     end
@@ -126,8 +127,8 @@ class User < ApplicationRecord
     access_token = self.get_access_token["access_token"]
     template_id = "iZfL6-huU3tjrPv3gM79a3OVvBUp8ON3qpC4TwryJ4s"
     page = "pages/merchant-consult/index"
-    emphasis_keyword = ""
-    data = {"keyword1":{"value": name}, "keyword2":{"value": contact}, "keyword3":{"value": content}}
+    emphasis_hot_word = ""
+    data = {"hot_word1":{"value": name}, "hot_word2":{"value": contact}, "hot_word3":{"value": content}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
       "touser": self.openid,
@@ -136,7 +137,7 @@ class User < ApplicationRecord
         "page": page,
         "form_id": form_id,
         "data": data,
-        "emphasis_keyword": emphasis_keyword
+        "emphasis_hot_word": emphasis_hot_word
       } 
     } 
 
@@ -147,9 +148,9 @@ class User < ApplicationRecord
     access_token = self.get_access_token["access_token"]
     template_id = "CzcXQjGXXqqxxwmUzCqSdvceFI_8MYmMluLP-KnO_LI"
     page = "pages/merchant-appointment/index"
-    emphasis_keyword = ""
+    emphasis_hot_word = ""
     date_time = date + " " + time
-    data = {"keyword1":{"value": name}, "keyword2":{"value": contact}, "keyword3":{"value": date_time}}
+    data = {"hot_word1":{"value": name}, "hot_word2":{"value": contact}, "hot_word3":{"value": date_time}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
       "touser": self.openid,
@@ -158,7 +159,7 @@ class User < ApplicationRecord
         "page": page,
         "form_id": form_id,
         "data": data,
-        "emphasis_keyword": emphasis_keyword
+        "emphasis_hot_word": emphasis_hot_word
       }
     }
 
@@ -169,8 +170,8 @@ class User < ApplicationRecord
     access_token = self.get_access_token["access_token"]
     template_id = "iZfL6-huU3tjrPv3gM79a5LT-5OdvD1CKQuKCreOhNI"
     page = "pages/merchant-contact/index"
-    emphasis_keyword = ""
-    data = {"keyword1":{"value": name}, "keyword2":{"value": telephone}}
+    emphasis_hot_word = ""
+    data = {"hot_word1":{"value": name}, "hot_word2":{"value": telephone}}
     uri = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/uniform_send?access_token=#{access_token}"
     content = {
       "touser": self.openid,
@@ -179,7 +180,7 @@ class User < ApplicationRecord
         "page": page,
         "form_id": form_id,
         "data": data,
-        "emphasis_keyword": emphasis_keyword
+        "emphasis_hot_word": emphasis_hot_word
       }
     }
 

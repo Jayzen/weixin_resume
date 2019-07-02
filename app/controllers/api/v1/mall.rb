@@ -76,6 +76,13 @@ module API
         products = present @products, with: API::Entities::Product
         build_response code: 0, data: products
       end
+
+      desc 'find all keywords'
+      get '/keywords' do
+        @keywords = @user.keywords.where(reveal: true)
+        keywords = present @keywords, with: API::Entities::Keyword
+        build_response code: 0, data: keywords
+      end
     end
   end
 end

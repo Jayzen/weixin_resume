@@ -81,11 +81,12 @@ class AdminsController < ApplicationController
     product = params[:privilege][:product] ? :product : nil
     merchant_image = params[:privilege][:merchant_image] ? :merchant_image : nil
     merchant_basic = params[:privilege][:merchant_basic] ? :merchant_basic : nil
+    hot_word = params[:privilege][:hot_word] ? :hot_word : nil
 
     @user.roles = [location, basic, wedding_basic, workshop_basic, top, consult, appointment, comment, recent, home_photograph_category,
                    carousel, photograph,
                    contact, home_photograph, tap_sort, tap_photograph, movie, menu, tap_carousel, state, official_account,
-                   affair, independent_carousel, product, merchant_image, merchant_basic
+                   affair, independent_carousel, product, merchant_image, merchant_basic, hot_word
                   ].compact
     @user.save
 

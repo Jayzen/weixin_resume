@@ -1,0 +1,23 @@
+<% @keywords.each_with_index do |keyword, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= keyword.name %>
+      <% if keyword.reveal? %>
+        <span class="badge badge-primary">已发布</span>
+      <% else %>
+        <span class="badge badge-danger">未发布</span>
+      <% end -%> 
+    </div>
+    <div>
+      <%= link_to '查看', keyword_path(keyword), class: "badge badge-primary"%>
+      <%= link_to '编辑', edit_keyword_path(keyword), class: "badge badge-primary"%>
+      <%= link_to '删除', delete_keyword_path(keyword), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '新建', new_keyword_path, class: "btn btn-primary btn-sm" %></div>
+  <div><%= paginate @keywords %></div>
+</div>
+<%= render 'shared/confirm_modal' %>
