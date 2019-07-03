@@ -36,6 +36,17 @@ module API
         build_response code: 0, data: products
       end 
 
+      desc 'search products'
+      get '/products/search?' do
+        name = params["q"].strip
+        start = params["start"].to_i || 0
+        @return_products = @user.products.where(["name like ?", "%#{name}%"]).where(reveal: true).order(order: :asc)
+        @total = @return_products.size
+        @products = @return_products.limit(20).offset(start)
+        products = present @products, with: API::Entities::Product
+        build_response code: 0, data: products
+      end
+
       desc 'find home images'
       get '/merchant_images' do
         @merchant_images = @user.merchant_images.where(reveal: true).order(order: :asc)
@@ -78,10 +89,10 @@ module API
       end
 
       desc 'find all keywords'
-      get '/keywords' do
-        @keywords = @user.keywords.where(reveal: true)
-        keywords = present @keywords, with: API::Entities::Keyword
-        build_response code: 0, data: keywords
+      get '/hot_words' do
+        @hot_words = @user.hot_words.where(reveal: true).order(order: :asc)
+        hot_words = present @hot_words, with: API::Entities::Keyword
+        build_response code: 0, data: hot_words
       end
     end
   end
