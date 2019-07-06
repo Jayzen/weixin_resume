@@ -14,7 +14,7 @@ class Product < ApplicationRecord
   validates :name, presence: { message: "名称不能为空" }
   validates :description, presence: { message: "描述不能为空" }
   validates :pic, presence: { message: "照片不能为空" }
-  validates :price, presence: { message: "价格不能为空" }
+  validates :current_price, presence: { message: "优惠后价格不能为空" }
+  validates :old_price, presence: { message: "优惠前价格不能为空" }
   validates :product_sort_id, presence: { message: "必须关联商品分类" }
-
 end

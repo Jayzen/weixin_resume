@@ -5,7 +5,9 @@ module API
       expose :name
       expose :description
       expose :pic
-      expose :price
+      expose :current_price
+      expose :old_price
+      expose :stock
       expose :product_images, using: API::Entities::ProductImage
       expose :product_details, using: API::Entities::ProductDetail
 

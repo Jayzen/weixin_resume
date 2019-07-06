@@ -33,7 +33,7 @@ module API
       get '/products' do
         @products = @user.products.where(reveal: true).order(order: :asc)
         products = present @products, with: API::Entities::Product
-        build_response code: 0, data: products
+        #build_response code: 0, data: products
       end 
 
       desc 'search products'
@@ -44,7 +44,8 @@ module API
         @total = @return_products.size
         @products = @return_products.limit(20).offset(start)
         products = present @products, with: API::Entities::Product
-        build_response code: 0, data: products
+        #products = present @products, with: API::Entities::Product
+        #build_response code: 0, data: products
       end
 
       desc 'find home images'

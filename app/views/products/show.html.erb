@@ -4,12 +4,16 @@
       <div class="col-sm-8 col-form-label"><%= @product.name %></div>
     </div>
     <div class="form-group row">
-      <div class="col-sm-2 text-right col-form-label">描述:</div>
-      <div class="col-sm-8 col-form-label"><%= @product.description %></div>
-    </div> 
+      <div class="col-sm-2 text-right col-form-label">优惠后价格:</div>
+      <div class="col-sm-8 col-form-label"><%= @product.current_price %></div>
+    </div>
     <div class="form-group row">
-      <div class="col-sm-2 text-right col-form-label">价格:</div>
-      <div class="col-sm-8 col-form-label"><%= @product.price %></div>
+      <div class="col-sm-2 text-right col-form-label">优惠前价格:</div>
+      <div class="col-sm-8 col-form-label"><%= @product.old_price %></div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">库存:</div>
+      <div class="col-sm-8 col-form-label"><%= @product.stock %></div>
     </div> 
     <div class="form-group row">
       <div class="col-sm-2 text-right col-form-label">图片:</div>
@@ -18,6 +22,10 @@
           <%= image_tag @product.pic.url, height: "250" %>
         <% end -%>
       </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-2 text-right col-form-label">描述:</div>
+      <div class="col-sm-8 col-form-label"><%= @product.description %></div>
     </div>
     <div class="form-group row">
       <div class="col-sm-2 text-right col-form-label">关联商品分类:</div>
