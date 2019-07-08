@@ -24,7 +24,8 @@ module API
 
       desc 'find home products'
       get '/home_products' do
-        @products = @user.product_homes.includes(:product).where(reveal: true).order(order: :asc)
+        @ids = @user.product_homes.includes(:product).where(reveal: true).order(order: :asc).pluck(:product_id)
+        @products = @user.products.find(@ids)
         products = present @products, with: API::Entities::Product
         build_response code: 0, data: products
       end
