@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_04_030854) do
+ActiveRecord::Schema.define(version: 2019_07_08_081431) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -78,6 +78,26 @@ ActiveRecord::Schema.define(version: 2019_07_04_030854) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
+  create_table "banner_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "pic"
+    t.integer "user_id"
+    t.integer "banner_id"
+    t.integer "order", default: 0
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["banner_id"], name: "index_banner_items_on_banner_id"
+    t.index ["user_id"], name: "index_banner_items_on_user_id"
+  end
+
+  create_table "banners", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "basics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -353,6 +373,17 @@ ActiveRecord::Schema.define(version: 2019_07_04_030854) do
     t.index ["user_id"], name: "index_product_details_on_user_id"
   end
 
+  create_table "product_homes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order"
+    t.boolean "reveal"
+    t.index ["product_id"], name: "index_product_homes_on_product_id"
+    t.index ["user_id"], name: "index_product_homes_on_user_id"
+  end
+
   create_table "product_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "pic"
@@ -376,6 +407,17 @@ ActiveRecord::Schema.define(version: 2019_07_04_030854) do
     t.index ["user_id"], name: "index_product_sorts_on_user_id"
   end
 
+  create_table "product_themes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "theme_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order", default: 0
+    t.integer "user_id"
+    t.index ["theme_id", "product_id"], name: "index_product_themes_on_theme_id_and_product_id", unique: true
+    t.index ["user_id"], name: "index_product_themes_on_user_id"
+  end
+
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -385,7 +427,6 @@ ActiveRecord::Schema.define(version: 2019_07_04_030854) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "set_home"
     t.integer "product_sort_id"
     t.decimal "current_price", precision: 5, scale: 2
     t.decimal "old_price", precision: 5, scale: 2
@@ -456,6 +497,18 @@ ActiveRecord::Schema.define(version: 2019_07_04_030854) do
     t.integer "tap_carousel_id"
     t.index ["tap_carousel_id"], name: "index_tap_photographs_on_tap_carousel_id"
     t.index ["user_id"], name: "index_tap_photographs_on_user_id"
+  end
+
+  create_table "themes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "home_pic"
+    t.string "theme_pic"
+    t.integer "order", default: 0
+    t.integer "user_id"
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_themes_on_user_id"
   end
 
   create_table "tops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

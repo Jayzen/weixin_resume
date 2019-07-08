@@ -5,6 +5,9 @@ class Product < ApplicationRecord
   has_many :affairs, dependent: :destroy
   belongs_to :user
   belongs_to :product_sort, optional: true
+  has_many :product_themes, dependent: :destroy
+  has_many :themes, through: :product_themes
+  has_one :home_product, dependent: :destroy
 
   module Status
     On = true

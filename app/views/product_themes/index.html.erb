@@ -1,0 +1,19 @@
+<% @product_themes.each_with_index do |product_theme, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= product_theme.product.name %>
+    </div>
+    <div>
+      <%= link_to '删除', delete_theme_product_theme_path(@theme, product_theme), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div>
+    <%= link_to '主题列表', themes_path, class: "btn btn-primary btn-sm" %>
+    <%= link_to '新建', new_theme_product_theme_path(@theme), class: "btn btn-primary btn-sm" %>
+  </div>
+  <div><%= paginate @product_themes %></div>
+</div>
+<%= render 'shared/confirm_modal' %>

@@ -54,6 +54,11 @@ class User < ApplicationRecord
   has_many :product_sorts, dependent: :destroy
   has_many :hot_words, dependent: :destroy
 
+  has_many :banners, dependent: :destroy
+  has_many :themes, dependent: :destroy
+  has_many :product_themes, dependent: :destroy
+  has_many :product_homes, dependent: :destroy 
+
   has_many :comments, dependent: :destroy
   has_many :carousels, dependent: :destroy
   has_many :tap_carousels, dependent: :destroy

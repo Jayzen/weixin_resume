@@ -1,0 +1,26 @@
+<% @banner_items.each_with_index do |banner_item, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= banner_item.name %>
+      <% if banner_item.reveal? %>
+        <span class="badge badge-primary">已发布</span>
+      <% else %>
+        <span class="badge badge-danger">未发布</span>
+      <% end -%>
+    </div>
+    <div>
+      <%= link_to '查看', banner_banner_item_path(@banner, banner_item), class: "badge badge-primary"%>
+      <%= link_to "编辑", edit_banner_banner_item_path(@banner, banner_item), class: "badge badge-primary" %>
+      <%= link_to '删除', delete_banner_banner_item_path(@banner, banner_item), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div>
+    <%= link_to '轮播列表', banners_path, class: "btn btn-primary btn-sm" %>
+    <%= link_to '新建', new_banner_banner_item_path(@banner), class: "btn btn-primary btn-sm" %>
+  </div>
+  <div><%= paginate @banner_items %></div>
+</div>
+<%= render 'shared/confirm_modal' %>

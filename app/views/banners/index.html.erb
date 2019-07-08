@@ -1,0 +1,18 @@
+<% @banners.each_with_index do |banner, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= banner.name %>
+    </div>
+    <div>
+      <%= link_to '照片', banner_banner_items_path(banner), class: "badge badge-primary" %>
+      <%= link_to '编辑', edit_banner_path(banner), class: "badge badge-primary"%>
+      <%= link_to '删除', delete_banner_path(banner), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '新建', new_banner_path, class: "btn btn-primary btn-sm" %></div>
+  <div><%= paginate @banners %></div>
+</div>
+<%= render 'shared/confirm_modal' %>
