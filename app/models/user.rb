@@ -8,7 +8,7 @@ class User < ApplicationRecord
                     :affair, :location, :basic, :wedding_basic, :workshop_basic, :top, :consult, :appointment, :comment, :recent, :home_photograph_category,
                     :carousel, :photograph,
                     :contact, :home_photograph, :tap_photograph, :tap_carousel, :official_account, :movie, :menu, :state,
-                    :independent_carousel, :affair, :product, :merchant_image, :merchant_basic, :hot_word
+                    :independent_carousel, :affair, :product, :merchant_image, :merchant_basic, :hot_word, :product_home
                     ], multiple: true)                                      ##
   ############################################################################################ 
  
@@ -51,13 +51,14 @@ class User < ApplicationRecord
   has_many :merchant_images, dependent: :destroy
   has_many :official_accounts, dependent: :destroy
   has_many :affairs, dependent: :destroy
-  has_many :product_sorts, dependent: :destroy
+  has_many :sorts, dependent: :destroy
   has_many :hot_words, dependent: :destroy
 
   has_many :banners, dependent: :destroy
   has_many :themes, dependent: :destroy
   has_many :product_themes, dependent: :destroy
   has_many :product_homes, dependent: :destroy 
+  has_many :product_sorts, dependent: :destroy
 
   has_many :comments, dependent: :destroy
   has_many :carousels, dependent: :destroy

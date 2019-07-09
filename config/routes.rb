@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :product_homes, :hot_words, :product_sorts, :merchant_images, :independent_carousels, :contacts, :home_photographs, :official_accounts, :home_photograph_categories, :recents, :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
+  resources :product_homes, :hot_words, :merchant_images, :independent_carousels, :contacts, :home_photographs, :official_accounts, :home_photograph_categories, :recents, :clients, :carousels, :states, :tap_carousels, :tops, :photographs, :consults, :appointments, :movies do
     get 'delete', on: :member
   end
 
@@ -29,6 +29,13 @@ Rails.application.routes.draw do
   resources :tap_photographs do
     get 'delete', on: :member
     resources :tap_photograph_images do
+      get 'delete', on: :member
+    end
+  end
+
+  resources :sorts do
+    get 'delete', on: :member
+    resources :product_sorts do
       get 'delete', on: :member
     end
   end

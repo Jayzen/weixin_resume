@@ -1,6 +1,6 @@
 module API
   module Entities
-    class ProductSort < Grape::Entity
+    class Sort < Grape::Entity
       expose :id
       expose :name
     end

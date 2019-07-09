@@ -2,22 +2,18 @@
   <div class="d-flex justify-content-between">
     <div>
       <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
-      <%= product_sort.name %>
-      <% if product_sort.reveal? %>
-        <span class="badge badge-primary">已发布</span>
-      <% else %>
-        <span class="badge badge-danger">未发布</span>
-      <% end -%>
+      <%= product_sort.product.name %>
     </div>
     <div>
-      <%= link_to '查看', product_sort_path(product_sort), class: "badge badge-primary"%>
-      <%= link_to '编辑', edit_product_sort_path(product_sort), class: "badge badge-primary"%>
-      <%= link_to '删除', delete_product_sort_path(product_sort), remote: true, class: "badge badge-primary" %>
+      <%= link_to '删除', delete_sort_product_sort_path(@sort, product_sort), remote: true, class: "badge badge-primary" %>
     </div>
   </div>
 <% end %>
 <div class="d-flex justify-content-between mt-2">
-  <div><%= link_to '新建', new_product_sort_path, class: "btn btn-primary btn-sm" %></div>
+  <div>
+    <%= link_to '商品分类', sorts_path, class: "btn btn-primary btn-sm" %>
+    <%= link_to '新建', new_sort_product_sort_path(@sort), class: "btn btn-primary btn-sm" %>
+  </div>
   <div><%= paginate @product_sorts %></div>
 </div>
 <%= render 'shared/confirm_modal' %>

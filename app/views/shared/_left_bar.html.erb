@@ -60,10 +60,15 @@
           <% end -%> 
           <% if current_user.has_roles?(:product) %>
             <li class="nav-item">
-              <%= link_to "商品分类", product_sorts_path, class: "nav-link #{ (controller_name == 'product_sorts') ? 'active' : '' }" %>
+              <%= link_to "商品分类", sorts_path, class: "nav-link #{ ((controller_name == 'sorts')||(controller_name == 'product_sorts')) ? 'active' : '' }" %>
             </li>
             <li class="nav-item">
-              <%= link_to "商品管理", products_path, class: "nav-link #{ ((/product/ =~ controller_name)&&(controller_name != 'product_sorts')) ? 'active' : '' }" %>
+              <%= link_to "商品管理", products_path, class: "nav-link #{ ((controller_name == 'products')||(controller_name == 'product_images')||(controller_name == 'product_details')) ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
+          <% if current_user.has_roles?(:product_home) %>
+            <li class="nav-item">
+              <%= link_to "首页商品", product_homes_path, class: "nav-link #{ (controller_name == 'product_homes') ? 'active' : '' }" %>
             </li>
           <% end -%> 
           <% if current_user.has_roles?(:affair) %>

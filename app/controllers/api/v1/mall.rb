@@ -65,27 +65,27 @@ module API
 
       desc 'find product sorts'
       get '/product_sorts' do
-        @product_sorts = @user.product_sorts.where(reveal: true).order(order: :asc)
-        product_sorts = present @product_sorts, with: API::Entities::ProductSort
-        build_response code: 0, data: product_sorts
+        @sorts = @user.sorts.where(reveal: true).order(order: :asc)
+        sorts = present @sorts, with: API::Entities::Sort
+        build_response code: 0, data: sorts
       end
 
       desc 'find first produc_sort products'
       get '/product_sorts/first' do
-        if @product_sort = @user.product_sorts.where(reveal: true).first
-          @products = @product_sort.products.where(reveal: true).order(order: :asc)
+        if @sort = @user.sorts.where(reveal: true).first
+          @products = @sort.products.where(reveal: true).order(order: :asc)
           products = present @products, with: API::Entities::Product
           build_response code: 0, data: products
         else
-          product_sort = present @product_sort, with: API::Entities::ProductSort
-          build_response code: 0, data: product_sort
+          sort = present @sort, with: API::Entities::Sort
+          build_response code: 0, data: sort
         end
       end 
 
       desc 'find specific produc_sort products'
       get '/product_sorts/:id' do
-        @product_sort = @user.product_sorts.where(reveal: true).find(params[:id])
-        @products = @product_sort.products.where(reveal: true).order(order: :asc)
+        @sort = @user.sorts.where(reveal: true).find(params[:id])
+        @products = @sort.products.where(reveal: true).order(order: :asc)
         products = present @products, with: API::Entities::Product
         build_response code: 0, data: products
       end

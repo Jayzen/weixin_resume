@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_081431) do
+ActiveRecord::Schema.define(version: 2019_07_09_030533) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -398,12 +398,15 @@ ActiveRecord::Schema.define(version: 2019_07_08_081431) do
   end
 
   create_table "product_sorts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.integer "order", default: 0
+    t.integer "product_id"
+    t.integer "sort_id"
     t.integer "user_id"
-    t.boolean "reveal"
+    t.integer "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_sorts_on_product_id"
+    t.index ["sort_id", "product_id"], name: "index_product_sorts_on_sort_id_and_product_id", unique: true
+    t.index ["sort_id"], name: "index_product_sorts_on_sort_id"
     t.index ["user_id"], name: "index_product_sorts_on_user_id"
   end
 
@@ -427,11 +430,9 @@ ActiveRecord::Schema.define(version: 2019_07_08_081431) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "product_sort_id"
     t.decimal "current_price", precision: 5, scale: 2
     t.decimal "old_price", precision: 5, scale: 2
     t.integer "stock"
-    t.index ["product_sort_id"], name: "index_products_on_product_sort_id"
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
@@ -446,6 +447,16 @@ ActiveRecord::Schema.define(version: 2019_07_08_081431) do
     t.datetime "updated_at", null: false
     t.index ["photograph_id"], name: "index_recents_on_photograph_id"
     t.index ["user_id"], name: "index_recents_on_user_id"
+  end
+
+  create_table "sorts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.integer "order", default: 0
+    t.boolean "reveal"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sorts_on_user_id"
   end
 
   create_table "states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

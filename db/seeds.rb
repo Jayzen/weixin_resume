@@ -12,5 +12,5 @@
 #@user.roles = [:contact, :home_photograph, :tap_sort, :tap_photograph, :state, :official_account, :wedding_basic, :location, :tap_carousel, :tap_carousel_photograph, :menu, :movie, :top]
 #@user.save
 @user = User.find_by(email: "mall@demo.com")
-@user.roles = [:affair, :location, :independent_carousel, :product, :merchant_image, :merchant_basic, :hot_word]
+@user.roles = [:affair, :location, :independent_carousel, :product, :merchant_image, :merchant_basic, :hot_word, :product_home]
 @user.save
