@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   mount_uploader :pic, ImageUploader
   has_many :product_images, dependent: :destroy
   has_many :product_details, dependent: :destroy
+  has_many :product_attributes, dependent: :destroy
   has_many :affairs, dependent: :destroy
   belongs_to :user
   
@@ -12,6 +13,7 @@ class Product < ApplicationRecord
   has_many :sorts, through: :product_sorts
 
   has_one :product_home, dependent: :destroy
+  has_one :banner_item, dependent: :destroy
 
   module Status
     On = true

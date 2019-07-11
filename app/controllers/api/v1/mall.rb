@@ -22,14 +22,6 @@ module API
         build_response code: 0, data: basic
       end
 
-      desc 'find home products'
-      get '/home_products' do
-        @ids = @user.product_homes.includes(:product).where(reveal: true).order(order: :asc).pluck(:product_id)
-        @products = @user.products.find(@ids)
-        products = present @products, with: API::Entities::Product
-        build_response code: 0, data: products
-      end
-
       desc 'find products'
       get '/products' do
         @products = @user.products.where(reveal: true).order(order: :asc)
@@ -59,35 +51,8 @@ module API
       desc 'find specific product'
       get 'products/:id' do
         @product = @user.products.includes(:product_images, :product_details).find(params[:id])
-        product = present @product, with: API::Entities::Product
+        product = present @product, with: API::Entities::ProductDetail
         build_response code: 0, data: product
-      end
-
-      desc 'find product sorts'
-      get '/product_sorts' do
-        @sorts = @user.sorts.where(reveal: true).order(order: :asc)
-        sorts = present @sorts, with: API::Entities::Sort
-        build_response code: 0, data: sorts
-      end
-
-      desc 'find first produc_sort products'
-      get '/product_sorts/first' do
-        if @sort = @user.sorts.where(reveal: true).first
-          @products = @sort.products.where(reveal: true).order(order: :asc)
-          products = present @products, with: API::Entities::Product
-          build_response code: 0, data: products
-        else
-          sort = present @sort, with: API::Entities::Sort
-          build_response code: 0, data: sort
-        end
-      end 
-
-      desc 'find specific produc_sort products'
-      get '/product_sorts/:id' do
-        @sort = @user.sorts.where(reveal: true).find(params[:id])
-        @products = @sort.products.where(reveal: true).order(order: :asc)
-        products = present @products, with: API::Entities::Product
-        build_response code: 0, data: products
       end
 
       desc 'find all keywords'

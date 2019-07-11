@@ -1,8 +1,9 @@
 class BannerItemsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_products, only: [:create, :new, :edit, :update]
   before_action :set_banner
   before_action :set_banner_item, only: [:show, :edit, :update, :destroy, :delete]
-  #access banner: :all, message: "当前用户无权访问"
+  access banner: :all, message: "当前用户无权访问"
 
   def index
     @banner_items = @banner.banner_items.order(order: :desc).page(params[:page])
@@ -56,6 +57,10 @@ class BannerItemsController < ApplicationController
     end
 
     def banner_item_params
-      params.require(:banner_item).permit(:name, :pic, :user_id, :order, :reveal)
+      params.require(:banner_item).permit(:name, :pic, :user_id, :order, :reveal, :product_id)
+    end
+
+    def set_products
+      @products = current_user.products
     end
 end

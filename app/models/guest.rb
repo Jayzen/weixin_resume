@@ -1,6 +1,8 @@
 require 'net/http'
 
 class Guest < ApplicationRecord
+  belongs_to :user
+  
   has_many :comments, dependent: :destroy
   has_many :affair_comments, dependent: :destroy
 

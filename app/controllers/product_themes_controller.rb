@@ -3,7 +3,7 @@ class ProductThemesController < ApplicationController
   before_action :set_theme
   before_action :set_products, only: [:new, :create]
   before_action :set_product_theme, only: [:destroy, :delete]
-  #access theme: :all, message: "当前用户无权访问"
+  access theme: :all, message: "当前用户无权访问"
 
   def index
     @product_themes = @theme.product_themes.includes(:product).order(order: :desc).page(params[:page])

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_030533) do
+ActiveRecord::Schema.define(version: 2019_07_11_062749) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -89,7 +89,9 @@ ActiveRecord::Schema.define(version: 2019_07_09_030533) do
     t.boolean "reveal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "product_id"
     t.index ["banner_id"], name: "index_banner_items_on_banner_id"
+    t.index ["product_id"], name: "index_banner_items_on_product_id"
     t.index ["user_id"], name: "index_banner_items_on_user_id"
   end
 
@@ -185,6 +187,8 @@ ActiveRecord::Schema.define(version: 2019_07_09_030533) do
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_guests_on_user_id"
   end
 
   create_table "home_photograph_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -360,6 +364,19 @@ ActiveRecord::Schema.define(version: 2019_07_09_030533) do
     t.index ["user_id"], name: "index_photographs_on_user_id"
   end
 
+  create_table "product_attributes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "content"
+    t.integer "order", default: 0
+    t.boolean "reveal"
+    t.integer "product_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_attributes_on_product_id"
+    t.index ["user_id"], name: "index_product_attributes_on_user_id"
+  end
+
   create_table "product_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "pic"
@@ -456,6 +473,7 @@ ActiveRecord::Schema.define(version: 2019_07_09_030533) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pic"
     t.index ["user_id"], name: "index_sorts_on_user_id"
   end
 

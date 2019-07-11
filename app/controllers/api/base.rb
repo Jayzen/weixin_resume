@@ -18,12 +18,15 @@ module API
     mount V1::Common::AffairComment
     mount V1::Common::OfficialAccount
     mount V1::Common::Pay
+    mount V1::Common::HomeProduct
+    mount V1::Common::Sort
 
     mount V1::Wedding
     mount V1::WeddingTwo
     mount V1::Resume
     mount V1::Workshop
     mount V1::Mall
+    mount V1::MallTwo
 
     add_swagger_documentation(
       info: {

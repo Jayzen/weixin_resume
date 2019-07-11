@@ -2,7 +2,7 @@ class SortsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_sort, only: [:show, :edit, :update, :destroy, :delete]
   before_action :set_sorts, only: [:index]
-  #access product: :all, message: "当前用户无权访问"
+  access product: :all, message: "当前用户无权访问"
 
   def index
   end
@@ -52,7 +52,7 @@ class SortsController < ApplicationController
     end
 
     def sort_params
-      params.require(:sort).permit(:name, :reveal, :order)
+      params.require(:sort).permit(:name, :reveal, :order, :pic)
     end
 
     def set_sorts

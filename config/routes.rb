@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     get 'delete', on: :member
   end
 
+  resources :guests do
+    get 'delete', on: :member
+  end
+
   resources :tops do
     get 'set_weight', on: :member
     get 'delete', on: :member
@@ -53,6 +57,9 @@ Rails.application.routes.draw do
       get 'delete', on: :member
     end
     resources :product_details do
+      get 'delete', on: :member
+    end
+    resources :product_attributes do
       get 'delete', on: :member
     end
   end

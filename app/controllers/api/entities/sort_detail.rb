@@ -1,18 +1,11 @@
 module API
   module Entities
-    class ProductDetail < Grape::Entity
+    class SortDetail < Grape::Entity
       expose :id
       expose :name
-      expose :description
       expose :pic
-      expose :current_price
-      expose :old_price
-      expose :stock
-      expose :product_images, using: API::Entities::ProductImage
-      expose :product_attributes, using: API::Entities::ProductAttribute
-      expose :product_details, using: API::Entities::ProductDetails
-     
-
+      expose :products, using: API::Entities::Product
+    
       private
         def pic
           if Rails.env == "production"
@@ -20,7 +13,7 @@ module API
           else
             link = Rails.application.credentials.de_base_url + object.pic.url.to_s
           end
-        end 
+        end
     end
   end
 end

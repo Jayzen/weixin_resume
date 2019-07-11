@@ -3,6 +3,8 @@ class Sort < ApplicationRecord
   has_many :product_sorts, dependent: :destroy
   has_many :products, through: :product_sorts
 
+  mount_uploader :pic, ImageUploader
+
   module Status
     On = true
     Off = false

@@ -13,6 +13,7 @@
       <%= link_to '查看', product_path(product), class: "badge badge-primary"%>
       <%= link_to '轮播照片', product_product_images_path(product), class: "badge badge-primary" %>
       <%= link_to '产品详情', product_product_details_path(product), class: "badge badge-primary" %>
+      <%= link_to '产品属性', product_product_attributes_path(product), class: "badge badge-primary" %>
       <%= link_to '编辑', edit_product_path(product), class: "badge badge-primary"%>
       <%= link_to '删除', delete_product_path(product), remote: true, class: "badge badge-primary" %>
     </div>

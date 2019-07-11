@@ -43,6 +43,11 @@
               <%= link_to "评论管理", comments_path, class: "nav-link #{ (controller_name == 'comments') ? 'active' : '' }" %>
             </li>
           <% end -%>
+          <% if current_user.has_roles?(:banner) %>
+            <li class="nav-item">
+              <%= link_to "轮播分类", banners_path, class: "nav-link #{ ((controller_name == 'banners')||(controller_name == 'banner_items')) ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:carousel) %>
             <li class="nav-item">
               <%= link_to "轮播图", carousels_path, class: "nav-link #{ (controller_name == 'carousels') ? 'active' : '' }" %>
@@ -69,6 +74,11 @@
           <% if current_user.has_roles?(:product_home) %>
             <li class="nav-item">
               <%= link_to "首页商品", product_homes_path, class: "nav-link #{ (controller_name == 'product_homes') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
+          <% if current_user.has_roles?(:theme) %>
+            <li class="nav-item">
+              <%= link_to "主题商品", themes_path, class: "nav-link #{ (controller_name == 'themes') ? 'active' : '' }" %>
             </li>
           <% end -%> 
           <% if current_user.has_roles?(:affair) %>
@@ -151,7 +161,12 @@
             <li class="nav-item">
               <%= link_to "热词设置", hot_words_path, class: "nav-link #{ (controller_name == 'hot_words') ? 'active' : '' }" %>
             </li>
-          <% end -%> 
+        <% end -%> 
+        <% if current_user.has_roles?(:guest) %>
+            <li class="nav-item">
+              <%= link_to "客户管理", guests_path, class: "nav-link #{ (controller_name == 'guests') ? 'active' : '' }" %>
+            </li>
+        <% end -%> 
         <li class="nav-item">
           <%= link_to "修改密码", edit_user_registration_path, class: "nav-link #{ ((controller_name == 'registrations')&&(action_name=="edit")) ? 'active' : '' }" %>
         </li>

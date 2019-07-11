@@ -3,7 +3,7 @@ class ProductSortsController < ApplicationController
   before_action :set_sort
   before_action :set_products, only: [:new, :create]
   before_action :set_product_sort, only: [:destroy, :delete]
-  #access sort: :all, message: "当前用户无权访问"
+  access product: :all, message: "当前用户无权访问"
 
   def index
     @product_sorts = @sort.product_sorts.includes(:product).order(order: :desc).page(params[:page])

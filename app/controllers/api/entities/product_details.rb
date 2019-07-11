@@ -1,9 +1,8 @@
 module API
   module Entities
-    class Sort < Grape::Entity
-      expose :id
-      expose :name
-      expose :id
+    class ProductDetails < Grape::Entity
+      expose :title
+      expose :pic
 
       private
         def pic
@@ -12,7 +11,7 @@ module API
           else
             link = Rails.application.credentials.de_base_url + object.pic.url.to_s
           end
-        end
+        end 
     end
   end
 end
