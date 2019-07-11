@@ -164,7 +164,7 @@
         <% end -%> 
         <% if current_user.has_roles?(:guest) %>
             <li class="nav-item">
-              <%= link_to "客户管理", guests_path, class: "nav-link #{ (controller_name == 'guests') ? 'active' : '' }" %>
+              <%= link_to "客户管理", guests_path, class: "nav-link #{ ((controller_name == 'guests')||(controller_name == 'guest_comments')) ? 'active' : '' }" %>
             </li>
         <% end -%> 
         <li class="nav-item">

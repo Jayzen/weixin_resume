@@ -6,6 +6,7 @@
         <%= guest.nickname %>
       </div>
       <div>
+        <%= link_to '评论', guest_guest_comments_path(guest), class: "badge badge-primary" %>
         <%= link_to '删除', delete_guest_path(guest), remote: true, class: "badge badge-primary" %>
       </div>  
     </div>

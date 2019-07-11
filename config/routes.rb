@@ -23,6 +23,9 @@ Rails.application.routes.draw do
 
   resources :guests do
     get 'delete', on: :member
+    resources :guest_comments do
+      get 'delete', on: :member
+    end
   end
 
   resources :tops do

@@ -15,13 +15,13 @@ module API
           if openid_message["errcode"]
             error!({code: 1, message: 'opendid获取错误'})
           else
-            if @guest = Guest.find_by(openid: openid_message["openid"])
+            if @guest = @user.guests.find_by(openid: openid_message["openid"])
               guest_id = @guest.id
             else
-              @guest = Guest.create(openid: openid_message["openid"])
+              @guest = @user.guests.create(openid: openid_message["openid"])
               guest_id = @guest.id
             end
-            token = Guest.generate_token(32)
+            token = User.generate_token(32)
             cache(key: token, expires_in: 12.hours) do
               { openid_message: openid_message, guest_id: guest_id }
             end

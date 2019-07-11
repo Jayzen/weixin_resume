@@ -1,0 +1,16 @@
+<% @guest_comments.each_with_index do |guest_comment, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= guest_comment.content %>
+    </div>
+    <div>
+      <%= link_to '删除', delete_guest_guest_comment_path(@guest, guest_comment), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '客户列表', guests_path, class: "btn btn-primary btn-sm" %></div>
+  <div><%= paginate @guest_comments %></div>
+</div>
+<%= render 'shared/confirm_modal' %>
