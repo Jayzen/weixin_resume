@@ -1,0 +1,5 @@
+  <div class="d-flex justify-content-between">
+    <div><%= @guest_address.detail %></div>
+    <div><%= link_to '删除', delete_guest_guest_address_path(@guest), remote: true, class: "badge badge-primary" %></div>
+  </div>
+<%= render 'shared/confirm_modal' %>

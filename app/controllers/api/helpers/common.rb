@@ -21,13 +21,13 @@ module API
             end
           end
 
-          def create_or_update_user(user, user_id)
-            if user.user_address
-              user.user_address.update(name: params[:name], mobile: params[:mobile], province: params[:province], city: params[:city], country: params[:country], detail: params[:detail])
+          def create_or_update_guest_address(guest)
+            if guest.guest_address
+              guest.guest_address.update(name: params[:name], mobile: params[:mobile], province: params[:province], city: params[:city], country: params[:country], detail: params[:detail])
             else
-              user.create_user_address(name: params[:name], mobile: params[:mobile], province: params[:province], city: params[:city], country: params[:country], detail: params[:detail])
+              guest.create_guest_address(name: params[:name], mobile: params[:mobile], province: params[:province], city: params[:city], country: params[:country], detail: params[:detail])
             end
-            build_response code: 0, data: user.user_address
+            build_response code: 0, data: guest.guest_address
           end
 
           def validate_order(products, user_id)

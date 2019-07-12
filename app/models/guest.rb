@@ -1,6 +1,7 @@
 class Guest < ApplicationRecord
   belongs_to :user
-  
+  has_one :guest_address, dependent: :destroy
+
   has_many :comments, dependent: :destroy
   has_many :affair_comments, dependent: :destroy
 

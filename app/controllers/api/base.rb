@@ -20,6 +20,7 @@ module API
     mount V1::Common::Pay
     mount V1::Common::HomeProduct
     mount V1::Common::Sort
+    mount V1::Common::Address
 
     mount V1::Wedding
     mount V1::WeddingTwo
