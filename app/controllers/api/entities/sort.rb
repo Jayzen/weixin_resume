@@ -4,6 +4,7 @@ module API
       expose :id
       expose :name
       expose :id
+      expose :products, using: API::Entities::Product
 
       private
         def pic

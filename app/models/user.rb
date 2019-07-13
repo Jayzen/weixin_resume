@@ -65,6 +65,8 @@ class User < ApplicationRecord
   has_many :user_guests, dependent: :destroy
   has_many :guests, through: :user_guests
 
+  has_many :orders, dependent: :destroy
+   
   has_many :comments, dependent: :destroy
   has_many :carousels, dependent: :destroy
   has_many :tap_carousels, dependent: :destroy

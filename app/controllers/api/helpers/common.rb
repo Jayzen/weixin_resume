@@ -30,7 +30,7 @@ module API
             build_response code: 0, data: guest.guest_address
           end
 
-          def validate_order(products, user_id)
+          def validate_order(products, user)
              #查看库存是否满足要求
              order_product_ids = []
              #order_products是订单传递过来的数据, stock_products是数据库中查询的数据
@@ -39,7 +39,7 @@ module API
              products.each do |product|
                order_product_ids << product["product_id"]
              end
-             unless stock_products = Product.find(order_product_ids).pluck(:id, :stock)
+             unless stock_products = user.products.find(order_product_ids).pluck(:id, :stock)
                error!({code: 1, message: '不存在该商品'})
              end
              order_products.each_index do |index|
@@ -52,7 +52,7 @@ module API
              end
            end
 
-          def create_order(products, user_id)
+          def create_order(products, guest_id, user)
              #初始化参数
              order_product_ids = []
              order_products = products
@@ -61,7 +61,7 @@ module API
              end
 
              #创建订单
-             stock_products = Product.find(order_product_ids).pluck(:id, :price)
+             stock_products = user.products.find(order_product_ids).pluck(:id, :current_price)
              total_price = 0
              total_count = 0
 
@@ -76,18 +76,18 @@ module API
              end
 
              #获得订单地址
-             user_address = User.find(user_id).user_address
-             if user_address
+             guest_address = Guest.find(guest_id).guest_address
+             if guest_address
                #snap_address = user_address.province + user_address.city + user_address.country + user_address.detail
-               snap_address = user_address.to_json(except: [:id, :user_id, :created_at, :updated_at])
+               snap_address = guest_address.to_json(except: [:id, :user_id, :created_at, :updated_at])
              else
                error!({code: 1, message: '地址不存在'})
              end
 
              #获取snap_img和snap_name
-             product = Product.find(order_products[0]["product_id"])
+             product = user.products.find(order_products[0]["product_id"])
              if product
-               snap_img = product.image.link
+               snap_img = product.pic
                snap_name = product.name
                if order_products.size > 1
                  snap_name = product.name + "等"
@@ -98,10 +98,11 @@ module API
                error!({code: 1, message: '商品不存在'})
              end
 
+
              #获取order_no
              order_no  = User.generate_order_uuid
-
-             order = Order.create(user_id: user_id, total_price: total_price, total_count: total_count, snap_address: snap_address, snap_name: snap_name, snap_img: snap_img, order_no: order_no)
+             
+             order = user.orders.create(guest_id: guest_id, total_price: total_price, total_count: total_count, snap_address: snap_address, snap_name: snap_name, snap_img: snap_img, order_no: order_no)
              order_products.each do |product|
                order.order_products.create(product_id: product["product_id"], count: product["count"])
              end

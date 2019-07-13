@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_13_063024) do
+ActiveRecord::Schema.define(version: 2019_07_13_082857) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -357,6 +357,33 @@ ActiveRecord::Schema.define(version: 2019_07_13_063024) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_official_accounts_on_user_id"
+  end
+
+  create_table "order_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "product_id"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_products_on_order_id"
+    t.index ["product_id"], name: "index_order_products_on_product_id"
+  end
+
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "order_no"
+    t.integer "user_id"
+    t.integer "guest_id"
+    t.decimal "total_price", precision: 5, scale: 2
+    t.integer "total_count"
+    t.integer "status"
+    t.string "snap_img"
+    t.string "snap_name"
+    t.string "snap_items"
+    t.string "snap_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_orders_on_guest_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "photographs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

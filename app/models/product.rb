@@ -9,6 +9,9 @@ class Product < ApplicationRecord
   has_many :product_themes, dependent: :destroy
   has_many :themes, through: :product_themes
   
+  has_many :order_products, dependent: :destroy
+  has_many :orders
+
   has_many :product_sorts, dependent: :destroy
   has_many :sorts, through: :product_sorts
 

@@ -11,7 +11,7 @@ module API
 
         desc 'find product sorts'
         get '/product_sorts' do
-          @sorts = @user.sorts.where(reveal: true).order(order: :asc)
+          @sorts = @user.sorts.includes(:products).where(reveal: true).order(order: :asc)
           sorts = present @sorts, with: API::Entities::Sort
           build_response code: 0, data: sorts
         end 
