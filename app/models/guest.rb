@@ -3,6 +3,7 @@ class Guest < ApplicationRecord
   has_many :users, through: :user_guests
 
   has_one :guest_address, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   has_many :comments, dependent: :destroy
   has_many :affair_comments, dependent: :destroy

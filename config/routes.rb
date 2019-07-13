@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     resource :guest_address do
       get 'delete', on: :member
     end
+    resources :orders do
+      get 'delete', on: :member
+    end
   end
 
   resources :tops do
