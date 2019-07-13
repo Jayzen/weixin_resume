@@ -56,6 +56,6 @@ class SortsController < ApplicationController
     end
 
     def set_sorts
-      @sorts = current_user.sorts.page(params[:page])
+      @sorts = current_user.sorts.page(params[:page]).per(20)
     end
 end
