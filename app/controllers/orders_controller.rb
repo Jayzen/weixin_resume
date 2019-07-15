@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_guest
-  before_action :set_order, only: [:destroy, :deletei, :show]
+  before_action :set_order, only: [:destroy, :delete, :show]
   access guest: :all, message: "当前用户无权访问"
 
   def index
