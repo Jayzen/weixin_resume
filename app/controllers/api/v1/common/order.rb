@@ -24,11 +24,20 @@ module API
           create_order(params["products"], guest_id, @user)
         end
 
-        desc 'get guest order'
+        desc 'get guest orders'
         get '/orders' do
           cache = cache_value
           guest_id = cache["guest_id"]
           @orders = @user.guests.find(guest_id).orders.order(created_at: :desc)
+          orders = present @orders, with: API::Entities::Order
+          build_response code: 0, data: orders
+        end
+
+        desc 'get specific orders'
+        get '/order/:status' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @orders = @user.guests.find(guest_id).orders.where(status: params[:status]).order(created_at: :desc)
           orders = present @orders, with: API::Entities::Order
           build_response code: 0, data: orders
         end
