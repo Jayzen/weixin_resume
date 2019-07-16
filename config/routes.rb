@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'homes/index'
+  get 'welcomes/index'
   mount API::Base => '/api'
   mount GrapeSwaggerRails::Engine => '/api/doc' 
 

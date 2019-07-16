@@ -19,6 +19,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :trackable, :rememberable, :timeoutable
   
   mount_uploader :merchant, ImageUploader
+  mount_uploader :certificate, ImageUploader
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: { message: "名字不能为空" }
@@ -81,6 +82,16 @@ class User < ApplicationRecord
   has_many :tops, dependent: :destroy
   has_many :states, dependent: :destroy
 
+  alias certificate_new certificate
+
+  def certificate
+    if Rails.env == "production"
+      certificate = Rails.application.credentials.pr_base_url + self.certificate_new.url.to_s
+    else
+      certificate = Rails.application.credentials.de_base_url + self.certificate_new.url.to_s
+    end
+  end 
+  
   after_create :set_style, :generate_token, :create_default_basic, :create_default_location, :create_default_merchant_basic
 
   def set_style
@@ -210,6 +221,20 @@ class User < ApplicationRecord
   end
  
   def self.generate_order_uuid
-    Date.today.to_s.split('-').join()[2..-1] << generate_token(8).upcase
+    Date.today.to_s.split('-').join()[2..-1] << generate_token(26).upcase
+  end
+
+  def self.refund
+    @user = User.second
+    #WxPay.set_apiclient_by_pkcs12(@user.certificate, @user.merchant_id)
+    current_account = {appid: @user.app_id, mch_id: @user.merchant_id, key: @user.merchant_key}.freeze
+    weixin_params = {
+      out_refund_no: User.generate_order_uuid,
+      total_fee: 1,
+      refund_fee: 1,
+      op_user_id: nil,
+      out_trade_no: "1907166FIHS9LQJA831D13WZCDLPV33U"
+    } 
+    WxPay::Service.invoke_refund weixin_params, current_account.dup
   end
 end

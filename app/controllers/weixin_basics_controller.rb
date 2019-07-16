@@ -14,7 +14,8 @@ class WeixinBasicsController < ApplicationController
                         app_secret: params[:user][:app_secret], 
                         merchant: params[:user][:merchant],
                         merchant_key: params[:user][:merchant_key],
-                        merchant_id: params[:user][:merchant_id]
+                        merchant_id: params[:user][:merchant_id],
+                        certificate: params[:user][:certificate]
                        )
     flash[:success] = "更新成功"
     redirect_to weixin_basic_path
