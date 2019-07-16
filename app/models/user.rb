@@ -88,7 +88,7 @@ class User < ApplicationRecord
     if Rails.env == "production"
       certificate = Rails.application.credentials.pr_base_url + self.certificate_new.url.to_s
     else
-      certificate = Rails.application.credentials.de_base_url + self.certificate_new.url.to_s
+      certificate = "/Users/jayzen/workshop/weixin_resume/public" + self.certificate_new.url.to_s
     end
   end 
   
@@ -226,14 +226,15 @@ class User < ApplicationRecord
 
   def self.refund
     @user = User.second
-    #WxPay.set_apiclient_by_pkcs12(@user.certificate, @user.merchant_id)
-    current_account = {appid: @user.app_id, mch_id: @user.merchant_id, key: @user.merchant_key}.freeze
+    WxPay.set_apiclient_by_pkcs12(File.read(@user.certificate), @user.merchant_id)
+    options = {apiclient_cert: WxPay.apiclient_cert, ssl_client_key: WxPay.apiclient_key}
+    current_account = {appid: @user.app_id, mch_id: @user.merchant_id, key: @user.merchant_key}.merge(options).freeze
     weixin_params = {
       out_refund_no: User.generate_order_uuid,
       total_fee: 1,
       refund_fee: 1,
       op_user_id: nil,
-      out_trade_no: "1907166FIHS9LQJA831D13WZCDLPV33U"
+      out_trade_no: "190716CBRYZSHKWWR85UNN8UKZZFWAST"
     } 
     WxPay::Service.invoke_refund weixin_params, current_account.dup
   end
