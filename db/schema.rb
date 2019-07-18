@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_16_081749) do
+ActiveRecord::Schema.define(version: 2019_07_18_171127) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -57,14 +57,25 @@ ActiveRecord::Schema.define(version: 2019_07_16_081749) do
     t.index ["user_id"], name: "index_affair_images_on_user_id"
   end
 
+  create_table "affair_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "guest_id"
+    t.integer "affair_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["affair_id"], name: "index_affair_likes_on_affair_id"
+    t.index ["guest_id"], name: "index_affair_likes_on_guest_id"
+  end
+
   create_table "affairs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
     t.integer "user_id"
     t.integer "order", default: 0
     t.boolean "reveal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "product_id"
+    t.text "content"
+    t.integer "affair_comments_count", default: 0
+    t.integer "affair_likes_count", default: 0
     t.index ["product_id"], name: "index_affairs_on_product_id"
     t.index ["user_id"], name: "index_affairs_on_user_id"
   end

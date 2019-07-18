@@ -15,7 +15,6 @@ module API
     mount V1::Common::Recent
     mount V1::Common::HomePhotographCategory
     mount V1::Common::Affair
-    mount V1::Common::AffairComment
     mount V1::Common::OfficialAccount
     mount V1::Common::Pay
     mount V1::Common::HomeProduct

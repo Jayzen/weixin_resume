@@ -1,6 +1,6 @@
 class AffairComment < ApplicationRecord
   belongs_to :guest
-  belongs_to :affair
+  belongs_to :affair, counter_cache: true
 
   module Status
     On = true

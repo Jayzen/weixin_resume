@@ -1,8 +1,7 @@
 module API
   module Entities
-    class AffairComment < Grape::Entity
+    class AffairLike < Grape::Entity
       expose :id
-      expose :content
       expose :guest, using: API::Entities::Guest
     end
   end

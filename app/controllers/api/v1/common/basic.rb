@@ -14,6 +14,13 @@ module API
           basic = present @basic, with: API::Entities::Basic
           build_response code: 0, data: basic
         end
+
+        desc 'find affair basic'
+        get '/affair_basic' do
+          validate_appkey
+          @basic = @user.merchant_basic
+          basic = present @basic, with: API::Entities::AffairBasic
+        end
       end
     end
   end

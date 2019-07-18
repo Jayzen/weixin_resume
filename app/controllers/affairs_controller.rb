@@ -54,7 +54,7 @@ class AffairsController < ApplicationController
     end
 
     def affair_params
-      params.require(:affair).permit(:name, :reveal, :order, :product_id)
+      params.require(:affair).permit(:content, :reveal, :order, :product_id)
     end
     
     def set_affairs
