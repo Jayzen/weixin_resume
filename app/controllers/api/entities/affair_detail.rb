@@ -1,6 +1,6 @@
 module API
   module Entities
-    class Affair < Grape::Entity
+    class AffairDetail < Grape::Entity
       expose :id
       expose :content
       expose :updated_at
@@ -10,7 +10,7 @@ module API
       expose :affair_images, using: API::Entities::AffairImage
       expose :affair_comments, using: API::Entities::AffairComment
       expose :affair_likes, using: API::Entities::AffairLike
-      expose :product, using: API::Entities::ProductAffair
+      expose :affair_shares, using: API::Entities::AffairShare
 
       private
         def updated_at

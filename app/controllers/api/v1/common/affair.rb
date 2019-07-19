@@ -45,7 +45,7 @@ module API
         get '/affair/:id' do
           validate_appkey
           @affair = @user.affairs.includes(:affair_images, [affair_comments: :guest], :guests, :product).where(reveal: true).find(params[:id])
-          affair = present @affair, with: API::Entities::Affair
+          affair = present @affair, with: API::Entities::AffairDetail
           build_response code: 0, data: affair
         end
 
@@ -71,6 +71,22 @@ module API
             guest_id = JSON.parse(token)["guest_id"]
             @affair_like = Guest.find(guest_id).affair_likes.find_by(affair_id: params[:id])
             @affair_like.destroy
+          else
+            error!({code: 102, error: "不存在token"})
+          end
+        end
+
+        desc 'create affair share'
+        params do
+          requires :affair_id, type: Integer
+        end
+        post '/affair_share' do
+          if token = Rails.cache.fetch(request.headers["Token"])
+            guest_id = JSON.parse(token)["guest_id"]
+            @affair_share = ::AffairShare.create(guest_id: guest_id, affair_id: params[:affair_id])
+            if @affair_share.errors.messages.size != 0
+              error!({code: 102, error:  @affair_share.errors.messages.values.flatten.first})
+            end
           else
             error!({code: 102, error: "不存在token"})
           end

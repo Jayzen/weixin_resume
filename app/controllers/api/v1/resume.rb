@@ -11,7 +11,7 @@ module API
       post '/guest/update' do
         if token = Rails.cache.fetch(params[:token])
           guest_id = JSON.parse(token)["guest_id"]
-          Guest.find(guest_id).update(nickname: params[:nickname], avatar: params[:avatar])
+          Guest.find(guest_id).update(nickname: params[:nickname], avatar: params[:avatar], gender: params[:gender])
         end
       end
 

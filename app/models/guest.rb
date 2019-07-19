@@ -8,6 +8,7 @@ class Guest < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :affair_comments, dependent: :destroy
   has_many :affair_likes, dependent: :destroy
+  has_many :affair_shares, dependent: :destroy
 
   #like relationshipls
   has_many :like_affairs, dependent: :destroy

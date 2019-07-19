@@ -7,7 +7,5 @@ class AffairComment < ApplicationRecord
     Off = false
   end
 
-  #default_scope { order(created_at: :desc).where(reveal: true) }
-
   validates :content, presence: { message: "内容不能为空" }
 end
