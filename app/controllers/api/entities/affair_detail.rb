@@ -11,7 +11,7 @@ module API
       expose :affair_comments, using: API::Entities::AffairComment
       expose :affair_likes, using: API::Entities::AffairLike
       expose :affair_shares, using: API::Entities::AffairShare
-      expose :product, using: API::Entities::ProductiAffair
+      expose :product, using: API::Entities::ProductAffair
 
       private
         def updated_at
