@@ -22,38 +22,12 @@ module API
         build_response code: 0, data: basic
       end
 
-      desc 'find products'
-      get '/products' do
-        @products = @user.products.where(reveal: true).order(order: :asc)
-        products = present @products, with: API::Entities::Product
-        #build_response code: 0, data: products
-      end 
-
-      desc 'search products'
-      get '/products/search?' do
-        name = params["q"].strip
-        start = params["start"].to_i || 0
-        @return_products = @user.products.where(["name like ?", "%#{name}%"]).where(reveal: true).order(order: :asc)
-        @total = @return_products.size
-        @products = @return_products.limit(20).offset(start)
-        products = present @products, with: API::Entities::Product
-        #products = present @products, with: API::Entities::Product
-        #build_response code: 0, data: products
-      end
-
       desc 'find home images'
       get '/merchant_images' do
         @merchant_images = @user.merchant_images.where(reveal: true).order(order: :asc)
         merchant_images = present @merchant_images, with: API::Entities::MerchantImage
         build_response code: 0, data: merchant_images
       end 
-
-      desc 'find specific product'
-      get 'products/:id' do
-        @product = @user.products.includes(:product_images, :product_details).find(params[:id])
-        product = present @product, with: API::Entities::ProductDetail
-        build_response code: 0, data: product
-      end
 
       desc 'find all keywords'
       get '/hot_words' do

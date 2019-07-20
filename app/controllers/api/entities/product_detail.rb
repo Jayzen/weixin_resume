@@ -8,10 +8,13 @@ module API
       expose :current_price
       expose :old_price
       expose :stock
+      expose :product_comments_count
+      expose :product_likes_count
       expose :product_images, using: API::Entities::ProductImage
       expose :product_attributes, using: API::Entities::ProductAttribute
       expose :product_details, using: API::Entities::ProductDetails
-     
+      expose :product_comments, using: API::Entities::ProductComment
+      expose :product_likes, using: API::Entities::ProductLike
 
       private
         def pic

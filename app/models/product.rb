@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   has_many :product_details, dependent: :destroy
   has_many :product_attributes, dependent: :destroy
   has_many :affairs, dependent: :destroy
+  has_many :product_comments, dependent: :destroy
+  has_many :product_likes, dependent: :destroy
   belongs_to :user
   
   has_many :product_themes, dependent: :destroy
@@ -28,4 +30,13 @@ class Product < ApplicationRecord
   validates :pic, presence: { message: "照片不能为空" }
   validates :current_price, presence: { message: "优惠后价格不能为空" }
   validates :old_price, presence: { message: "优惠前价格不能为空" }
+
+  #alias alias_current_price current_price
+  #alias alias_old_price old_price
+
+  #def current_price
+  #  if alias_current_price.to_s.split(".").last == "0"
+  #    return alias_current_price.to_s.split(".").first
+  #  end
+  #end
 end

@@ -21,6 +21,7 @@ module API
     mount V1::Common::Sort
     mount V1::Common::Address
     mount V1::Common::Order
+    mount V1::Common::Product
 
     mount V1::Wedding
     mount V1::WeddingTwo

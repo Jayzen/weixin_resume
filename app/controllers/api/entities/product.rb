@@ -16,7 +16,7 @@ module API
           else
             link = Rails.application.credentials.de_base_url + object.pic.url.to_s
           end
-        end 
+        end
     end
   end
 end

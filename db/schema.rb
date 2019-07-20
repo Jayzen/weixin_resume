@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_19_085249) do
+ActiveRecord::Schema.define(version: 2019_07_20_091725) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -439,6 +439,17 @@ ActiveRecord::Schema.define(version: 2019_07_19_085249) do
     t.index ["user_id"], name: "index_product_attributes_on_user_id"
   end
 
+  create_table "product_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "content"
+    t.integer "guest_id"
+    t.integer "product_id"
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_product_comments_on_guest_id"
+    t.index ["product_id"], name: "index_product_comments_on_product_id"
+  end
+
   create_table "product_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "pic"
@@ -474,6 +485,15 @@ ActiveRecord::Schema.define(version: 2019_07_19_085249) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_images_on_product_id"
     t.index ["user_id"], name: "index_product_images_on_user_id"
+  end
+
+  create_table "product_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "guest_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_product_likes_on_guest_id"
+    t.index ["product_id"], name: "index_product_likes_on_product_id"
   end
 
   create_table "product_sorts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -512,6 +532,8 @@ ActiveRecord::Schema.define(version: 2019_07_19_085249) do
     t.decimal "current_price", precision: 5, scale: 2
     t.decimal "old_price", precision: 5, scale: 2
     t.integer "stock"
+    t.integer "product_comments_count", default: 0
+    t.integer "product_likes_count", default: 0
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 
