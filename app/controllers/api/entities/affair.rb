@@ -11,6 +11,11 @@ module API
       expose :affair_comments, using: API::Entities::AffairComment
       expose :affair_likes, using: API::Entities::AffairLike
       expose :product, using: API::Entities::ProductAffair
+    
+      private
+        def updated_at
+          updated_at = object.updated_at.strftime("%F %H:%M")
+        end 
     end
   end
 end
