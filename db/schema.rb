@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_035649) do
+ActiveRecord::Schema.define(version: 2019_07_21_062026) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -224,7 +224,7 @@ ActiveRecord::Schema.define(version: 2019_07_21_035649) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "gender"
-    t.integer "product_reserves_count", default: 0
+    t.integer "product_keeps_count"
     t.index ["user_id"], name: "index_guests_on_user_id"
   end
 
@@ -489,6 +489,15 @@ ActiveRecord::Schema.define(version: 2019_07_21_035649) do
     t.index ["user_id"], name: "index_product_images_on_user_id"
   end
 
+  create_table "product_keeps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "guest_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_product_keeps_on_guest_id"
+    t.index ["product_id"], name: "index_product_keeps_on_product_id"
+  end
+
   create_table "product_likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "guest_id"
     t.integer "product_id"
@@ -496,15 +505,6 @@ ActiveRecord::Schema.define(version: 2019_07_21_035649) do
     t.datetime "updated_at", null: false
     t.index ["guest_id"], name: "index_product_likes_on_guest_id"
     t.index ["product_id"], name: "index_product_likes_on_product_id"
-  end
-
-  create_table "product_reserves", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "guest_id"
-    t.integer "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["guest_id"], name: "index_product_reserves_on_guest_id"
-    t.index ["product_id"], name: "index_product_reserves_on_product_id"
   end
 
   create_table "product_sorts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

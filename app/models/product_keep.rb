@@ -1,4 +1,4 @@
-class ProductReserve < ApplicationRecord
+class ProductKeep < ApplicationRecord
   belongs_to :product
   belongs_to :guest 
 end

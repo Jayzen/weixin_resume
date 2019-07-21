@@ -98,52 +98,51 @@ module API
           end
         end
 
-        desc 'create product reserve'
+        desc 'create product keep'
         params do
           requires :product_id, type: Integer
         end
-        post '/product_reserve' do
+        post '/product_keep' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            @product_reserve = ::ProductReserve.create(guest_id: guest_id, product_id: params[:product_id])
-            if @product_reserve.errors.messages.size != 0
-              error!({code: 102, error:  @product_reserve.errors.messages.values.flatten.first})
+            @product_keep = ::ProductKeep.create(guest_id: guest_id, product_id: params[:product_id])
+            if @product_keep.errors.messages.size != 0
+              error!({code: 102, error:  @product_keep.errors.messages.values.flatten.first})
             end
           else
             error!({code: 102, error: "不存在token"})
           end
         end
 
-        desc 'delete product reserve'
-        delete '/product_reserve/:id' do
+        desc 'delete product keep'
+        delete '/product_keep/:id' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            @product_reserve = Guest.find(guest_id).product_reserves.find_by(product_id: params[:id])
-            @product_reserve.destroy
+            @product_keep = Guest.find(guest_id).product_keeps.find_by(product_id: params[:id])
+            @product_keep.destroy
           else
             error!({code: 102, error: "不存在token"})
           end
         end
 
-        desc 'judge reserve status'
-        get '/product_judge_reserve/:id' do
+        desc 'judge keep status'
+        get '/product_judge_keep/:id' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            debugger
-            reserve_status = ::Guest.find(guest_id).product_reserves.pluck(:product_id).include?(params[:id].to_i)
-            build_response code: 0, data: reserve_status
+            keep_status = Guest.find(guest_id).product_keeps.pluck(:product_id).include?(params[:id].to_i)
+            build_response code: 0, data: keep_status
           else
             error!({code: 102, error: "不存在token"})
           end
         end
 
-        desc 'find guest reserve products'
-        get '/guest_reserve_products' do
+        desc 'find guest keep products'
+        get '/guest_keep_products' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            product_ids = Guest.find(guest_id).product_reserves.pluck(:product_id)
-            @reserve_products = Product.find(product_ids) 
-            reserve_products = present @reserve_products, with: API::Entities::Product
+            product_ids = Guest.find(guest_id).product_keeps.pluck(:product_id)
+            @keep_products = ::Product.find(product_ids) 
+            keep_products = present @keep_products, with: API::Entities::Product
           else
             error!({code: 102, error: "不存在token"})
           end
