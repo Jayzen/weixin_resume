@@ -4,6 +4,7 @@ module API
       expose :id
       expose :content
       expose :updated_at
+      expose :view
       expose :affair_comments_count
       expose :affair_likes_count
       expose :affair_shares_count

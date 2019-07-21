@@ -45,6 +45,8 @@ module API
         get '/affair/:id' do
           validate_appkey
           @affair = @user.affairs.includes(:affair_images, [affair_comments: :guest], :guests, :product).where(reveal: true).find(params[:id])
+          @affair.view = @affair.view + 1
+          @affair.save
           affair = present @affair, with: API::Entities::AffairDetail
           build_response code: 0, data: affair
         end
