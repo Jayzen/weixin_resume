@@ -6,6 +6,8 @@ class Product < ApplicationRecord
   has_many :affairs, dependent: :destroy
   has_many :product_comments, dependent: :destroy
   has_many :product_likes, dependent: :destroy
+  has_many :product_reserves, dependent: :destroy
+
   belongs_to :user
   
   has_many :product_themes, dependent: :destroy
