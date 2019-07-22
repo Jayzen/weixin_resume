@@ -104,6 +104,26 @@ module API
             error!({code: 102, error: "不存在token"})
           end
         end
+
+        desc 'judge like status'
+        get '/judge_likes' do
+          if token = Rails.cache.fetch(request.headers["Token"])
+            validate_appkey
+            @affairs = @user.affairs.includes(:affair_likes).order(order: :desc)
+            @guest_id = JSON.parse(token)["guest_id"]
+            likes_status = []
+            @affairs.each do |affair|
+              if affair.affair_likes.pluck(:guest_id).include?(@guest_id)
+                likes_status << true
+              else
+                likes_status << false
+              end
+            end
+            build_response code: 0, data: likes_status
+          else
+            error!({code: 102, error: "不存在token"})
+          end
+        end
       end
     end
   end
