@@ -40,6 +40,14 @@ module API
             {isValid: false}
           end
         end
+
+        desc 'get access_token'
+        get '/access_token/achieve' do
+          validate_appkey
+          uri = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=#{@user.app_id}&secret=#{@user.app_secret}"
+          response = Net::HTTP.get(URI(uri))
+          name = ActiveSupport::JSON.decode(response)
+        end
       end
     end
   end
