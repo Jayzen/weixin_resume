@@ -99,10 +99,11 @@ module API
              end
 
 
-             #获取order_no
-             order_no  = User.generate_order_uuid
-             
-             order = user.orders.create(guest_id: guest_id, total_price: total_price, total_count: total_count, snap_address: snap_address, snap_name: snap_name, snap_img: snap_img, order_no: order_no)
+             #获取order_no和after_no
+             order_no = User.generate_order_uuid
+             after_no = User.generate_after_uuid
+
+             order = user.orders.create(guest_id: guest_id, total_price: total_price, total_count: total_count, snap_address: snap_address, snap_name: snap_name, snap_img: snap_img, order_no: order_no, after_no: after_no)
              order_products.each do |product|
                order.order_products.create(product_id: product["product_id"], count: product["count"])
              end

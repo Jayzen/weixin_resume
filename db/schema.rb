@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_21_062026) do
+ActiveRecord::Schema.define(version: 2019_07_24_063921) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -399,13 +399,15 @@ ActiveRecord::Schema.define(version: 2019_07_21_062026) do
     t.integer "guest_id"
     t.decimal "total_price", precision: 5, scale: 2
     t.integer "total_count"
-    t.integer "status"
+    t.integer "status", default: 0
     t.string "snap_img"
     t.string "snap_name"
     t.string "snap_items"
     t.string "snap_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "after_no"
+    t.integer "after_status", default: 0
     t.index ["guest_id"], name: "index_orders_on_guest_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

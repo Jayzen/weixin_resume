@@ -224,6 +224,10 @@ class User < ApplicationRecord
     Date.today.to_s.split('-').join()[2..-1] << generate_token(26).upcase
   end
 
+  def self.generate_after_uuid
+    Date.today.to_s.split('-').join()[2..-1] << generate_token(8).upcase
+  end
+
   def self.refund
     @user = User.second
     WxPay.set_apiclient_by_pkcs12(File.read(@user.certificate), @user.merchant_id)

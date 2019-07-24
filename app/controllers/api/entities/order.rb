@@ -1,10 +1,13 @@
 module API
   module Entities
     class Order < Grape::Entity
+      expose :id
       expose :order_no
+      expose :after_no
       expose :total_price
       expose :total_count
       expose :status
+      expose :after_status
       expose :snap_img
       expose :snap_name
       expose :snap_items
