@@ -22,7 +22,11 @@ class OrdersController < ApplicationController
   end 
 
   def refund
-    WxPay.set_apiclient_by_pkcs12(File.read(current_user.certificate), current_user.merchant_id)
+    #certificate的值必须是本地地址，而不是网络地址
+    temp_dir = __dir__.split("/")
+    temp_dir.pop(2)
+    dir = temp_dir.join("/") + "/public"
+    WxPay.set_apiclient_by_pkcs12(File.read(dir+current_user.certificate.url), current_user.merchant_id)
     options = {apiclient_cert: WxPay.apiclient_cert, ssl_client_key: WxPay.apiclient_key}
     current_account = {appid: current_user.app_id, mch_id: current_user.merchant_id, key: current_user.merchant_key}.merge(options).freeze
     weixin_params = {
