@@ -82,21 +82,6 @@ class User < ApplicationRecord
   has_many :tops, dependent: :destroy
   has_many :states, dependent: :destroy
 
-  #certificate必须是本地文件地址，不能是网络链接地址
-  alias certificate_new certificate
-
-  #def certificate
-    #dir = __dir__.split("/")
-    #dir.pop(2)
-    #final_dir = dir.joins("/") + "/public"
-    #certificate = final_dir + self.certificate_new.url.to_s 
-    #if Rails.env == "production"
-    #  certificate = "/home/deploy/projects/weixin_resume/public" + self.certificate_new.url.to_s
-    #else
-    #  certificate = "/Users/jayzen/workshop/weixin_resume/public" + self.certificate_new.url.to_s
-    #end
-  #end 
-  
   after_create :set_style, :generate_token, :create_default_basic, :create_default_location, :create_default_merchant_basic
 
   def set_style
