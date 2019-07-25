@@ -41,15 +41,17 @@ module API
         params do
           requires :token, type: String
           requires :price, type: String
+          requires :order_id, type: Integer
         end
         post '/order_pay' do
           validate_appkey
           current_account = {appid: @user.app_id, mch_id: @user.merchant_id, key: @user.merchant_key}.freeze
           if Rails.cache.fetch(params["token"])
             openid = JSON.parse(Rails.cache.fetch(params["token"]))["openid_message"]["openid"]
+            order_no = @user.orders.find(params[:order_id]).order_no
             weixin_params = {
               body: '订单支付',
-              out_trade_no: User.generate_order_uuid,
+              out_trade_no: order_no,
               total_fee: (params["price"].to_f*100).to_i,
               spbill_create_ip: '127.0.0.1',
               notify_url: 'http://making.dev/notify',

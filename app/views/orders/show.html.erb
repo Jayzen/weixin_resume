@@ -12,7 +12,13 @@
 </div>
 <% if @order.after_status == 1 %>
   <div class="d-flex">
-    <div>订单状态: <span class="badge badge-danger">申请退货</span></div>
+    <div>
+      订单状态: 
+      <span class="badge badge-danger">申请退货</span>
+      <%= link_to "同意退货", refund_guest_order_path(@guest, @order), class: "badge badge-danger" %>
+      <%= link_to "拒绝退货", refuse_refund_guest_order_path(@guest, @order), class: "badge badge-danger" %>
+    </div>
+    
   </div>
 <% end -%>
 

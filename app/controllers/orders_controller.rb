@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_guest
-  before_action :set_order, only: [:destroy, :delete, :show]
+  before_action :set_order, only: [:destroy, :delete, :show, :refund, :refuse_refund, :revert_refund]
   access guest: :all, message: "当前用户无权访问"
 
   def index
@@ -26,9 +26,9 @@ class OrdersController < ApplicationController
     options = {apiclient_cert: WxPay.apiclient_cert, ssl_client_key: WxPay.apiclient_key}
     current_account = {appid: current_user.app_id, mch_id: current_user.merchant_id, key: current_user.merchant_key}.merge(options).freeze
     weixin_params = {
-      out_refund_no: @order.generate_order_uuid,
-      total_fee: @order.total_price,
-      refund_fee: @order.total_price,
+      out_refund_no: User.generate_order_uuid,
+      total_fee: Integer(@order.total_price.to_f*100),
+      refund_fee: Integer(@order.total_price.to_f*100),
       op_user_id: nil,
       out_trade_no: @order.order_no
     }
