@@ -2,9 +2,12 @@
   <div class="d-flex justify-content-between">
     <div>
       <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
-      <%= order.order_no %>
+      <%= order.after_no %>
     </div>
     <div>
+      <% if order.after_status == 1 %>
+        <span class="badge badge-danger">申请退货</span>
+      <% end -%>
       <%= link_to '订单详情', guest_order_path(@guest, order), class: "badge badge-primary" %>
       <%= link_to '删除', delete_guest_order_path(@guest, order), remote: true, class: "badge badge-primary" %>
     </div>

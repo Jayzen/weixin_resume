@@ -238,7 +238,7 @@ class User < ApplicationRecord
       total_fee: 1,
       refund_fee: 1,
       op_user_id: nil,
-      out_trade_no: "190716CBRYZSHKWWR85UNN8UKZZFWAST"
+      out_trade_no: "190725YHTYQ4FOP5TV8NJ9MR6BQRTXA8"
     } 
     WxPay::Service.invoke_refund weixin_params, current_account.dup
   end

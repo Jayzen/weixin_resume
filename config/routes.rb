@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     end
     resources :orders do
       get 'delete', on: :member
+      get 'refund', on: :member
+      get 'refuse_refund', on: :member
+      get 'revert_refund', on: :member
     end
   end
 

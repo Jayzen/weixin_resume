@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <div>订单编号:<%= @order.order_no %></div>
+  <div>订单编号:<%= @order.after_no %></div>
 </div>
 <div class="d-flex">
   <div>订单名称:<%= @order.snap_name %></div>
@@ -10,6 +10,12 @@
 <div class="d-flex">
   <div>订单商品数量:<%= @order.total_count %></div>
 </div>
+<% if @order.after_status == 1 %>
+  <div class="d-flex">
+    <div>订单状态: <span class="badge badge-danger">申请退货</span></div>
+  </div>
+<% end -%>
+
 <% @order_products.each_with_index do |order_product, index| %>
   <div class="d-flex justify-content-between">
     <div>
@@ -23,5 +29,5 @@
   </div>
 <% end -%>
 <div class="d-flex mt-2">
-  <div><%= link_to '客户列表', guests_path, class: "btn btn-primary btn-sm" %></div>
+  <div><%= link_to '订单列表', guest_orders_path(@guest), class: "btn btn-primary btn-sm" %></div>
 </div>

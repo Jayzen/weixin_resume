@@ -21,7 +21,9 @@ module API
           cache = cache_value
           guest_id = cache["guest_id"]
           validate_order(params["products"], @user)
-          create_order(params["products"], guest_id, @user)
+          @order = create_order(params["products"], guest_id, @user)
+          order = present @order, with: API::Entities::Order
+          build_response code: 0, data: order
         end
 
         desc 'get guest orders'
@@ -61,9 +63,18 @@ module API
           @order = @user.guests.find(guest_id).orders.find(params[:order_id])
           @order.after_status = 1
           @order.save
-          @orders = @user.guests.find(guest_id).orders.where(status: 1).order(created_at: :desc)
-          orders = present @orders, with: API::Entities::Order
-          build_response code: 0, data: orders
+        end
+
+        desc 'change order status'
+        params do
+          requires :order_id, type: Integer
+        end
+        post '/change_order_status' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @order = @user.guests.find(guest_id).orders.find(params[:order_id])
+          @order.status = 1
+          @order.save
         end
       end
     end

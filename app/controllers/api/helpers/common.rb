@@ -107,6 +107,7 @@ module API
              order_products.each do |product|
                order.order_products.create(product_id: product["product_id"], count: product["count"])
              end
+             return order
           end
 
           def validate_appkey
