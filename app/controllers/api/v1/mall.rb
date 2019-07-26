@@ -3,7 +3,7 @@ module API
     class Mall < Grape::API
       include Default
       include Grape::Rails::Cache
-
+      
       before do
         validate_appkey
       end

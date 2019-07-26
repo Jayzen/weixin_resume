@@ -8,7 +8,7 @@ module API
           def build_response code: 0, data: nil
             { code: code, data: data }
           end
-
+          
           def cache_value
             if token = request.headers["Token"]
               if Rails.cache.fetch(token)
@@ -119,6 +119,7 @@ module API
               @user = User.find_by(appkey: request.headers["Appkey"])
             end
           end
+          
         end
       end
     end

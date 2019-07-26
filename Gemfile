@@ -32,7 +32,6 @@ gem 'grape-entity'
 gem 'rack-cors'
 gem 'grape-rails-cache'
 
-
 #pay
 gem 'wx_pay'
 
