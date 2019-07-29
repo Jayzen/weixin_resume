@@ -24,6 +24,8 @@ module API
               guest_id = @guest.id
             end
             token = User.generate_token(32)
+            print "print token"
+            print "token值: #{token}"
             cache(key: token, expires_in: 12.hours) do
               { openid_message: openid_message, guest_id: guest_id }
             end
