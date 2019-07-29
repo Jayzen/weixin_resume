@@ -53,6 +53,16 @@ module API
           build_response code: 0, data: orders
         end
 
+        desc 'get order by order id'
+        get '/orders/:order_id' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @order =  @user.guests.find(guest_id).orders.find(params[:order_id])
+          order = present @order, with: API::Entities::Order
+          build_response code: 0, data: order
+        end
+
+
         desc 'change order after status'
         params do 
           requires :order_id, type: Integer

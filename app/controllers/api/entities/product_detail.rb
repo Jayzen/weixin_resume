@@ -8,6 +8,7 @@ module API
       expose :current_price
       expose :old_price
       expose :stock
+      expose :view
       expose :product_comments_count
       expose :product_likes_count
       expose :product_images, using: API::Entities::ProductImage

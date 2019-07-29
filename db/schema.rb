@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_122652) do
+ActiveRecord::Schema.define(version: 2019_07_29_104514) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -547,6 +547,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_122652) do
     t.integer "stock"
     t.integer "product_comments_count", default: 0
     t.integer "product_likes_count", default: 0
+    t.integer "view", default: 0
     t.index ["user_id"], name: "index_products_on_user_id"
   end
 

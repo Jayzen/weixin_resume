@@ -8,6 +8,7 @@ module API
       expose :current_price
       expose :old_price
       expose :stock
+      expose :view
 
       private
         def pic
