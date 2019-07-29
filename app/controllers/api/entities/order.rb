@@ -2,6 +2,7 @@ module API
   module Entities
     class Order < Grape::Entity
       expose :id
+      expose :created_at
       expose :order_no
       expose :after_no
       expose :total_price
@@ -20,6 +21,10 @@ module API
           else
             link = Rails.application.credentials.de_base_url + object.snap_img.url.to_s
           end
+        end
+
+        def created_at
+          created_at = object.created_at.strftime("%F %H:%M")
         end
     end
   end
