@@ -21,6 +21,7 @@ module API
               @guest = @user.guests.create(openid: openid_message["openid"])
               guest_id = @guest.id
             end
+            print "hello world"
             token = User.generate_token(32)
             print "print token"
             print "token值: #{token}"
