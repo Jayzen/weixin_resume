@@ -12,8 +12,6 @@ module API
         post '/token/achieve' do
           validate_appkey
           openid_message = @user.get_openid(params[:code])
-          print "print openid_message"
-          print "#{openid_message}"
           if openid_message["errcode"]
             error!({code: 1, message: 'opendid获取错误'})
           else
