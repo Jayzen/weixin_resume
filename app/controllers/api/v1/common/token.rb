@@ -22,7 +22,7 @@ module API
               guest_id = @guest.id
             end
             print "hello world"
-            token = User.generate_token(32)
+            token = ::User.generate_token(32)
             print "print token"
             print "token值: #{token}"
             cache(key: token, expires_in: 12.hours) do
