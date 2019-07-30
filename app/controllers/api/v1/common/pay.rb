@@ -18,7 +18,7 @@ module API
             openid = JSON.parse(Rails.cache.fetch(params["token"]))["openid_message"]["openid"]
             weixin_params = {
               body: '直接支付',
-              out_trade_no: User.generate_order_uuid,
+              out_trade_no: ::User.generate_order_uuid,
               total_fee: (params["price"].to_f*100).to_i,
               spbill_create_ip: '127.0.0.1',
               notify_url: 'http://making.dev/notify',

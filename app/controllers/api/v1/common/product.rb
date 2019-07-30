@@ -27,7 +27,7 @@ module API
 
         desc 'find specific product'
         get 'products/:id' do
-          @product = @user.products.includes(:product_images, :product_details, :product_comments, :product_likes).find(params[:id])
+          @product = @user.products.includes(:product_images, :product_details, [product_comments: :guest], [product_likes: :guest]).find(params[:id])
           @product.view = @product.view + 1
           @product.save
           product = present @product, with: API::Entities::ProductDetail

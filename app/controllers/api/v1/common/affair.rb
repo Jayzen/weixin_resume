@@ -44,7 +44,7 @@ module API
         desc 'find specific affiar'
         get '/affair/:id' do
           validate_appkey
-          @affair = @user.affairs.includes(:affair_images, [affair_comments: :guest], :product).where(reveal: true).find(params[:id])
+          @affair = @user.affairs.includes(:affair_images, [affair_comments: :guest], [affair_likes: :guest], [affair_shares: :guest], :product).where(reveal: true).find(params[:id])
           @affair.view = @affair.view + 1
           @affair.save
           affair = present @affair, with: API::Entities::AffairDetail
