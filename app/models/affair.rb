@@ -6,10 +6,6 @@ class Affair < ApplicationRecord
   has_many :affair_shares, dependent: :destroy
   belongs_to :product, optional: true
 
-  #like relationships
-  has_many :like_affairs
-  has_many :guests, through: :like_affairs
-
   module Status
     On = true
     Off = false

@@ -13,8 +13,4 @@ class Guest < ApplicationRecord
   has_many :product_comments, dependent: :destroy
   has_many :product_likes, dependent: :destroy
   has_many :product_keeps, dependent: :destroy
-
-  #like relationshipls
-  has_many :like_affairs, dependent: :destroy
-  has_many :affairs, through: :like_affairs
 end
