@@ -13,7 +13,7 @@ module API
       default_format :json
 
       rescue_from ActiveRecord::RecordNotFound do |e|
-        error!({code: 102, error: '不存这条记录'}, 404)
+        error!({code: 102, error: e }, 404)
       end
 
       rescue_from NoMethodError do |e|
