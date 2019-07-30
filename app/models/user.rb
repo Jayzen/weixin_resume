@@ -82,6 +82,8 @@ class User < ApplicationRecord
   has_many :tops, dependent: :destroy
   has_many :states, dependent: :destroy
 
+  has_many :pay_records, dependent: :destroy
+  
   after_create :set_style, :generate_token, :create_default_basic, :create_default_location, :create_default_merchant_basic
 
   def set_style
