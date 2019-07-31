@@ -1,0 +1,18 @@
+<% @product_comments.each_with_index do |product_comment, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= product_comment.guest.nickname %>|<%= product_comment.content %>
+    </div>
+    <div>
+      <%= link_to '删除', delete_product_product_comment_path(@product, product_comment), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div>
+    <%= link_to '返回商品管理', products_path, class: "btn btn-primary btn-sm" %>
+  </div>
+  <div><%= paginate @product_comments %></div>
+</div>
+<%= render 'shared/confirm_modal' %>
