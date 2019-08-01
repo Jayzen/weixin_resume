@@ -46,6 +46,8 @@ module API
             if @product_comment.errors.messages.size != 0
               error!({code: 102, error:  @product_comment.errors.messages.values.flatten.first})
             end
+            product_comment = present @product_comment, with: API::Entities::ProductComment
+            build_response code: 0, data: product_comment
           else
             error!({code: 102, error: "不存在token"})
           end
@@ -55,7 +57,7 @@ module API
         delete '/product_comment/:id' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            @product_comment = Guest.find(guest_id).product_comments.find(params[:id])
+            @product_comment = ::Guest.find(guest_id).product_comments.find(params[:id])
             @product_comment.destroy
           else
             error!({code: 102, error: "不存在token"})
