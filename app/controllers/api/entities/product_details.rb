@@ -1,8 +1,10 @@
 module API
   module Entities
     class ProductDetails < Grape::Entity
+      expose :id
       expose :title
       expose :pic
+      #expose :current_price
 
       private
         def pic

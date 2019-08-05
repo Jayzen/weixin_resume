@@ -63,6 +63,30 @@ module API
         end
 
 
+        desc 'change to wait pay status'
+        params do 
+          requires :order_id, type: Integer
+        end
+        post '/wait_pay_status' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @order = @user.guests.find(guest_id).orders.find(params[:order_id])
+          @order.status = 1
+          @order.save
+        end
+
+        desc 'change to paid status'
+        params do
+          requires :order_id, type: Integer
+        end
+        post '/paid_status' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @order = @user.guests.find(guest_id).orders.find(params[:order_id])
+          @order.status = 2
+          @order.save
+        end 
+  
         desc 'change order after status'
         params do 
           requires :order_id, type: Integer
@@ -72,18 +96,6 @@ module API
           guest_id = cache["guest_id"]
           @order = @user.guests.find(guest_id).orders.find(params[:order_id])
           @order.after_status = 1
-          @order.save
-        end
-
-        desc 'change order status'
-        params do
-          requires :order_id, type: Integer
-        end
-        post '/change_order_status' do
-          cache = cache_value
-          guest_id = cache["guest_id"]
-          @order = @user.guests.find(guest_id).orders.find(params[:order_id])
-          @order.status = 1
           @order.save
         end
       end

@@ -13,7 +13,8 @@ module API
       expose :snap_name
       expose :snap_items
       expose :snap_address
-    
+      expose :products, using: API::Entities::Product
+
       private
         def snap_img
           if Rails.env == "production"
