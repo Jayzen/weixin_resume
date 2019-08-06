@@ -48,7 +48,7 @@ module API
         get '/after_order/:after_status' do
           cache = cache_value
           guest_id = cache["guest_id"]
-          @orders = @user.guests.find(guest_id).orders.where(status: 1, after_status: params[:after_status]).order(created_at: :desc)
+          @orders = @user.guests.find(guest_id).orders.where(status: 2, after_status: params[:after_status]).order(created_at: :desc)
           orders = present @orders, with: API::Entities::Order
           build_response code: 0, data: orders
         end
