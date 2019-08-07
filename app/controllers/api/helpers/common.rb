@@ -39,6 +39,9 @@ module API
              products.each do |product|
                order_product_ids << product["product_id"]
              end
+             #error!({code: 1, message: '不存在该商品'})
+             error!({code: 1, message: 'hello world'}, 401)
+             #debugger
              unless stock_products = user.products.find(order_product_ids).pluck(:id, :stock)
                error!({code: 1, message: '不存在该商品'})
              end
@@ -76,7 +79,7 @@ module API
              end
 
              #获得订单地址
-             guest_address = Guest.find(guest_id).guest_address
+             guest_address = ::Guest.find(guest_id).guest_address
              if guest_address
                #snap_address = user_address.province + user_address.city + user_address.country + user_address.detail
                snap_address = guest_address.to_json(except: [:id, :user_id, :created_at, :updated_at])
@@ -100,8 +103,8 @@ module API
 
 
              #获取order_no和after_no
-             order_no = User.generate_order_uuid
-             after_no = User.generate_after_uuid
+             order_no = ::User.generate_order_uuid
+             after_no = ::User.generate_after_uuid
 
              order = user.orders.create(guest_id: guest_id, total_price: total_price, total_count: total_count, snap_address: snap_address, snap_name: snap_name, snap_img: snap_img, order_no: order_no, after_no: after_no)
              order_products.each do |product|
@@ -116,7 +119,7 @@ module API
             elsif User.find_by(appkey: request.headers["Appkey"]) == nil
               error!({code: 101, error: 'appkey不正确'})
             else
-              @user = User.find_by(appkey: request.headers["Appkey"])
+              @user = ::User.find_by(appkey: request.headers["Appkey"])
             end
           end
           

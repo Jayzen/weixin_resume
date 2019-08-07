@@ -15,9 +15,11 @@ module API
           requires :products, type: Array do
             requires :product_id, type: Integer
             requires :count, type: Integer
+            requires :name, type: String
           end
         end
         post '/order' do
+          #debugger
           cache = cache_value
           guest_id = cache["guest_id"]
           validate_order(params["products"], @user)
