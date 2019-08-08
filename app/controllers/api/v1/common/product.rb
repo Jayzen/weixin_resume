@@ -40,7 +40,7 @@ module API
           requires :product_id, type: Integer
         end
         post '/product_comment' do
-          if token = Redis.new.get(request.headers["Token"])
+          if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @product_comment = ::ProductComment.create(guest_id: guest_id, product_id: params[:product_id], content: params[:content])
             if @product_comment.errors.messages.size != 0
@@ -55,7 +55,7 @@ module API
 
         desc 'delete product comment'
         delete '/product_comment/:id' do
-          if token = Redis.new.get(request.headers["Token"])
+          if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @product_comment = ::Guest.find(guest_id).product_comments.find(params[:id])
             @product_comment.destroy
@@ -69,7 +69,7 @@ module API
           requires :product_id, type: Integer
         end
         post '/product_like' do
-          if token = Redis.new.get(request.headers["Token"])
+          if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @product_like = ::ProductLike.create(guest_id: guest_id, product_id: params[:product_id])
             if @product_like.errors.messages.size != 0
@@ -82,7 +82,7 @@ module API
 
         desc 'delete product like'
         delete '/product_like/:id' do
-          if token = Redis.new.get(request.headers["Token"])
+          if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @product_like = ::Guest.find(guest_id).product_likes.find_by(product_id: params[:id])
             @product_like.destroy
@@ -93,7 +93,7 @@ module API
         
         desc 'judge like status'
         get '/product_judge_like/:id' do
-          if token = Redis.new.get(request.headers["Token"])
+          if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             like_status = ::Guest.find(guest_id).product_likes.pluck(:product_id).include?(params[:id].to_i)
             build_response code: 0, data: like_status
@@ -107,7 +107,7 @@ module API
           requires :product_id, type: Integer
         end
         post '/product_keep' do
-          if token = Redis.new.get(request.headers["Token"])
+          if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @product_keep = ::ProductKeep.create(guest_id: guest_id, product_id: params[:product_id])
             if @product_keep.errors.messages.size != 0
@@ -120,7 +120,7 @@ module API
 
         desc 'delete product keep'
         delete '/product_keep/:id' do
-          if token = Redis.new.get(request.headers["Token"])
+          if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @product_keep = ::Guest.find(guest_id).product_keeps.find_by(product_id: params[:id])
             @product_keep.destroy
@@ -131,7 +131,7 @@ module API
 
         desc 'judge keep status'
         get '/product_judge_keep/:id' do
-          if token = Redis.new.get(request.headers["Token"])
+          if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             keep_status = ::Guest.find(guest_id).product_keeps.pluck(:product_id).include?(params[:id].to_i)
             build_response code: 0, data: keep_status
@@ -142,7 +142,7 @@ module API
 
         desc 'find guest keep products'
         get '/guest_keep_products' do
-          if token = Redis.new.get(request.headers["Token"])
+          if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             product_ids = ::Guest.find(guest_id).product_keeps.pluck(:product_id)
             @keep_products = ::Product.find(product_ids) 
