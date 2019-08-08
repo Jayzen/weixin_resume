@@ -31,12 +31,13 @@ Rails.application.configure do
   #  config.cache_store = :null_store
   #end
   #
-  config.action_controller.perform_caching = true
+  #config.action_controller.perform_caching = true
+
   config.cache_store = :redis_store, {
-    host: Rails.application.credentials.de_base_url,
+    host: 'localhost',
     port: 6379,
     db: 0
-  } 
+  }   
 
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local

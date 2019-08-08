@@ -116,7 +116,7 @@ module API
           def validate_appkey
             if request.headers["Appkey"] == "[object Undefined]"
               error!({code: 100, error: 'appkey不存在'})
-            elsif User.find_by(appkey: request.headers["Appkey"]) == nil
+            elsif ::User.find_by(appkey: request.headers["Appkey"]) == nil
               error!({code: 101, error: 'appkey不正确'})
             else
               @user = ::User.find_by(appkey: request.headers["Appkey"])
