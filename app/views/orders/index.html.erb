@@ -3,6 +3,15 @@
     <div>
       <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
       <%= order.after_no %>
+      <% if order.status == 1 %>
+        <span class="badge badge-danger">待付款</span>  
+      <% elsif order.status == 2 %>
+        <span class="badge badge-danger">已付款</span>
+      <% elsif order.status == 3 %>
+        <span class="badge badge-danger">已发货</span>
+      <% else %>
+        <span class="badge badge-danger">已收货</span>
+      <% end -%>
     </div>
     <div>
       <% if order.after_status == 1 %>

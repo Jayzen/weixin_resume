@@ -19,7 +19,7 @@ module API
           requires :affair_id, type: Integer
         end
         post '/affair_comment' do
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @affair_comment = ::AffairComment.create(guest_id: guest_id, affair_id: params[:affair_id], content: params[:content])
             if @affair_comment.errors.messages.size != 0
@@ -32,7 +32,7 @@ module API
 
         desc 'delete affair comment'
         delete '/affair_comment/:id' do
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @affair_comment = Guest.find(guest_id).affair_comments.find(params[:id])
             @affair_comment.destroy
@@ -56,7 +56,7 @@ module API
           requires :affair_id, type: Integer
         end
         post '/affair_like' do
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @affair_like = ::AffairLike.create(guest_id: guest_id, affair_id: params[:affair_id])
             if @affair_like.errors.messages.size != 0
@@ -69,9 +69,9 @@ module API
 
         desc 'delete affair like'
         delete '/affair_like/:id' do
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            @affair_like = Guest.find(guest_id).affair_likes.find_by(affair_id: params[:id])
+            @affair_like = ::Guest.find(guest_id).affair_likes.find_by(affair_id: params[:id])
             @affair_like.destroy
           else
             error!({code: 102, error: "不存在token"})
@@ -83,7 +83,7 @@ module API
           requires :affair_id, type: Integer
         end
         post '/affair_share' do
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @affair_share = ::AffairShare.create(guest_id: guest_id, affair_id: params[:affair_id])
             if @affair_share.errors.messages.size != 0
@@ -96,9 +96,9 @@ module API
 
         desc 'judge like status'
         get '/judge_like/:id' do
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            like_status = Guest.find(guest_id).affair_likes.pluck(:affair_id).include?(params[:id].to_i)
+            like_status = ::Guest.find(guest_id).affair_likes.pluck(:affair_id).include?(params[:id].to_i)
             build_response code: 0, data: like_status
           else
             error!({code: 102, error: "不存在token"})
@@ -107,7 +107,7 @@ module API
 
         desc 'judge like status'
         get '/judge_likes' do
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             validate_appkey
             @affairs = @user.affairs.includes(:affair_likes).order(order: :desc)
             @guest_id = JSON.parse(token)["guest_id"]

@@ -11,8 +11,8 @@ module API
           
           def cache_value
             if token = request.headers["Token"]
-              if Rails.cache.fetch(token)
-                cache = JSON.parse(Rails.cache.fetch(token))
+              if Redis.new.get(token)
+                cache = JSON.parse(Redis.new.get(token))
               else
                 error!({code: 1, message: '缓存中不存在该token'}, 401)
               end
@@ -40,7 +40,7 @@ module API
                order_product_ids << product["product_id"]
              end
              #error!({code: 1, message: '不存在该商品'})
-             error!({code: 1, message: 'hello world'}, 401)
+             #error!({code: 1, message: 'hello world'}, 401)
              #debugger
              unless stock_products = user.products.find(order_product_ids).pluck(:id, :stock)
                error!({code: 1, message: '不存在该商品'})

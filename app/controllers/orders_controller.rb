@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_guest
-  before_action :set_order, only: [:destroy, :delete, :show, :refund, :refuse_refund, :revert_refund]
+  before_action :set_order, only: [:destroy, :delete, :show, :refund, :refuse_refund, :revert_refund, :deliver_goods]
   access guest: :all, message: "当前用户无权访问"
 
   def index
@@ -54,6 +54,13 @@ class OrdersController < ApplicationController
     @order.after_status = 0
     @order.save
     flash[:success] = "返回至支付状态"
+    redirect_to guest_order_path(@guest, @order)
+  end
+
+  def deliver_goods
+    @order.status = 3
+    @order.save
+    flash[:success] = "订单发货"
     redirect_to guest_order_path(@guest, @order)
   end
 

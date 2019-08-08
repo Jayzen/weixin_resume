@@ -13,7 +13,7 @@ module API
         post '/directly_pay' do
           validate_appkey
           current_account = {appid: @user.app_id, mch_id: @user.merchant_id, key: @user.merchant_key}.freeze
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             openid = JSON.parse(token)["openid_message"]["openid"]
             weixin_params = {
               body: '直接支付',
@@ -44,7 +44,7 @@ module API
         end
         post '/directly_pay_record' do
           validate_appkey
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @pay_record = ::PayRecord.create(user_id: @user.id, guest_id: guest_id, price: params[:price], remark: params[:remark], pattern: params[:pattern])
             if @pay_record.errors.messages.size != 0
@@ -58,7 +58,7 @@ module API
         desc 'get directly pay records'
         get '/directly_pay_records' do
           validate_appkey
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @pay_records = ::Guest.find(guest_id).pay_records.where(user_id: @user.id).order(created_at: :desc)
             pay_records = present @pay_records, with: API::Entities::PayRecord
@@ -77,7 +77,7 @@ module API
         post '/order_pay' do
           validate_appkey
           current_account = {appid: @user.app_id, mch_id: @user.merchant_id, key: @user.merchant_key}.freeze
-          if token = Rails.cache.fetch(request.headers["Token"])
+          if token = Redis.new.get(request.headers["Token"])
             openid = JSON.parse(token)["openid_message"]["openid"]
             order_no = @user.orders.find(params[:order_id]).order_no
             weixin_params = {

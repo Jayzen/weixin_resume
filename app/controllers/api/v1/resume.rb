@@ -4,24 +4,13 @@ module API
       include Default
       include Grape::Rails::Cache
 
-      desc 'update guest'
-      params do
-        requires :token, type: String
-      end
-      post '/guest/update' do
-        if token = Rails.cache.fetch(params[:token])
-          guest_id = JSON.parse(token)["guest_id"]
-          Guest.find(guest_id).update(nickname: params[:nickname], avatar: params[:avatar], gender: params[:gender])
-        end
-      end
-
       desc 'create comment'
       params do
         requires :token, type: String
         requires :content, type: String
       end
       post '/comment' do
-        if token = Rails.cache.fetch(params[:token])
+        if token = Redis.new.get(params[:token])
           guest_id = JSON.parse(token)["guest_id"]
           validate_appkey
           @comment = Comment.create(guest_id: guest_id, user_id: @user.id, content: params[:content])

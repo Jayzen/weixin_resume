@@ -77,6 +77,18 @@ module API
           @order.save
         end
 
+        desc 'receive goods'
+        params do 
+          requires :order_id, type: Integer
+        end
+        post '/receive_goods' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @order = @user.guests.find(guest_id).orders.find(params[:order_id])
+          @order.status = 4
+          @order.save
+        end
+
         desc 'change to paid status'
         params do
           requires :order_id, type: Integer

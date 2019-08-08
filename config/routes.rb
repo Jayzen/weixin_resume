@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'demo/index'
   get 'homes/index'
   get 'welcomes/index'
   mount API::Base => '/api'
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
       get 'refund', on: :member
       get 'refuse_refund', on: :member
       get 'revert_refund', on: :member
+      get 'deliver_goods', on: :member
     end
   end
 

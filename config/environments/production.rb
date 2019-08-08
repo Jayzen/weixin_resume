@@ -60,7 +60,13 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
-
+  
+  config.action_controller.perform_caching = true
+  config.cache_store = :redis_store, {
+    host: Rails.application.credentials.pr_base_url,
+    port: 6379,
+    db: 0
+  }
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "pdf_#{Rails.env}"

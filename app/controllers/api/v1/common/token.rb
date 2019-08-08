@@ -34,7 +34,7 @@ module API
           requires :token, type: String
         end
         post '/token/verify' do
-          if Rails.cache.fetch(params[:token])
+          if Redis.new.get(params[:token])
             {isValid: true}
           else
             {isValid: false}
