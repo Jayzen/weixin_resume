@@ -25,7 +25,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # redis
-gem 'redis-rails'
+gem 'redis'
+gem 'hiredis'
 
 # api
 gem 'grape'
