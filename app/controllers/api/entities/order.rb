@@ -13,7 +13,7 @@ module API
       expose :snap_name
       expose :snap_items
       expose :snap_address
-      expose :products, using: API::Entities::Product
+      expose :order_products, using: API::Entities::OrderProduct
 
       private
         def snap_img

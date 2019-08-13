@@ -19,7 +19,6 @@ module API
           end
         end
         post '/order' do
-          #debugger
           cache = cache_value
           guest_id = cache["guest_id"]
           validate_order(params["products"], @user)

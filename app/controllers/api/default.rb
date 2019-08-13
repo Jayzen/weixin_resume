@@ -12,9 +12,9 @@ module API
 
       default_format :json
 
-      #rescue_from ActiveRecord::RecordNotFound do |e|
-      #  error!({code: 102, error: e }, 404)
-      #end
+      rescue_from ActiveRecord::RecordNotFound do |e|
+        error!({code: 102, error: e }, 404)
+      end
 
       rescue_from NoMethodError do |e|
         error!({code: 1, error: 'system error'}, 422)
