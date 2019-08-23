@@ -101,7 +101,11 @@ module API
              order = user.orders.create(guest_id: guest_id, total_price: total_price, total_count: total_count, snap_address: snap_address, snap_name: snap_name, snap_img: snap_img, order_no: order_no, after_no: after_no)
              order_products.each do |product|
                order.order_products.create(product_id: product["product_id"], count: product["count"])
+               @product = user.products.find(product["product_id"])
+               @product.stock = @product.stock - product["count"]
+               @product.save
              end
+             
              return order
           end
 

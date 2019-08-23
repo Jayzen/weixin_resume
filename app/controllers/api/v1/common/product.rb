@@ -9,6 +9,125 @@ module API
           validate_appkey
         end
 
+        desc 'find product groups'
+        get '/product_groups' do
+          @product_groups = @user.product_groups.includes(:product).where(reveal: true).order(order: :asc)
+          product_groups = present @product_groups, with: API::Entities::ProductGroup
+        end
+
+        desc 'find product bargains'
+        get '/product_bargains' do
+          @product_bargains = @user.product_bargains.includes(:product).where(reveal: true).order(order: :asc)
+          product_bargains = present @product_bargains, with: API::Entities::ProductBargain
+        end 
+
+        desc 'find specific product group'
+        get '/product_groups/:id' do
+          @product_group = @user.product_groups.includes(:product, :product_group_orders).where(reveal: true).order(order: :asc).find(params[:id])
+          @product = @product_group.product
+          @product.view = @product.view + 1
+          @product.save
+          product_group = present @product_group, with: API::Entities::ProductGroupDetail
+        end
+
+        desc 'find specific product bargain'
+        get '/product_bargains/:id' do
+          @product_bargain = @user.product_bargains.includes(:product).where(reveal: true).order(order: :asc).find(params[:id])
+          @product = @product_bargain.product
+          @product.view = @product.view + 1
+          @product.save
+          product_bargain = present @product_bargain, with: API::Entities::ProductBargainDetail
+        end 
+
+        desc 'find specific product group order'
+        get '/product_group_orders/:id' do
+          @product_group_order = ::ProductGroupOrder.find(params[:id])
+          product_group_order = present @product_group_order, with: API::Entities::ProductGroupOrder
+        end
+
+        desc 'find specific product bargain order'
+        get '/product_bargain_orders/:product_bargain_id' do
+          if token = Rails.cache.fetch(request.headers["Token"])
+            guest_id = JSON.parse(token)["guest_id"]
+            @product_bargain_order = ::ProductBargainOrder.includes(:guest).where(product_bargain_id: params[:product_bargain_id], guest_id: guest_id)
+            product_bargain_order = present @product_bargain_order, with: API::Entities::ProductBargainOrder
+          else
+            error!({code: 102, error: "不存在token"})
+          end
+        end
+
+        desc 'find specific product bargain order by id'
+        get '/product_bargain_orders_by_id/:id' do
+          @product_bargain_order = ::ProductBargainOrder.includes(:guest).find(params[:id])
+          product_bargain_order = present @product_bargain_order, with: API::Entities::ProductBargainOrder
+        end
+
+        desc 'create product group order'
+        params do
+          requires :product_group_id, type: Integer
+        end
+        post '/product_group_order' do
+          if token = Rails.cache.fetch(request.headers["Token"])
+            guest_id = JSON.parse(token)["guest_id"]
+            @product_group_order = ::ProductGroupOrder.create(guest_id: guest_id, product_group_id: params[:product_group_id])
+            if @product_group_order.errors.messages.size != 0
+              error!({code: 102, error:  @product_group_order.errors.messages.values.flatten.first})
+            end
+          else
+            error!({code: 102, error: "不存在token"})
+          end
+        end
+
+        desc 'create product bargain order'
+        params do
+          requires :product_bargain_id, type: Integer
+        end
+        post '/product_bargain_order' do
+          if token = Rails.cache.fetch(request.headers["Token"])
+            guest_id = JSON.parse(token)["guest_id"]
+            @product_bargain_order = ::ProductBargainOrder.create(guest_id: guest_id, product_bargain_id: params[:product_bargain_id])
+            if @product_bargain_order.errors.messages.size != 0
+              error!({code: 102, error:  @product_bargain_order.errors.messages.values.flatten.first})
+            end
+            product_bargain_order = present @product_bargain_order, with: API::Entities::ProductBargainOrder
+          else
+            error!({code: 102, error: "不存在token"})
+          end
+        end 
+        
+        desc 'create product group order join'
+        params do
+          requires :product_group_order_id, type: Integer
+        end
+        post '/product_group_order_join' do
+          if token = Rails.cache.fetch(request.headers["Token"])
+            guest_id = JSON.parse(token)["guest_id"]
+            @product_group_order_join = ::ProductGroupOrderJoin.create(guest_id: guest_id, product_group_order_id: params[:product_group_order_id])
+            if @product_group_order_join.errors.messages.size != 0
+              error!({code: 102, error:  @product_group_order_join.errors.messages.values.flatten.first})
+            end
+          else
+            error!({code: 102, error: "不存在token"})
+          end
+        end 
+
+        desc 'create product bargain order join'
+        params do
+          requires :product_bargain_order_id, type: Integer
+        end
+        post '/product_bargain_order_join' do
+          if token = Rails.cache.fetch(request.headers["Token"])
+            guest_id = JSON.parse(token)["guest_id"]
+            @product_bargain_order_join = ::ProductBargainOrderJoin.create(guest_id: guest_id, product_bargain_order_id: params[:product_bargain_order_id])
+            if @product_bargain_order_join.errors.messages.size != 0
+              error!({code: 102, error:  @product_bargain_order_join.errors.messages.values.flatten.first})
+            end
+            product_bargain_order_join = present @product_bargain_order_join, with: API::Entities::ProductBargainOrderJoin
+          else
+            error!({code: 102, error: "不存在token"})
+          end
+        end 
+
         desc 'find products'
         get '/products' do
           @products = @user.products.where(reveal: true).order(order: :asc)

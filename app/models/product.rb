@@ -27,6 +27,9 @@ class Product < ApplicationRecord
     Off = false
   end
   
+  has_one :product_groups, dependent: :destroy
+  has_one :product_bargains, dependent: :destroy
+
   validates :name, presence: { message: "名称不能为空" }
   validates :description, presence: { message: "描述不能为空" }
   validates :pic, presence: { message: "照片不能为空" }

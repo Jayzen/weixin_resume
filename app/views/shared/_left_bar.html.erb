@@ -76,6 +76,16 @@
               <%= link_to "首页商品", product_homes_path, class: "nav-link #{ (controller_name == 'product_homes') ? 'active' : '' }" %>
             </li>
           <% end -%> 
+          <% if current_user.has_roles?(:product_group) %>
+            <li class="nav-item">
+              <%= link_to "团购商品", product_groups_path, class: "nav-link #{ (controller_name == 'product_groups') ? 'active' : '' }" %>
+            </li>
+          <% end -%>
+          <% if current_user.has_roles?(:product_bargain) %>
+            <li class="nav-item">
+              <%= link_to "砍价商品", product_bargains_path, class: "nav-link #{ (controller_name == 'product_bargains') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:theme) %>
             <li class="nav-item">
               <%= link_to "主题商品", themes_path, class: "nav-link #{ (controller_name == 'themes') ? 'active' : '' }" %>

@@ -1,0 +1,23 @@
+<% @product_groups.each_with_index do |product_group, index| %>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%= params[:page] ? (index + 1 + (params[:page].to_i-1)*10) : (index+1) %>.
+      <%= product_group.product.name %>
+      <% if product_group.reveal? %>
+        <span class="badge badge-primary">已发布</span>
+      <% else %>
+        <span class="badge badge-danger">未发布</span>
+      <% end -%>
+    </div>
+    <div>
+      <%= link_to '查看', product_group_path(product_group), class: "badge badge-primary"%>
+      <%= link_to '编辑', edit_product_group_path(product_group), class: "badge badge-primary"%>
+      <%= link_to '删除', delete_product_group_path(product_group), remote: true, class: "badge badge-primary" %>
+    </div>
+  </div>
+<% end %>
+<div class="d-flex justify-content-between mt-2">
+  <div><%= link_to '新建', new_product_group_path, class: "btn btn-primary btn-sm" %></div>
+  <div><%= paginate @product_groups %></div>
+</div>
+<%= render 'shared/confirm_modal' %>

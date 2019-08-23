@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_071445) do
+ActiveRecord::Schema.define(version: 2019_08_22_023249) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -399,6 +399,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_071445) do
     t.datetime "updated_at", null: false
     t.string "after_no"
     t.integer "after_status", default: 0
+    t.integer "remark", default: 0
     t.index ["guest_id"], name: "index_orders_on_guest_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -446,6 +447,37 @@ ActiveRecord::Schema.define(version: 2019_07_30_071445) do
     t.index ["user_id"], name: "index_product_attributes_on_user_id"
   end
 
+  create_table "product_bargain_order_joins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "product_bargain_order_id"
+    t.integer "guest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_product_bargain_order_joins_on_guest_id"
+    t.index ["product_bargain_order_id"], name: "index_product_bargain_order_joins_on_product_bargain_order_id"
+  end
+
+  create_table "product_bargain_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "guest_id"
+    t.integer "product_bargain_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id", "product_bargain_id"], name: "index_product_bargain_orders_on_guest_id_and_product_bargain_id", unique: true
+    t.index ["guest_id"], name: "index_product_bargain_orders_on_guest_id"
+    t.index ["product_bargain_id"], name: "index_product_bargain_orders_on_product_bargain_id"
+  end
+
+  create_table "product_bargains", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.decimal "price", precision: 5, scale: 2
+    t.integer "order"
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_bargains_on_product_id"
+    t.index ["user_id"], name: "index_product_bargains_on_user_id"
+  end
+
   create_table "product_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "content"
     t.integer "guest_id"
@@ -468,6 +500,37 @@ ActiveRecord::Schema.define(version: 2019_07_30_071445) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_details_on_product_id"
     t.index ["user_id"], name: "index_product_details_on_user_id"
+  end
+
+  create_table "product_group_order_joins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "product_group_order_id"
+    t.integer "guest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_product_group_order_joins_on_guest_id"
+    t.index ["product_group_order_id"], name: "index_product_group_order_joins_on_product_group_order_id"
+  end
+
+  create_table "product_group_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "guest_id"
+    t.integer "product_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "product_group_order_joins_count", default: 0
+    t.index ["guest_id"], name: "index_product_group_orders_on_guest_id"
+    t.index ["product_group_id"], name: "index_product_group_orders_on_product_group_id"
+  end
+
+  create_table "product_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.decimal "price", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order"
+    t.boolean "reveal"
+    t.index ["product_id"], name: "index_product_groups_on_product_id"
+    t.index ["user_id"], name: "index_product_groups_on_user_id"
   end
 
   create_table "product_homes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

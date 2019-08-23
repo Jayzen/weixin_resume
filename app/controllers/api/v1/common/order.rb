@@ -31,7 +31,7 @@ module API
         get '/orders' do
           cache = cache_value
           guest_id = cache["guest_id"]
-          @orders = @user.guests.find(guest_id).orders.order(created_at: :desc)
+          @orders = @user.guests.find(guest_id).orders.includes(:order_products, :products).order(created_at: :desc)
           orders = present @orders, with: API::Entities::Order
           build_response code: 0, data: orders
         end
@@ -62,7 +62,6 @@ module API
           order = present @order, with: API::Entities::Order
           build_response code: 0, data: order
         end
-
 
         desc 'change to wait pay status'
         params do 
@@ -97,6 +96,43 @@ module API
           guest_id = cache["guest_id"]
           @order = @user.guests.find(guest_id).orders.find(params[:order_id])
           @order.after_status = 1
+          @order.save
+        end
+
+        desc 'change specific order account'
+        params do
+          requires :order_id, type: Integer
+          requires :account, type: Float
+        end
+        post '/change_order_account' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @order = @user.guests.find(guest_id).orders.find(params[:order_id])
+          @order.total_price = params[:account]
+          @order.save
+        end
+
+        desc 'change specific order remark to group'
+        params do 
+          requires :order_id, type: Integer
+        end
+        post 'change_remark_to_group' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @order = @user.guests.find(guest_id).orders.find(params[:order_id])
+          @order.remark = 1
+          @order.save
+        end
+
+        desc 'change specific order remark to bargain'
+        params do
+          requires :order_id, type: Integer
+        end
+        post 'change_remark_to_bargain' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @order = @user.guests.find(guest_id).orders.find(params[:order_id])
+          @order.remark = 2
           @order.save
         end
       end

@@ -13,6 +13,7 @@ module API
       expose :snap_name
       expose :snap_items
       expose :snap_address
+      expose :remark
       expose :order_products, using: API::Entities::OrderProduct
 
       private
