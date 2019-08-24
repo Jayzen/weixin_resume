@@ -14,8 +14,11 @@
 //= require jquery_ujs
 //= require activestorage
 //= require turbolinks
+//= require moment
+//= require moment/zh-cn.js
 //= require popper
 //= require bootstrap
+//= require tempusdominus-bootstrap-4.js
 
 $(document).on("turbolinks:load", function() {
   $('#form-modal-save-btn').click(function() {

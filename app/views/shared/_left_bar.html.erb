@@ -76,6 +76,11 @@
               <%= link_to "首页商品", product_homes_path, class: "nav-link #{ (controller_name == 'product_homes') ? 'active' : '' }" %>
             </li>
           <% end -%> 
+          <% if current_user.has_roles?(:product_limit) %>
+            <li class="nav-item">
+              <%= link_to "限时商品", product_limits_path, class: "nav-link #{ (controller_name == 'product_limits') ? 'active' : '' }" %>
+            </li>
+          <% end -%> 
           <% if current_user.has_roles?(:product_group) %>
             <li class="nav-item">
               <%= link_to "团购商品", product_groups_path, class: "nav-link #{ (controller_name == 'product_groups') ? 'active' : '' }" %>

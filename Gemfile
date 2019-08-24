@@ -48,6 +48,10 @@ gem 'mysql2'
 gem 'mini_racer'
 gem 'faker'
 
+#select time
+gem 'jquery-ui-rails'
+gem 'bootstrap4-datetime-picker-rails'
+
 #translation
 gem 'httparty'
 

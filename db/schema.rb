@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_22_023249) do
+ActiveRecord::Schema.define(version: 2019_08_24_064312) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -573,6 +573,18 @@ ActiveRecord::Schema.define(version: 2019_08_22_023249) do
     t.datetime "updated_at", null: false
     t.index ["guest_id"], name: "index_product_likes_on_guest_id"
     t.index ["product_id"], name: "index_product_likes_on_product_id"
+  end
+
+  create_table "product_limits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.integer "order"
+    t.boolean "reveal"
+    t.datetime "limit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_limits_on_product_id"
+    t.index ["user_id"], name: "index_product_limits_on_user_id"
   end
 
   create_table "product_sorts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
