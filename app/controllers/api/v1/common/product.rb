@@ -15,12 +15,27 @@ module API
           product_groups = present @product_groups, with: API::Entities::ProductGroup
         end
 
+        desc 'find product limits'
+        get '/product_limits' do
+          @product_limits = @user.product_limits.includes(:product).where(reveal: true).order(order: :asc)
+          product_limits = present @product_limits, with: API::Entities::ProductLimit
+        end 
+
         desc 'find product bargains'
         get '/product_bargains' do
           @product_bargains = @user.product_bargains.includes(:product).where(reveal: true).order(order: :asc)
           product_bargains = present @product_bargains, with: API::Entities::ProductBargain
         end 
 
+        desc 'find specific product limit'
+        get '/product_limits/:id' do
+          @product_limit = @user.product_limits.includes(:product).where(reveal: true).order(order: :asc).find(params[:id])
+          @product = @product_limit.product
+          @product.view = @product.view + 1
+          @product.save
+          product_limit = present @product_limit, with: API::Entities::ProductLimit
+        end 
+        
         desc 'find specific product group'
         get '/product_groups/:id' do
           @product_group = @user.product_groups.includes(:product, :product_group_orders).where(reveal: true).order(order: :asc).find(params[:id])
