@@ -32,9 +32,10 @@ module API
 
         desc 'delete affair comment'
         delete '/affair_comment/:id' do
+          validate_appkey
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            @affair_comment = Guest.find(guest_id).affair_comments.find(params[:id])
+            @affair_comment = @user.guests.find(guest_id).affair_comments.find(params[:id])
             @affair_comment.destroy
           else
             error!({code: 102, error: "不存在token"})
@@ -69,9 +70,10 @@ module API
 
         desc 'delete affair like'
         delete '/affair_like/:id' do
+          validate_appkey
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            @affair_like = Guest.find(guest_id).affair_likes.find_by(affair_id: params[:id])
+            @affair_like = @user.guests.find(guest_id).affair_likes.find_by(affair_id: params[:id])
             @affair_like.destroy
           else
             error!({code: 102, error: "不存在token"})
@@ -96,9 +98,10 @@ module API
 
         desc 'judge like status'
         get '/judge_like/:id' do
+          validate_appkey
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            like_status = Guest.find(guest_id).affair_likes.pluck(:affair_id).include?(params[:id].to_i)
+            like_status = @user.guests.find(guest_id).affair_likes.pluck(:affair_id).include?(params[:id].to_i)
             build_response code: 0, data: like_status
           else
             error!({code: 102, error: "不存在token"})
