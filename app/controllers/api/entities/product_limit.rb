@@ -6,7 +6,7 @@ module API
       expose :product, using: API::Entities::Product
     
       def limit
-        limit = object.limit.strftime("%F %H:%M")
+        limit = object.limit.to_i - Time.now.to_i
       end
     end
   end
