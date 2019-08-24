@@ -176,7 +176,7 @@ module API
         delete '/product_comment/:id' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            @product_comment = ::Guest.find(guest_id).product_comments.find(params[:id])
+            @product_comment = @user.guests.find(guest_id).product_comments.find(params[:id])
             @product_comment.destroy
           else
             error!({code: 102, error: "不存在token"})
@@ -203,7 +203,7 @@ module API
         delete '/product_like/:id' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            @product_like = Guest.find(guest_id).product_likes.find_by(product_id: params[:id])
+            @product_like = @user.guests.find(guest_id).product_likes.find_by(product_id: params[:id])
             @product_like.destroy
           else
             error!({code: 102, error: "不存在token"})
@@ -214,7 +214,7 @@ module API
         get '/product_judge_like/:id' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            like_status = Guest.find(guest_id).product_likes.pluck(:product_id).include?(params[:id].to_i)
+            like_status = @user.guests.find(guest_id).product_likes.pluck(:product_id).include?(params[:id].to_i)
             build_response code: 0, data: like_status
           else
             error!({code: 102, error: "不存在token"})
@@ -241,7 +241,7 @@ module API
         delete '/product_keep/:id' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            @product_keep = Guest.find(guest_id).product_keeps.find_by(product_id: params[:id])
+            @product_keep = @user.guests.find(guest_id).product_keeps.find_by(product_id: params[:id])
             @product_keep.destroy
           else
             error!({code: 102, error: "不存在token"})
@@ -252,7 +252,7 @@ module API
         get '/product_judge_keep/:id' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            keep_status = Guest.find(guest_id).product_keeps.pluck(:product_id).include?(params[:id].to_i)
+            keep_status = @user.guests.find(guest_id).product_keeps.pluck(:product_id).include?(params[:id].to_i)
             build_response code: 0, data: keep_status
           else
             error!({code: 102, error: "不存在token"})
@@ -263,7 +263,7 @@ module API
         get '/guest_keep_products' do
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
-            product_ids = Guest.find(guest_id).product_keeps.pluck(:product_id)
+            product_ids = @user.guests.find(guest_id).product_keeps.pluck(:product_id)
             @keep_products = ::Product.find(product_ids) 
             keep_products = present @keep_products, with: API::Entities::Product
           else
