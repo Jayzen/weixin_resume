@@ -40,7 +40,13 @@ module API
         get '/order/:status' do
           cache = cache_value
           guest_id = cache["guest_id"]
-          @orders = @user.guests.find(guest_id).orders.where(status: params[:status]).order(created_at: :desc)
+          if params[:status].to_i == 1
+            @orders = @user.guests.find(guest_id).orders.includes(:order_products, :products).where(status: 1).where("created_at >= :time", {time: Time.now-2.hours}).order(created_at: :desc)
+          elsif params[:status].to_i == 5
+            @orders = @user.guests.find(guest_id).orders.includes(:order_products, :products).where(status: 1).where("created_at < :time", {time: Time.now-2.hours}).order(created_at: :desc)
+          else
+            @orders = @user.guests.find(guest_id).orders.includes(:order_products, :products).where(status: params[:status]).order(created_at: :desc)
+          end
           orders = present @orders, with: API::Entities::Order
           build_response code: 0, data: orders
         end

@@ -14,6 +14,7 @@ module API
       expose :snap_items
       expose :snap_address
       expose :remark
+      expose :limit
       expose :order_products, using: API::Entities::OrderProduct
 
       private
@@ -27,6 +28,10 @@ module API
 
         def created_at
           created_at = object.created_at.strftime("%F %H:%M")
+        end
+
+        def limit
+          limit = Time.now.to_i - object.created_at.to_i
         end
     end
   end
