@@ -4,7 +4,7 @@ module API
       expose :id
       expose :price
       expose :product, using: API::Entities::ProductDetail
-      expose :product_group_orders, using: API::Entities::ProductGroupOrder
+      #expose :product_group_orders, using: API::Entities::ProductGroupOrder
     end
   end
 end

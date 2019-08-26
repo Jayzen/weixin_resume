@@ -45,6 +45,18 @@ module API
           product_group = present @product_group, with: API::Entities::ProductGroupDetail
         end
 
+        desc 'find product group orders by specific product group id'
+        get '/product_group_orders/:product_group_id' do
+          @product_group_orders = @user.product_groups.find(params[:product_group_id]).product_group_orders.where("product_group_order_joins_count < 2").order(product_group_order_joins_count: :desc).includes(:guest, :product_group_order_joins)
+          product_group_orders = present @product_group_orders, with: API::Entities::ProductGroupOrder
+        end
+      
+        desc 'find finished product group orders by specific product group id'
+        get '/finished_product_group_orders/:product_group_id' do
+          @product_group_orders = @user.product_groups.find(params[:product_group_id]).product_group_orders.where("product_group_order_joins_count = 2").includes(:guest, :product_group_order_joins)
+          product_group_orders = present @product_group_orders, with: API::Entities::ProductGroupOrder
+        end
+
         desc 'find specific product bargain'
         get '/product_bargains/:id' do
           @product_bargain = @user.product_bargains.includes(:product).where(reveal: true).order(order: :asc).find(params[:id])
@@ -55,7 +67,7 @@ module API
         end 
 
         desc 'find specific product group order'
-        get '/product_group_orders/:id' do
+        get '/product_group_order/:id' do
           @product_group_order = ::ProductGroupOrder.find(params[:id])
           product_group_order = present @product_group_order, with: API::Entities::ProductGroupOrder
         end
