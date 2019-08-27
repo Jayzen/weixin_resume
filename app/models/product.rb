@@ -19,7 +19,7 @@ class Product < ApplicationRecord
   has_many :product_sorts, dependent: :destroy
   has_many :sorts, through: :product_sorts
 
-  has_one :product_home, dependent: :destroy
+  has_one :product_recommend, dependent: :destroy
   has_one :banner_item, dependent: :destroy
 
   module Status

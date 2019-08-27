@@ -71,9 +71,9 @@
               <%= link_to "商品管理", products_path, class: "nav-link #{ ((controller_name == 'products')||(controller_name == 'product_images')||(controller_name == 'product_details')) ? 'active' : '' }" %>
             </li>
           <% end -%> 
-          <% if current_user.has_roles?(:product_home) %>
+          <% if current_user.has_roles?(:product_recommend) %>
             <li class="nav-item">
-              <%= link_to "首页商品", product_homes_path, class: "nav-link #{ (controller_name == 'product_homes') ? 'active' : '' }" %>
+              <%= link_to "推荐商品", product_recommends_path, class: "nav-link #{ (controller_name == 'product_recommends') ? 'active' : '' }" %>
             </li>
           <% end -%> 
           <% if current_user.has_roles?(:product_limit) %>

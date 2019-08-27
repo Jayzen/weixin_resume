@@ -27,6 +27,12 @@ module API
           product_bargains = present @product_bargains, with: API::Entities::ProductBargain
         end 
 
+        desc 'find product recommends'
+        get '/product_recommends' do
+          @product_recommends = @user.product_recommends.includes(:product).where(reveal: true).order(order: :asc)
+          product_recommends = present @product_recommends, with: API::Entities::ProductRecommend
+        end
+        
         desc 'find specific product limit'
         get '/product_limits/:id' do
           @product_limit = @user.product_limits.includes(:product).where(reveal: true).order(order: :asc).find(params[:id])

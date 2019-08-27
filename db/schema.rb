@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_24_064312) do
+ActiveRecord::Schema.define(version: 2019_08_27_021058) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -533,17 +533,6 @@ ActiveRecord::Schema.define(version: 2019_08_24_064312) do
     t.index ["user_id"], name: "index_product_groups_on_user_id"
   end
 
-  create_table "product_homes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "order"
-    t.boolean "reveal"
-    t.index ["product_id"], name: "index_product_homes_on_product_id"
-    t.index ["user_id"], name: "index_product_homes_on_user_id"
-  end
-
   create_table "product_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.string "pic"
@@ -585,6 +574,17 @@ ActiveRecord::Schema.define(version: 2019_08_24_064312) do
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_product_limits_on_product_id"
     t.index ["user_id"], name: "index_product_limits_on_user_id"
+  end
+
+  create_table "product_recommends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.integer "order"
+    t.boolean "reveal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_recommends_on_product_id"
+    t.index ["user_id"], name: "index_product_recommends_on_user_id"
   end
 
   create_table "product_sorts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

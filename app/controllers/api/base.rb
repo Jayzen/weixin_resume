@@ -17,7 +17,6 @@ module API
     mount V1::Common::Affair
     mount V1::Common::OfficialAccount
     mount V1::Common::Pay
-    mount V1::Common::HomeProduct
     mount V1::Common::Sort
     mount V1::Common::Address
     mount V1::Common::Order
