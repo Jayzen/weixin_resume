@@ -141,6 +141,19 @@ module API
           @order.remark = 2
           @order.save
         end
+
+        desc 'change specific order from'
+        params do 
+          requires :order_id, type: Integer
+          requires :from, type: Integer
+        end
+        put 'change_order_from' do
+          debugger
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @order = @user.guests.find(guest_id).orders.find(params[:order_id])
+          @order.update(from: params[:from])
+        end
       end
     end
   end

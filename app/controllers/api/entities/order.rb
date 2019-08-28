@@ -14,6 +14,7 @@ module API
       expose :snap_items
       expose :snap_address
       expose :remark
+      expose :from
       expose :limit
       expose :order_products, using: API::Entities::OrderProduct
 

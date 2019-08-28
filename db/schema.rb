@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_27_021058) do
+ActiveRecord::Schema.define(version: 2019_08_28_102930) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -400,6 +400,7 @@ ActiveRecord::Schema.define(version: 2019_08_27_021058) do
     t.string "after_no"
     t.integer "after_status", default: 0
     t.integer "remark", default: 0
+    t.integer "from", default: 0
     t.index ["guest_id"], name: "index_orders_on_guest_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

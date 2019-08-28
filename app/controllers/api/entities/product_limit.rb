@@ -3,7 +3,7 @@ module API
     class ProductLimit < Grape::Entity
       expose :id
       expose :limit
-      expose :product, using: API::Entities::Product
+      expose :product, using: API::Entities::ProductDetail
     
       def limit
         limit = object.limit.to_i - Time.now.to_i
