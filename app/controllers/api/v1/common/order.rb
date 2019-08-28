@@ -148,7 +148,6 @@ module API
           requires :from, type: Integer
         end
         put 'change_order_from' do
-          debugger
           cache = cache_value
           guest_id = cache["guest_id"]
           @order = @user.guests.find(guest_id).orders.find(params[:order_id])
