@@ -5,6 +5,7 @@ module API
       expose :nickname
       expose :avatar
       expose :gender
+      expose :recharge
     end
   end
 end

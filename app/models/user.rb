@@ -9,6 +9,7 @@ class User < ApplicationRecord
                     :carousel, :photograph,
                     :contact, :home_photograph, :tap_photograph, :tap_carousel, :official_account, :movie, :menu, :state,
                     :independent_carousel, :affair, :product, :merchant_image, :merchant_basic, :hot_word, :product_recommend, :product_group, :product_bargain, :product_limit,
+                    :recharge_card,
                     :banner, :theme, :guest
                     ], multiple: true)                                      ##
   ############################################################################################ 
@@ -58,6 +59,7 @@ class User < ApplicationRecord
   has_many :affairs, dependent: :destroy
   has_many :sorts, dependent: :destroy
   has_many :hot_words, dependent: :destroy
+  has_many :recharge_cards, dependent: :destroy
 
   has_many :banners, dependent: :destroy
   has_many :themes, dependent: :destroy
@@ -100,7 +102,7 @@ class User < ApplicationRecord
     when "workshop"
       self.roles = [:workshop_basic, :location, :carousel]
     when "mall"
-      self.roles = [:merchant_basic, :location, :independent_carousel, :affair, :product, :merchant_image, :hot_word, :client, :product_recommend, :product_group, :product_bargain]
+      self.roles = [:merchant_basic, :location, :independent_carousel, :affair, :product, :merchant_image, :hot_word, :client, :product_recommend, :product_group, :product_bargain, :recharge_card]
     when "mall_v2"
       self.roles = [:product, :product_recommend, :banner, :theme, :guest]
     else 

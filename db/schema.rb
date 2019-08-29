@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_102930) do
+ActiveRecord::Schema.define(version: 2019_08_29_081800) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_102930) do
     t.integer "user_id"
     t.integer "gender"
     t.integer "product_keeps_count"
+    t.decimal "recharge", precision: 5, scale: 2, default: "0.0"
     t.index ["user_id"], name: "index_guests_on_user_id"
   end
 
@@ -641,6 +642,28 @@ ActiveRecord::Schema.define(version: 2019_08_28_102930) do
     t.datetime "updated_at", null: false
     t.index ["photograph_id"], name: "index_recents_on_photograph_id"
     t.index ["user_id"], name: "index_recents_on_user_id"
+  end
+
+  create_table "recharge_cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "order"
+    t.boolean "reveal"
+    t.decimal "recharge", precision: 5, scale: 2, default: "0.0"
+    t.decimal "benefit", precision: 5, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["user_id"], name: "index_recharge_cards_on_user_id"
+  end
+
+  create_table "recharge_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "guest_id"
+    t.decimal "recharge", precision: 5, scale: 2
+    t.decimal "benefit", precision: 5, scale: 2
+    t.integer "from", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_recharge_records_on_guest_id"
   end
 
   create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

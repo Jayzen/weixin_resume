@@ -15,7 +15,8 @@ class Guest < ApplicationRecord
   has_many :product_keeps, dependent: :destroy
 
   has_many :pay_records, dependent: :destroy
-  
+  has_many :recharge_records, dependent: :destroy
+
   has_many :product_group_orders, dependent: :destroy
   has_many :product_group_order_joins, dependent: :destroy
   has_many :product_bargain_orders, dependent: :destroy
