@@ -18,7 +18,7 @@ module API
             if @guest = @user.guests.find_by(openid: openid_message["openid"])
               guest_id = @guest.id
             else
-              @guest = @user.guests.create(openid: openid_message["openid"])
+              @guest = @user.guests.create(openid: openid_message["openid"], password: nil)
               guest_id = @guest.id
             end
             token = ::User.generate_token(32)

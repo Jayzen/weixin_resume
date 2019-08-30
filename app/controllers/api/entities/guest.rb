@@ -6,6 +6,7 @@ module API
       expose :avatar
       expose :gender
       expose :recharge
+      expose :password
     end
   end
 end

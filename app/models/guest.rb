@@ -1,4 +1,7 @@
 class Guest < ApplicationRecord
+  validates :password, length: { minimum: 6, message: "密码不能少于6个字符" }, allow_nil: true
+  #validates :password, length: { minimum: 6 }, allow_nil: true
+
   has_many :user_guests, dependent: :destroy
   has_many :users, through: :user_guests
 
