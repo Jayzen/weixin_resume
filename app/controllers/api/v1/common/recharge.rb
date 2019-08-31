@@ -25,6 +25,19 @@ module API
           end
         end 
 
+        desc 'get all recharge resumes'
+        get 'recharge_resumes' do
+          if token = Rails.cache.fetch(request.headers["Token"])
+            validate_appkey
+            guest_id = JSON.parse(token)["guest_id"]
+            @guest = @user.guests.find(guest_id)
+            @recharge_resumes = @guest.recharge_resumes.order(created_at: :desc)
+            recharge_resumes = present @recharge_resumes, with: API::Entities::RechargeResume
+          else
+            error!({code: 102, error: "不存在token"})
+          end
+        end 
+
         desc 'update guest recharge'
         params do
           requires :recharge, type: Float
@@ -34,7 +47,8 @@ module API
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @guest = @user.guests.find(guest_id)
-            @guest.recharge = @guest.recharge + params[:recharge]
+            total = (@guest.recharge*100 + params[:recharge]*100)/100
+            @guest.recharge = total
             @guest.save
           else
             error!({code: 102, error: "不存在token"})
@@ -60,6 +74,25 @@ module API
             error!({code: 102, error: "不存在token"})
           end
         end
+
+        desc 'create recharge resume'
+        params do
+          requires :recharge, type: Float
+          optional :from, type: Integer
+        end
+        post 'recharge_resume' do
+          validate_appkey
+          if token = Rails.cache.fetch(request.headers["Token"])
+            guest_id = JSON.parse(token)["guest_id"]
+            @guest = @user.guests.find(guest_id)
+            @recharge_resume = @guest.recharge_resumes.create(recharge: params[:recharge], from: params[:from])
+            if @recharge_resume.errors.messages.size != 0
+              error!({code: 102, error:  @recharge_resume.errors.messages.values.flatten.first})
+            end
+          else
+            error!({code: 102, error: "不存在token"})
+          end
+        end 
 
         desc 'update recharge password'
         params do 
