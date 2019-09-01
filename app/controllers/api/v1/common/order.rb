@@ -153,6 +153,18 @@ module API
           @order = @user.guests.find(guest_id).orders.find(params[:order_id])
           @order.update(from: params[:from])
         end
+
+        desc 'find group orders by from'
+        params do 
+          requires :from, type: Integer
+        end
+        post '/group_orders/' do
+          cache = cache_value
+          guest_id = cache["guest_id"]
+          @orders =  @user.guests.find(guest_id).orders.where(from: params[:from])
+          orders = present @orders, with: API::Entities::Order
+          build_response code: 0, data: orders
+        end 
       end
     end
   end
