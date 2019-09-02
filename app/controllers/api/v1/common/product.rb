@@ -318,7 +318,7 @@ module API
           if token = Rails.cache.fetch(request.headers["Token"])
             guest_id = JSON.parse(token)["guest_id"]
             @product_bargain_order_joins = @user.guests.find(guest_id).product_bargain_order_joins.includes([product_bargain_order: [product_bargain: :product]])
-            product_bargain_order_joins = present @product_bargain_order_joins, with: API::Entities::ProductBargainOrderDetail
+            product_bargain_order_joins = present @product_bargain_order_joins, with: API::Entities::ProductBargainOrderJoinDetail
           end
         end
       end
