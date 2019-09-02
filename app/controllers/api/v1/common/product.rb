@@ -303,6 +303,24 @@ module API
             error!({code: 102, error: "不存在token"})
           end
         end
+
+        desc 'find all product bargain orders'
+        get '/product_bargain_orders' do 
+          if token = Rails.cache.fetch(request.headers["Token"])
+            guest_id = JSON.parse(token)["guest_id"]
+            @product_bargain_orders = @user.guests.find(guest_id).product_bargain_orders.includes([product_bargain: :product])
+            product_bargain_orders = present @product_bargain_orders, with: API::Entities::ProductBargainOrderDetail
+          end
+        end
+
+        desc 'find all product bargain order joins'
+        get '/product_bargain_order_joins' do
+          if token = Rails.cache.fetch(request.headers["Token"])
+            guest_id = JSON.parse(token)["guest_id"]
+            @product_bargain_order_joins = @user.guests.find(guest_id).product_bargain_order_joins.includes([product_bargain_order: [product_bargain: :product]])
+            product_bargain_order_joins = present @product_bargain_order_joins, with: API::Entities::ProductBargainOrderDetail
+          end
+        end
       end
     end
   end
