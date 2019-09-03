@@ -35,6 +35,8 @@ Rails.application.configure do
   #config.action_controller.asset_host = 'https://file.zhengjiajun.com'
   #config.assets.prefix = "assets"
 
+  config.action_controller.perform_caching = true
+  config.cache_store = :redis_cache_store, { url: 'redis://47.110.88.139:6379/0' } 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
