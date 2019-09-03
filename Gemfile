@@ -24,6 +24,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#cache database
+gem "hiredis"
+gem "redis", "~> 4.0"
+
 # api
 gem 'grape'
 gem 'grape-swagger'
