@@ -1,1 +1,3 @@
-hello world
+<% cache 'word-of-the-hour', expires_in: Time.now.beginning_of_hour + 1.hour do %>
+  <%= %w(happy developer watch drifting ruby screencasts about rails).sample %>
+<% end %>
