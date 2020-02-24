@@ -40,7 +40,7 @@ gem 'grape-rails-cache'
 #pay
 gem 'wx_pay'
 
-gem 'devise'
+gem "devise", ">= 4.7.1"
 gem 'petergate'
 gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-rails'
